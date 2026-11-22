@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1446a0">
+<title>Spanje 2031</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#08193a);--ink:light-dark(#0f1f3d,#eef3fb);--muted:light-dark(#4a5a78,#a9b8d3);--card:light-dark(#f1f5fc,#10295a);--line:light-dark(#d5e0f1,#24477a);--blue:#1446a0;--bl:light-dark(#1446a0,#8fb3ff);--sun:#f5b400;--ok:light-dark(#1b7a45,#5fd08f);--bad:light-dark(#b42318,#ff8a80);--field:light-dark(#ffffff,#0b2149)}
+*{box-sizing:border-box;min-width:0;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Figtree,system-ui,sans-serif;overflow-x:clip;padding-bottom:env(safe-area-inset-bottom)}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,6vw,48px)}h2{font-size:clamp(24px,3.4vw,30px)}h3{font-size:18px}
+.band{padding:20px max(4vw,14px)}.wrap{max-width:1100px;margin:0 auto}
+.hero{background:linear-gradient(160deg,#1a55bd,#0b2a66);color:#fff;padding-top:calc(20px + env(safe-area-inset-top))}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:center}
+.hero p{color:#d8e4fb;margin:.5em 0 0}.big{color:var(--sun);font-variant-numeric:tabular-nums}
+.pic svg{width:100%;height:auto;display:block;border-radius:16px}
+.top{position:sticky;top:0;z-index:5;background:var(--blue);color:#fff;display:flex;align-items:center;gap:10px;padding:8px max(4vw,14px);padding-top:calc(8px + env(safe-area-inset-top))}
+.top b{font:600 18px Fraunces,serif;flex:1}.top .btn{background:#ffffff22}
+.dot{width:10px;height:10px;border-radius:50%;background:#9fb2d6;flex:none}.dot.ok{background:#5fd08f}.dot.err{background:#ff8a80}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;margin-top:-30px;position:relative}
+.kpi,.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.kpi{background:var(--bg);box-shadow:0 10px 30px #0b2a6622}.card{margin-top:14px}
+.v{font:700 clamp(28px,5vw,38px)/1.1 Fraunces,serif;font-variant-numeric:tabular-nums;white-space:nowrap}
+.res{font:700 clamp(26px,5vw,36px)/1.1 Fraunces,serif;color:var(--bl);white-space:nowrap;font-variant-numeric:tabular-nums}
+.lbl{color:var(--muted);font-size:14px}.sm{font-size:13px;color:var(--muted)}
+.bar{height:11px;background:var(--line);border-radius:9px;overflow:hidden;margin:8px 0 5px}.bar i{display:block;height:100%;background:var(--sun);border-radius:9px}.bar.b i{background:var(--blue)}.bar.g i{background:var(--ok)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:12px;margin-top:16px}
+.tile{all:unset;box-sizing:border-box;cursor:pointer;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:5px;min-height:138px}
+.tile:active{transform:scale(.98)}.tile svg{width:28px;height:28px;stroke:var(--bl);fill:none;stroke-width:1.8}
+.tile b{font:600 16px/1.2 Fraunces,serif}.tile small{color:var(--muted);font-size:13px;margin-top:auto}
+.btn{font:inherit;font-weight:700;min-height:44px;padding:0 16px;border-radius:12px;border:0;background:var(--blue);color:#fff;cursor:pointer}
+.btn.ghost{background:transparent;color:inherit;border:1px solid var(--line)}.btn.sm{min-height:36px;padding:0 12px;font-size:14px}.btn.red{background:var(--bad)}
+.btn:disabled{opacity:.5}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+input,select,textarea{font:inherit;font-size:16px;color:inherit;background:var(--field);border:1px solid var(--line);border-radius:10px;padding:9px 11px;min-height:44px;width:100%}
+input[type=checkbox]{width:22px;height:22px;min-height:0;accent-color:var(--blue);flex:none}input[type=range]{padding:0;accent-color:var(--blue)}
+textarea{min-height:84px;resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:end}.row>*{flex:1 1 130px}
+.f label{display:block;font-size:14px;color:var(--muted);margin-bottom:4px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+ul.list{list-style:none;padding:0;margin:6px 0 0}ul.list li{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}ul.list li:last-child{border:0}
+li.done .tt{text-decoration:line-through;color:var(--muted)}.tt{flex:1;cursor:pointer}
+.badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;background:var(--line);color:var(--ink);white-space:nowrap;margin:2px 4px 0 0}.badge.late{background:var(--bad);color:#fff}.badge.soon{background:var(--sun);color:#000}
+table{width:100%;border-collapse:collapse;font-size:15px}td,th{padding:8px 5px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{font-size:13px;color:var(--muted);font-weight:500}.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td input{min-height:38px;padding:6px 8px}.scroll{overflow-x:auto}
+tr.now td{background:light-dark(#fff4cc,#3a3108)}
+.ok{color:var(--ok);font-weight:700}.warn{color:light-dark(#a35a00,#ffc857);font-weight:700}
+.fig{position:relative;height:220px;margin-top:8px}.fig svg{position:absolute;inset:0;width:100%;height:100%}
+.mbars{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;align-items:end;height:130px;margin-top:10px}
+.mbars div{background:var(--blue);border-radius:5px 5px 0 0;min-height:2px;position:relative}.mbars div.off{background:var(--line)}
+.mlab{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;font-size:11px;color:var(--muted);text-align:center}
+.tl{border-left:3px solid var(--blue);margin-left:8px;padding-left:16px}.tl .yr{position:relative;margin-top:16px}.tl .yr:before{content:"";position:absolute;left:-25px;top:4px;width:15px;height:15px;border-radius:50%;background:var(--sun);border:3px solid var(--bg)}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-top:8px}
+.photos img,.ph{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:var(--line);display:block}
+.mood{columns:2 160px;column-gap:10px;margin-top:10px}.mood figure{break-inside:avoid;margin:0 0 10px;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--line)}.mood img{width:100%;display:block;min-height:80px;background:var(--line)}.mood figcaption{padding:6px 10px;font-size:14px;display:flex;justify-content:space-between;gap:6px}
+.word{background:linear-gradient(135deg,#fff3c4,#ffe08a);color:#3b2a00;border:0}
+.plan{width:100%;height:auto;touch-action:none;background:light-dark(#e9f3dc,#1b3320);border-radius:12px;border:1px solid var(--line);display:block}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chip{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:99px;padding:6px 12px;font-size:14px}
+#sheetBg{position:fixed;inset:0;background:#0008;z-index:20;display:none;align-items:flex-end;justify-content:center}#sheetBg.open{display:flex}
+#sheet{background:var(--bg);width:100%;max-width:640px;max-height:90vh;overflow:auto;border-radius:20px 20px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom))}
+.actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#0f1f3d;color:#fff;padding:10px 16px;border-radius:12px;z-index:30;display:none;max-width:90vw}
+.upd{background:var(--sun);color:#000;padding:10px max(4vw,14px);display:flex;gap:10px;align-items:center}.upd span{flex:1}
+.auth{max-width:440px;margin:0 auto;padding:calc(40px + env(safe-area-inset-top)) 18px 40px}
+.err{color:var(--bad);font-size:14px;margin-top:8px;min-height:1em}
+.celebrate{background:linear-gradient(135deg,#ffd666,#f5b400);color:#2b1d00;border:0}
+@media(max-width:600px){.hero .wrap{grid-template-columns:1fr}.kpis{margin-top:14px}.hide-s{display:none}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="sheetBg"><div id="sheet"></div></div>
+<div id="toast"></div>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+const APP_VN='__APP_VN__';
+const SB_URL='https://wnircustmcvwjlkvtyur.supabase.co',SB_KEY='sb_publishable_4sqsUxgtDeD6rHnDJH0tkg_uchFNIIS';
+const UPD_URL='https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/version.json';
+const eur=new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+const E=v=>eur.format(Math.round(+v||0)).replace(/\s/g,' ');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pct=(a,b)=>b?Math.max(0,Math.min(100,Math.round(a/b*100))):0;
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const clone=o=>JSON.parse(JSON.stringify(o));
+const fmtD=d=>d?new Date(d+'T12:00:00').toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'}):'';
+const MND=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+const bar=(p,c='')=>`<div class="bar ${c}"><i style="width:${p}%"></i></div>`;
+const isApp=()=>!!window.Android;
+function toast(t){const el=$('toast');el.textContent=t;el.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>el.style.display='none',2600)}
+function hashStr(s){let h=5381;for(let i=0;i<s.length;i++)h=(h*33+s.charCodeAt(i))|0;return String(h>>>0)}
+const hj=x=>hashStr(JSON.stringify(x===undefined?null:x));
+function openSheet(h){$('sheet').innerHTML=h;$('sheetBg').classList.add('open')}
+function closeSheet(){$('sheetBg').classList.remove('open')}
+$('sheetBg').addEventListener('click',e=>{if(e.target.id==='sheetBg')closeSheet()});
+window.appBack=()=>{if($('sheetBg').classList.contains('open')){closeSheet();return true}if(location.hash&&location.hash!=='#'){location.hash='';return true}return false};
+
+/* ---------- data ---------- */
+const GOAL={ing:40862,degiro:75000,pokemon:2994};const GOALT=GOAL.ing+GOAL.degiro+GOAL.pokemon;
+const HOUSE={woz:399000,hyp:367500,v2031:500000};
+const TASKS=[
+['a1','Huidige financiële situatie in kaart brengen',1,'t4'],['a2','Spaardoelen per jaar richting 2031 vastleggen',1,'t4'],['a3','Gewenste financiële buffer bij vertrek bepalen',1,'t5'],['a4','Kosten emigratie en eerste periode inschatten',1,'t5'],['a5','Financiële uitgangspunten vastleggen (zekerheid, risico, flexibiliteit)',1,'t2'],['a6','Kostentabel invullen',1,'t5'],
+['b1','Fase 2 t/m 5 verder uitwerken',2,'t3'],['b2','Mogelijke regio\'s verkennen',2,'t10'],['b3','Eerste oriëntatiereis naar Spanje',2,'t11'],['b4','Naam voor de B&B bedenken',2,'t6'],['b5','Realistisch B&B-inkomen doorrekenen',2,'t9'],
+['c1','Spaanse les starten (2027–2028), op locatie of thuis',3,'t8'],['c2','Regio\'s vergelijken en shortlist maken',3,'t10'],['c3','Langer verblijf in favoriete regio',3,'t11'],['c4','Logo laten ontwerpen',3,'t6'],['c5','Website opzetten (WordPress / n8n)',3,'t6'],['c6','Hypotheekmogelijkheden in Spanje uitzoeken',3,'t7'],
+['d1','Finca kiezen: bestaand huisje + ruimte voor extra huisjes',4,'t7'],['d2','Hypotheek of financiering regelen',4,'t7'],['d3','Huis in Nederland verkopen',4,'t7'],['d4','NIE-nummers aanvragen',4,'t12'],['d5','Documenten laten vertalen',4,'t12'],['d6','Verhuisbedrijf regelen',4,'t5'],['d7','Spaanse zorgverzekering regelen',4,'t12'],
+['e1','Pokémon-collectie verkopen',5,'t4'],['e2','Inschrijven bij de gemeente (padrón)',5,'t12'],['e3','Residencia aanvragen',5,'t12'],['e4','Spaanse bankrekening openen',5,'t12'],['e5','Verhuizen naar Spanje!',5,'t3']];
+const FASES=['Financiële basis','Oriëntatie','Verdieping','Voorbereiding','Uitvoering'];
+const FASE_YEAR=[2026,2027,2028,2030,2031];
+const COSTS=[
+['Woning – aankoop',[['koop','Aankoopprijs woning','e','Afhankelijk van regio'],['itp','Overdrachtsbelasting (ITP / BTW)','e','± 8–10% van aankoopprijs'],['nota','Notaris + registratiekosten','e','Eigendomsakte'],['advo','Advocaat / gestor','e','Begeleiding aankoop'],['taxa','Taxatie woning','e','Verplicht bij hypotheek'],['hypa','Hypotheekadvies / kosten','e','Indien van toepassing']]],
+['Woning – verbouwing',[['verb','Verbouwing / renovatie','e','Keuken, badkamer, etc.'],['arch','Architect / tekeningen','e','Bij grotere verbouwing'],['verg','Vergunningen','e','Afhankelijk van gemeente'],['nuts','Aansluiting nutsvoorzieningen','e','Water, elektra, gas'],['meub','Meubilair & inrichting','e','Bedden, meubels, witgoed']]],
+['Wonen – vast',[['ibi','Gemeentebelasting (IBI)','j','0,4–1,1% kadastrale waarde'],['water','Water','m',''],['elek','Elektriciteit','m',''],['inet','Internet / TV','m',''],['afval','Afval / lokale heffingen','m','']]],
+['Auto / vervoer',[['auto','Aankoop auto Spanje','e','Of import NL-auto'],['autov','Autoverzekering','m',''],['weg','Wegenbelasting','j',''],['brand','Brandstof / onderhoud','m','']]],
+['Emigratiekosten',[['verh','Verhuisbedrijf','e','Inboedel NL → ES'],['opsl','Opslag spullen','m','Indien nodig'],['vlucht','Vliegtickets / reizen','e','']]],
+['Administratie',[['nie','NIE-nummers','e','€ 9,84 p.p.'],['padr','Inschrijving gemeente (padrón)','e',''],['resi','Residencia','e','€ 12 p.p.'],['bank','Bankrekening Spanje','e',''],['vert','Vertalingen documenten','e','± € 40 p.p.']]],
+['Verzekeringen',[['zorg','Zorgverzekering Spanje','m','Privé of sociaal'],['aans','Aansprakelijkheid','m',''],['inb','Inboedelverzekering','m',''],['opst','Opstalverzekering','m','']]],
+['Levensonderhoud',[['boods','Boodschappen','m',''],['school','School / opvang kinderen','m',''],['sport','Sport / abonnementen','m','']]],
+['Reserves & belastingen',[['onv','Onvoorzien (medisch, reparaties)','e',''],['ib','Spaanse inkomstenbelasting','j','Afhankelijk van inkomen'],['vermb','Vermogensbelasting','j','Indien van toepassing']]]];
+const ALLC=COSTS.flatMap(g=>g[1]);const FREQ={e:'Eenmalig',m:'Per maand',j:'Per jaar'};
+const DOCSTEPS=[
+['nie','NIE-nummer aanvragen','Je persoonlijke nummer voor buitenlanders. Nodig voor een huis kopen, bankrekening en nutsvoorzieningen. Aan te vragen bij het Spaanse consulaat in Nederland of bij de politie in Spanje.','Paspoort + kopie, ingevuld formulier EX-15, betaalbewijs leges (formulier 790-012), reden van aanvraag'],
+['bank','Spaanse bankrekening openen','Nodig voor de aankoop, vaste lasten en later B&B-inkomsten.','Paspoort, NIE-nummer, bewijs van adres of inkomen'],
+['vert','Documenten laten vertalen','Officiële (beëdigde) vertalingen of internationale uittreksels.','Geboorteakten, huwelijksakte, eventueel diploma\'s'],
+['koop','Woning kopen bij de notaris','Koopakte (escritura) tekenen bij de notaris en laten inschrijven in het register.','NIE, bankrekening, financiering, advocaat/gestor'],
+['padron','Inschrijven bij de gemeente (padrón)','Registratie op je adres bij het ayuntamiento. Nodig voor de residencia, school en zorg.','Paspoort, NIE, koopakte of huurcontract'],
+['resi','EU-verblijfsregistratie (residencia)','Als EU-burger laat je je registreren als je langer dan 3 maanden blijft (groen certificaat met NIE).','Paspoort, padrón, bewijs van inkomen of vermogen, zorgverzekering, formulier EX-18, leges 790-012'],
+['zorg','Zorgverzekering regelen','Via de Spaanse sociale zekerheid (bij werk of eigen bedrijf) of een privéverzekering.','Residencia, NIE, eventueel inschrijving Seguridad Social'],
+['bedrijf','B&B inschrijven als bedrijf','Inschrijven als autónomo of bedrijf en een toeristische vergunning aanvragen bij de regio.','NIE, residencia, bankrekening, vergunning toeristische verhuur'],
+['brp','Uitschrijven in Nederland','Emigratie melden bij je Nederlandse gemeente (uiterlijk 5 dagen voor vertrek).','Paspoort, nieuw adres in Spanje'],
+['auto','Auto en rijbewijs','Een EU-rijbewijs blijft geldig. Een Nederlandse auto moet je binnen een paar maanden op Spaans kenteken zetten.','Kentekenbewijs, keuring (ITV), belasting'],
+['belast','Belastingen regelen','Spaanse belastingdienst (Agencia Tributaria) informeren over je fiscale woonplaats; in NL laatste aangifte als emigrant.','NIE, residencia, jaaropgaven']];
+const WORDS=[['la finca','het landgoed'],['la casita','het huisje'],['el desayuno','het ontbijt'],['la habitación','de kamer'],['la reserva','de reservering'],['bienvenidos','welkom'],['¿Cuánto cuesta?','Hoeveel kost het?'],['el ayuntamiento','het gemeentehuis'],['el notario','de notaris'],['la hipoteca','de hypotheek'],['el banco','de bank'],['la piscina','het zwembad'],['el jardín','de tuin'],['el olivo','de olijfboom'],['la llave','de sleutel'],['el huésped','de gast'],['limpiar','schoonmaken'],['la cocina','de keuken'],['el baño','de badkamer'],['la cama','het bed'],['las sábanas','de lakens'],['el mercado','de markt'],['la panadería','de bakkerij'],['¿Dónde está…?','Waar is…?'],['Encantado de conocerle','Aangenaam kennis te maken'],['el vecino','de buurman'],['la luz','het licht / de stroom'],['el agua','het water'],['el contrato','het contract'],['firmar','tekenen'],['el permiso','de vergunning'],['la obra','de verbouwing'],['el fontanero','de loodgieter'],['el electricista','de elektricien'],['la factura','de rekening'],['pagar','betalen'],['¡Que aproveche!','Eet smakelijk!'],['madrugar','vroeg opstaan'],['la sobremesa','het natafelen'],['poco a poco','stap voor stap'],['la mudanza','de verhuizing'],['el sol','de zon'],['tranquilo','rustig'],['¿Me puede ayudar?','Kunt u me helpen?'],['Hasta luego','Tot later']];
+const REGCRIT=[['klimaat','Klimaat'],['prijs','Betaalbare finca\'s'],['toer','Toerisme / B&B-kansen'],['vlieg','Dichtbij vliegveld'],['voorz','Voorzieningen & scholen'],['gevoel','Ons gevoel']];
+const COLROWS=[['boods','Boodschappen'],['energie','Energie'],['water','Water'],['inet','Internet / telefoon'],['zorg','Zorgverzekering'],['verz','Overige verzekeringen'],['auto','Auto en brandstof'],['gemb','Gemeentebelasting'],['uit','Uit eten / vrije tijd'],['kind','Kinderen / school']];
+const PLANTYPES={huis:['Ons huis','#f3ece0',14,10],huisje:['Gastenhuisje','#ffd99a',8,6],zwembad:['Zwembad','#7cc4f0',10,5],park:['Parkeren','#c9ced8',10,6],tuin:['Moestuin','#9ccf6b',10,8],terras:['Terras','#e9b98b',8,6]};
+const MILESTONES=[50000,75000,100000,GOALT];
+function defaults(){return{v:2,vertrek:'2031-07-01',acc:{ing:13000,degiro:30000,pokemon:0},divi:180,inleg:{ing:0,degiro:400},upd:'2026-11-22',
+hist:[{id:'2026-02-06',d:'2026-02-06',t:38356},{id:'2026-11-22',d:'2026-11-22',t:43000}],costs:{nie:19.68,resi:24,vert:80},notes:{},
+bnb:{kamers:3,prijs:90,bez:50,mnd:8,kost:40},done:['a1','a2'],custom:[],tmeta:{},inclHouse:false,whatif:{extra:0,rend:6,yld:7,bonus:true},
+finca:{prijs:250000,verb:40000,itp:9,bij:2},fincas:[],trips:[],regions:[],col:{r1:'Regio 1',r2:'Regio 2',v:{}},lessen:[],niveau:'A0',
+season:MND.map((m,i)=>({open:i>=3&&i<=9,prijs:i>=5&&i<=8?110:85,bez:i>=5&&i<=8?75:45})),plan:{w:80,h:50,items:[]},comp:[],mood:[],docs:{},divlog:[],ms:[]}}
+const COLS=['custom','trips','regions','fincas','lessen','hist','divlog','comp','mood'];
+let S=defaults();
+try{const l=JSON.parse(localStorage.getItem('sp-state')||'null');if(l&&l.v)S=Object.assign(defaults(),l)}catch(e){}
+let BASE=(()=>{try{return JSON.parse(localStorage.getItem('sp-base')||'null')}catch(e){return null}})();
+function saveLocal(){try{localStorage.setItem('sp-state',JSON.stringify(S))}catch(e){}}
+function makeBase(d){const o={k:{},c:{}};Object.keys(d).forEach(k=>{if(COLS.includes(k)&&Array.isArray(d[k])){o.c[k]={};d[k].forEach(x=>{if(x&&x.id)o.c[k][x.id]=hj(x)})}else o.k[k]=hj(d[k])});return o}
+function setBase(d){BASE=makeBase(d);try{localStorage.setItem('sp-base',JSON.stringify(BASE))}catch(e){}}
+function mergeItems(L,R,B){const rm=new Map((R||[]).map(x=>[x.id,x])),out=[],seen=new Set();
+  (L||[]).forEach(x=>{seen.add(x.id);const b=B[x.id],rv=rm.get(x.id);if(b==null||hj(x)!==b){out.push(x);return}if(rv)out.push(rv)});
+  (R||[]).forEach(x=>{if(!seen.has(x.id)&&B[x.id]==null)out.push(x)});return out}
+function merge3(L,R){if(!BASE)return Object.assign(defaults(),R);const out=Object.assign({},L);
+  Object.keys(R).forEach(k=>{if(COLS.includes(k)&&Array.isArray(R[k])){out[k]=mergeItems(L[k]||[],R[k],(BASE.c||{})[k]||{});return}
+    if(!(k in L)){out[k]=R[k];return}if(hj(L[k])===(BASE.k||{})[k])out[k]=R[k]});return out}
+const tasks=()=>TASKS.map(([id,t,f,tile])=>({id,t,f,tile})).concat(S.custom.map(c=>({...c,c:true})));
+const isDone=id=>S.done.includes(id);
+const total=()=>(+S.acc.ing||0)+(+S.acc.degiro||0)+(+S.acc.pokemon||0);
+const overwaarde=()=>HOUSE.v2031-HOUSE.hyp;
+const vertrek=()=>new Date(S.vertrek+'T12:00:00');
+const daysLeft=()=>Math.max(0,Math.ceil((vertrek()-new Date())/864e5));
+const monthsLeft=()=>Math.max(1,Math.round(daysLeft()/30.44));
+function faseP(f){const t=tasks().filter(x=>x.f===f);return pct(t.filter(x=>isDone(x.id)).length,t.length)}
+function allP(){const t=tasks();return pct(t.filter(x=>isDone(x.id)).length,t.length)}
+function costTot(){let e=0,m=0;for(const[id,,f]of ALLC){const v=+S.costs[id]||0;if(f==='e')e+=v;else if(f==='m')m+=v;else m+=v/12}return{e,m}}
+function bnbSimple(){const b=S.bnb;const omzet=b.kamers*b.prijs*(b.bez/100)*b.mnd*30.4;return{omzet,pm:omzet*(1-b.kost/100)/12}}
+function bnbSeason(){const dim=[31,28,31,30,31,30,31,31,30,31,30,31];const m=S.season.map((s,i)=>s.open?S.bnb.kamers*(+s.prijs||0)*((+s.bez||0)/100)*dim[i]:0);const omzet=m.reduce((a,b)=>a+b,0);return{m,omzet,pm:omzet*(1-S.bnb.kost/100)/12}}
+function projection(extra){const w=S.whatif;let ing=+S.acc.ing||0,dg=+S.acc.degiro||0;const r=(+w.rend||0)/100/12;const d=new Date();d.setDate(1);const end=vertrek();
+  while(d<end){d.setMonth(d.getMonth()+1);ing+=+S.inleg.ing||0;dg=dg*(1+r)+(+S.inleg.degiro||0)+(+extra||0);if(w.bonus&&d.getMonth()===11)dg+=2000}
+  return{ing,dg,total:ing+dg+(+S.acc.pokemon||0),div:dg*((+w.yld||0)/100)/12}}
+const WORD=()=>{const n=Math.floor((Date.now()-new Date(2026,0,1))/864e5);return WORDS[((n%WORDS.length)+WORDS.length)%WORDS.length]};
+function getRef(path){const k=path.split('.');let o=S;for(let i=0;i<k.length-1;i++){const s=k[i];o=s[0]==='#'?o.find(x=>x.id===s.slice(1)):o[s];if(o==null)return null}return{o,k:k[k.length-1]}}
+
+/* ---------- sync (Stuiver-account) ---------- */
+const SB={c:null,uid:null,email:'',hid:null,members:[],ready:false,chan:null,state:'local'};
+let dirty=(()=>{try{return localStorage.getItem('sp-dirty')==='1'}catch(e){return false}})(),timer=null,writing=false;
+const VAULT={on:false,key:null,doc:null};
+const te=new TextEncoder(),td=new TextDecoder();
+const b64e=b=>{let s='';const a=new Uint8Array(b);for(let i=0;i<a.length;i+=8192)s+=String.fromCharCode.apply(null,a.subarray(i,i+8192));return btoa(s)};
+const b64d=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const rnd=n=>crypto.getRandomValues(new Uint8Array(n));
+async function vKek(secret,salt,iter){const base=await crypto.subtle.importKey('raw',te.encode(secret.normalize('NFKC')),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:iter,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+async function vUnwrap(w,kek){return new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64d(w.iv)},kek,b64d(w.ct)))}
+const vImport=raw=>crypto.subtle.importKey('raw',raw,{name:'AES-GCM'},false,['encrypt','decrypt']);
+async function vEnc(obj){const iv=rnd(12);return{enc:1,iv:b64e(iv),ct:b64e(await crypto.subtle.encrypt({name:'AES-GCM',iv},VAULT.key,te.encode(JSON.stringify(obj))))}}
+async function vDec(d){return JSON.parse(td.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64d(d.iv)},VAULT.key,b64d(d.ct))))}
+function setSync(st){SB.state=st;const d=$('sync');if(d)d.className='dot '+(st==='ok'?'ok':st==='err'?'err':'')}
+function save(){saveLocal();dirty=true;try{localStorage.setItem('sp-dirty','1')}catch(e){}checkMilestones();scheduleDeadlines();clearTimeout(timer);timer=setTimeout(flush,1500)}
+async function flush(){if(!SB.hid||!SB.ready||writing||!dirty)return;if(VAULT.on&&!VAULT.key)return;writing=true;setSync('');
+  try{const r=await SB.c.from('docs').select('data').eq('household_id',SB.hid).eq('key','spanje').maybeSingle();if(r.error)throw r.error;
+    if(r.data&&r.data.data){const srv=r.data.data.enc?await vDec(r.data.data):r.data.data;const m=merge3(S,srv);if(hj(m)!==hj(S)){S=Object.assign(defaults(),m);saveLocal();render()}}
+    const snap=clone(S);let data=snap;if(VAULT.key)data=await vEnc(snap);
+    const w=await SB.c.from('docs').upsert({household_id:SB.hid,key:'spanje',data,updated_by:SB.uid,updated_at:new Date().toISOString()},{onConflict:'household_id,key'});if(w.error)throw w.error;
+    setBase(snap);if(hj(snap)===hj(S)){dirty=false;try{localStorage.setItem('sp-dirty','0')}catch(e){}}setSync('ok')}
+  catch(e){setSync('err');setTimeout(flush,15000)}finally{writing=false;if(dirty)setTimeout(flush,1500)}}
+async function pull(){const r=await SB.c.from('docs').select('data').eq('household_id',SB.hid).eq('key','spanje').maybeSingle();if(r.error)throw r.error;
+  if(!r.data||!r.data.data){dirty=true;return flush()}
+  const d=r.data.data;if(d.enc&&!VAULT.key)return;const srv=d.enc?await vDec(d):d;
+  if(!BASE&&!localStorage.getItem('sp-synced')){S=Object.assign(defaults(),srv)}else if(dirty){S=Object.assign(defaults(),merge3(S,srv))}else S=Object.assign(defaults(),srv);
+  try{localStorage.setItem('sp-synced','1')}catch(e){}
+  setBase(srv);saveLocal();render();if(dirty)flush();else setSync('ok')}
+async function initSB(){if(!window.supabase){render();return}
+  SB.c=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:'spanje-auth'}});
+  const {data}=await SB.c.auth.getSession();
+  if(data&&data.session)await afterLogin(data.session);
+  else if(!localStorage.getItem('sp-local'))showAuth();else render()}
+async function afterLogin(ses){SB.uid=ses.user.id;SB.email=ses.user.email||'';
+  const r=await SB.c.from('members').select('household_id').eq('user_id',SB.uid).limit(1);
+  const hid=r.data&&r.data[0]&&r.data[0].household_id;
+  if(!hid){showAuth('Dit account heeft nog geen huishouden. Maak of koppel eerst een huishouden in Stuiver.');return}
+  SB.hid=hid;const mm=await SB.c.from('members').select('user_id,name').eq('household_id',hid);if(mm.data)SB.members=mm.data;
+  const v=await SB.c.from('docs').select('data').eq('household_id',hid).eq('key','_vault').maybeSingle();
+  if(v.data&&v.data.data){VAULT.on=true;VAULT.doc=v.data.data;const c=localStorage.getItem('spanje-hk-'+hid);if(c){try{VAULT.key=await vImport(b64d(c))}catch(e){}}if(!VAULT.key){showVault();return}}
+  await connect()}
+async function connect(){SB.ready=true;render();setSync('');
+  try{await pull()}catch(e){setSync('err')}
+  if(SB.chan)SB.c.removeChannel(SB.chan);
+  SB.chan=SB.c.channel('sp-'+SB.hid).on('postgres_changes',{event:'*',schema:'public',table:'docs',filter:'household_id=eq.'+SB.hid},p=>{const r=p.new;if(r&&r.key==='spanje'&&r.updated_by!==SB.uid&&!writing)pull().catch(()=>{})}).subscribe();
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&SB.ready)pull().catch(()=>{})});
+  window.addEventListener('online',()=>{if(SB.ready)flush()})}
+function showAuth(msg){$('app').innerHTML=`<div class="auth"><h1>Spanje 2031</h1><p class="lbl">Log in met je <b>Stuiver-account</b>. Dan zien jullie allebei dezelfde gegevens.</p>
+  <div class="card"><div class="f"><label for="aMail">E-mailadres</label><input id="aMail" type="email" inputmode="email" autocomplete="username"></div>
+  <div class="f" style="margin-top:10px"><label for="aPw">Wachtwoord</label><input id="aPw" type="password" autocomplete="current-password"></div>
+  <button class="btn" style="width:100%;margin-top:14px" id="aBtn" data-act="login">Inloggen</button><div class="err" id="aErr">${esc(msg||'')}</div>
+  <p class="sm">Wachtwoord vergeten? Stel het opnieuw in via Stuiver.</p></div>
+  <button class="btn ghost" style="width:100%;margin-top:14px" data-act="localmode">Zonder account gebruiken (alleen op dit apparaat)</button></div>`}
+function showVault(msg){$('app').innerHTML=`<div class="auth"><h1>Gegevens versleuteld</h1><p class="lbl">Vul het <b>kluiswachtwoord</b> van jullie huishouden in (hetzelfde als in Stuiver). Dit hoeft maar één keer per apparaat.</p>
+  <div class="card"><div class="f"><label for="vPw">Kluiswachtwoord</label><input id="vPw" type="password" autocomplete="off"></div><button class="btn" style="width:100%;margin-top:14px" id="vBtn" data-act="vault">Openen</button>
+  <details style="margin-top:12px"><summary class="sm">Kluiswachtwoord vergeten? Gebruik de herstelcode</summary><div class="f" style="margin-top:8px"><input id="vRc" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX"></div><button class="btn ghost" style="width:100%;margin-top:8px" data-act="vaultrc">Openen met herstelcode</button></details>
+  <div class="err" id="aErr">${esc(msg||'')}</div></div><button class="btn ghost" style="width:100%;margin-top:14px" data-act="logout">Uitloggen</button></div>`}
+async function doLogin(){const email=$('aMail').value.trim(),password=$('aPw').value;if(!email||!password){$('aErr').textContent='Vul je e-mailadres en wachtwoord in.';return}
+  $('aBtn').disabled=true;$('aBtn').textContent='Bezig…';const {data,error}=await SB.c.auth.signInWithPassword({email,password});
+  if(error){$('aBtn').disabled=false;$('aBtn').textContent='Inloggen';$('aErr').textContent=/invalid/i.test(error.message)?'E-mailadres of wachtwoord klopt niet.':error.message;return}
+  try{localStorage.removeItem('sp-local')}catch(e){}await afterLogin(data.session)}
+async function doVault(rc){const d=VAULT.doc;const b=$('vBtn');b.disabled=true;b.textContent='Openen…';
+  try{let raw;if(rc){const c=$('vRc').value.toUpperCase().replace(/[^A-Z0-9]/g,'');raw=await vUnwrap(d.wr,await vKek(c,b64d(d.salt),d.iterR||100000))}else raw=await vUnwrap(d.wp,await vKek($('vPw').value,b64d(d.salt),d.iter));
+    VAULT.key=await vImport(raw);try{localStorage.setItem('spanje-hk-'+SB.hid,b64e(raw))}catch(e){}toast('Ontgrendeld');await connect()}
+  catch(e){b.disabled=false;b.textContent='Openen';$('aErr').textContent=rc?'Deze herstelcode klopt niet.':'Dit kluiswachtwoord klopt niet.'}}
+async function doLogout(){try{if(SB.chan)SB.c.removeChannel(SB.chan);await SB.c.auth.signOut()}catch(e){}
+  try{Object.keys(localStorage).filter(k=>k.startsWith('spanje-hk-')||k.startsWith('sp-')).forEach(k=>localStorage.removeItem(k))}catch(e){}
+  S=defaults();BASE=null;dirty=false;SB.uid=SB.hid=null;SB.ready=false;VAULT.key=null;closeSheet();showAuth()}
+
+/* ---------- foto's ---------- */
+const IMGURL={};let idbP=null;
+function idb(){if(idbP)return idbP;idbP=new Promise((res,rej)=>{try{const r=indexedDB.open('spanje-img',1);r.onupgradeneeded=()=>r.result.createObjectStore('i');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}});return idbP}
+async function idbGet(k){try{const db=await idb();return await new Promise(r=>{const q=db.transaction('i').objectStore('i').get(k);q.onsuccess=()=>r(q.result||null);q.onerror=()=>r(null)})}catch(e){return null}}
+async function idbPut(k,v){try{const db=await idb();db.transaction('i','readwrite').objectStore('i').put(v,k)}catch(e){}}
+function compress(file,max=1280){return new Promise((res,rej)=>{const url=URL.createObjectURL(file);const im=new Image();im.onload=()=>{const s=Math.min(1,max/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(url);c.toBlob(b=>b?res(b):rej(new Error('foto')),'image/jpeg',.82)};im.onerror=()=>rej(new Error('Dit is geen foto'));im.src=url})}
+async function putImg(file){const blob=await compress(file);const id='i'+uid();await idbPut(id,blob);IMGURL[id]=URL.createObjectURL(blob);
+  if(SB.hid){let body=new Uint8Array(await blob.arrayBuffer());if(VAULT.key){const iv=rnd(12);const ct=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},VAULT.key,body));body=new Uint8Array(12+ct.length);body.set(iv);body.set(ct,12)}
+    const {error}=await SB.c.storage.from('spanje').upload(SB.hid+'/'+id,new Blob([body],{type:'application/octet-stream'}),{upsert:true});if(error)toast('Foto staat alleen op dit apparaat: '+error.message)}
+  return id}
+async function getImg(id){if(IMGURL[id])return IMGURL[id];let b=await idbGet(id);
+  if(!b&&SB.hid){const {data,error}=await SB.c.storage.from('spanje').download(SB.hid+'/'+id);if(error||!data)return null;let u=new Uint8Array(await data.arrayBuffer());
+    if(VAULT.key){try{u=new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:u.slice(0,12)},VAULT.key,u.slice(12)))}catch(e){return null}}b=new Blob([u],{type:'image/jpeg'});idbPut(id,b)}
+  if(!b)return null;return IMGURL[id]=URL.createObjectURL(b)}
+function delImg(id){if(SB.hid)SB.c.storage.from('spanje').remove([SB.hid+'/'+id]).catch(()=>{})}
+function pickPhotos(multi,cb){const i=document.createElement('input');i.type='file';i.accept='image/*';i.multiple=!!multi;i.onchange=async()=>{const ids=[];for(const f of i.files){try{ids.push(await putImg(f))}catch(e){toast(e.message)}}if(ids.length)cb(ids)};i.click()}
+function loadImgs(){document.querySelectorAll('img[data-img]').forEach(el=>{getImg(el.dataset.img).then(u=>{if(u)el.src=u})})}
+
+/* ---------- meldingen ---------- */
+function checkMilestones(){const t=total();MILESTONES.forEach(m=>{if(t>=m&&!S.ms.includes(m)){S.ms.push(m);const txt=m===GOALT?'Spaardoel 2031 gehaald!':'Mijlpaal: '+E(m)+' gespaard!';toast(txt);S.celebrate=m;if(isApp()&&Android.notify)try{Android.notify(7000+MILESTONES.indexOf(m),'Spanje 2031',txt)}catch(e){}}})}
+function scheduleDeadlines(){if(!isApp()||!Android.schedule)return;let prev=[];try{prev=JSON.parse(localStorage.getItem('sp-sched')||'[]')}catch(e){}const ids=[];
+  tasks().forEach(t=>{const m=S.tmeta[t.id];if(!m||!m.due||isDone(t.id))return;const at=new Date(m.due+'T09:00:00');at.setDate(at.getDate()-1);if(at<=new Date())return;const id=100000+(+hashStr(t.id)%800000);ids.push(id);
+    try{Android.schedule(id,at.getTime(),'Morgen deadline: '+t.t,(m.who?m.who+' · ':'')+'Spanje 2031')}catch(e){}});
+  prev.filter(i=>!ids.includes(i)).forEach(i=>{try{Android.cancel(i)}catch(e){}});try{localStorage.setItem('sp-sched',JSON.stringify(ids))}catch(e){}}
+
+/* ---------- update ---------- */
+let UPD=null;
+function myVC(){try{return isApp()&&Android.versionCode?Android.versionCode():0}catch(e){return 0}}
+async function checkUpdate(){const vc=myVC();if(!vc)return;try{const r=await fetch(UPD_URL+'?t='+Date.now(),{cache:'no-store'});const j=await r.json();if(+j.versionCode>vc){UPD=j;const el=$('updbar');if(el)el.outerHTML=updBar();else render()}}catch(e){}}
+const updBar=()=>UPD?`<div class="upd" id="updbar"><span><b>Nieuwe versie ${esc(UPD.versionName)}</b>${UPD.notes&&UPD.notes.length?' · '+esc(UPD.notes[0]):''}</span><button class="btn sm" data-act="update">Bijwerken</button></div>`:'<div id="updbar"></div>';
+window.appResume=()=>{setTimeout(checkUpdate,1500);if(SB.ready)pull().catch(()=>{})};
+
+/* ---------- views ---------- */
+const ICON={t1:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>',t2:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',t3:'<path d="M3 20h4v-5h4v-5h4V5h6"/>',t4:'<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>',t5:'<path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/>',t6:'<path d="M4 20l4-1L19 8l-3-3L5 16z"/><path d="M14 7l3 3"/>',t7:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',t8:'<path d="M4 5h16v10H9l-5 4z"/>',t9:'<path d="M3 18V8M3 14h18v4M21 14v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11" r="2"/>',t10:'<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',t11:'<path d="M2 16l20-8-6 12-3-5z"/><path d="M13 15l-2 5"/>',t12:'<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/>',t13:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',t14:'<rect x="3" y="3" width="8" height="10" rx="1"/><rect x="13" y="3" width="8" height="6" rx="1"/><rect x="13" y="11" width="8" height="10" rx="1"/><rect x="3" y="15" width="8" height="6" rx="1"/>',t15:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>'};
+const TILES=[['t4','Financiën'],['t3','Planning en fases'],['t5','Benodigde middelen'],['t7','Wonen en finca'],['t10','Regio\'s vergelijken'],['t11','Reislogboek'],['t9','Inkomen B&B'],['t8','Taal'],['t12','Documenten Spanje'],['t13','Levensonderhoud'],['t6','Branding'],['t14','Moodboard'],['t2','Doel en uitgangspunten'],['t1','Inleiding'],['t15','Instellingen']];
+const HERO=`<svg viewBox="0 0 400 260" role="img" aria-label="Finca op een heuvel onder de zon"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b9be8"/><stop offset="1" stop-color="#ffd27a"/></linearGradient><linearGradient id="h1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c98a4b"/><stop offset="1" stop-color="#9c5f2e"/></linearGradient><linearGradient id="h2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2b26b"/><stop offset="1" stop-color="#c48a45"/></linearGradient><g id="olive"><rect x="-2" y="0" width="4" height="14" fill="#5a3b1e"/><ellipse cx="0" cy="-4" rx="13" ry="10" fill="#5f7f3a"/><ellipse cx="-3" cy="-7" rx="7" ry="5" fill="#7d9e4c"/></g></defs><rect width="400" height="260" fill="url(#sky)"/><circle cx="300" cy="78" r="44" fill="#f5b400"/><circle cx="300" cy="78" r="58" fill="#f5b400" opacity=".18"/><path d="M0 170 Q90 120 190 150 T400 140 V260 H0Z" fill="url(#h1)"/><path d="M0 205 Q120 165 230 190 T400 185 V260 H0Z" fill="url(#h2)"/><g transform="translate(150 118)"><rect x="0" y="22" width="92" height="44" fill="#fbf7ef"/><rect x="0" y="62" width="92" height="5" fill="#d8cdb8"/><path d="M-6 24 L46 0 L98 24Z" fill="#c4512a"/><path d="M-6 24 L46 0 L46 6 L2 26Z" fill="#e06a3c"/><rect x="38" y="40" width="16" height="26" rx="8" fill="#1446a0"/><rect x="12" y="34" width="14" height="12" fill="#1446a0"/><rect x="66" y="34" width="14" height="12" fill="#1446a0"/><rect x="100" y="38" width="40" height="28" fill="#f3ece0"/><path d="M96 40 L120 26 L144 40Z" fill="#c4512a"/></g><use href="#olive" x="70" y="196"/><use href="#olive" x="110" y="206"/><use href="#olive" x="320" y="188"/><use href="#olive" x="355" y="198"/><use href="#olive" x="40" y="222"/></svg>`;
+const num=(path,label,v,extra='')=>`<div class="f"><label>${label}</label><input type="number" inputmode="decimal" step="any" data-bind="${path}" value="${v??''}" ${extra}></div>`;
+const txt=(path,label,v,ph='')=>`<div class="f"><label>${label}</label><input type="text" data-bind="${path}" data-t="s" value="${esc(v)}" placeholder="${esc(ph)}"></div>`;
+function note(k,label,ph){return `<div class="f" style="margin-top:12px"><label>${label}</label><textarea data-bind="notes.${k}" data-t="s" data-norr="1" placeholder="${esc(ph||'')}">${esc(S.notes[k]||'')}</textarea></div>`}
+function badges(t){const m=S.tmeta[t.id]||{};let h='';if(m.who)h+=`<span class="badge">${esc(m.who)}</span>`;if(m.due){const d=(new Date(m.due+'T12:00')-new Date())/864e5;h+=`<span class="badge ${!isDone(t.id)&&d<0?'late':!isDone(t.id)&&d<14?'soon':''}">${d<0&&!isDone(t.id)?'Te laat · ':''}${fmtD(m.due)}</span>`}return h}
+function taskList(list,showFase){if(!list.length)return '<p class="lbl">Nog geen taken.</p>';return '<ul class="list">'+list.map(t=>`<li class="${isDone(t.id)?'done':''}"><input type="checkbox" data-task="${t.id}" ${isDone(t.id)?'checked':''} aria-label="Afgevinkt"><div class="tt" data-act="edittask" data-id="${t.id}"><span>${esc(t.t)}</span><div>${showFase?`<span class="badge">Fase ${t.f}</span>`:''}${badges(t)}</div></div></li>`).join('')+'</ul>'}
+function addForm(tile){return `<div class="row" style="margin-top:12px"><div class="f" style="flex:3 1 200px"><label>Nieuwe taak</label><input type="text" id="nt-${tile}" placeholder="Bijv. makelaar bellen"></div><div class="f"><label>Fase</label><select id="nf-${tile}">${FASES.map((f,i)=>`<option value="${i+1}">${i+1}. ${f}</option>`).join('')}</select></div><button class="btn" style="flex:0 0 auto" data-act="addtask" data-id="${tile}">Toevoegen</button></div>`}
+function tileTasks(tile){return `<div class="card"><h3>Te regelen</h3>${taskList(tasks().filter(x=>x.tile===tile),true)}${addForm(tile)}</div>`}
+function moneyForm(){const f=(n,l,v)=>`<div class="f"><label>${l}</label><input type="number" inputmode="decimal" step="any" name="${n}" value="${v}"></div>`;
+  return `<form data-form="money" style="margin-top:10px"><div class="lbl">Saldo nu</div><div class="row" style="margin-top:6px">${f('ing','ING Esponolos',S.acc.ing)}${f('degiro','DeGiro',S.acc.degiro)}${f('pokemon','Pokémon',S.acc.pokemon)}${f('divi','Dividend p/m',S.divi)}</div><div class="lbl" style="margin-top:12px">Maandelijkse inleg</div><div class="row" style="margin-top:6px">${f('iing','Inleg ING p/m',S.inleg.ing)}${f('ideg','Inleg DeGiro p/m',S.inleg.degiro)}</div><button class="btn" style="margin-top:12px">Opslaan</button> <span class="sm">Laatst bijgewerkt ${fmtD(S.upd)}</span></form>`}
+let qOpen=false;
+function home(){const tot=total(),need=Math.max(0,GOALT-tot)/monthsLeft(),w=WORD(),open=tasks().filter(t=>!isDone(t.id));
+  const late=tasks().filter(t=>!isDone(t.id)&&S.tmeta[t.id]&&S.tmeta[t.id].due&&S.tmeta[t.id].due<today());
+  const act=FASES.findIndex((f,i)=>faseP(i+1)<100),ct=costTot(),filled=ALLC.filter(c=>+S.costs[c[0]]>0).length,bs=bnbSeason();
+  const sum={t1:'Waarom we dit doen',t2:'4 uitgangspunten',t3:act<0?'Alle fases afgerond':`Fase ${act+1}: ${FASES[act]}`,t4:`${E(tot)} van ${E(GOALT)}`,t5:`${filled} van ${ALLC.length} ingevuld`,t6:'Naam, logo, website',t7:`${S.fincas.length} finca's bewaard`,t8:`Niveau ${S.niveau} · ${(S.lessen.reduce((a,l)=>a+(+l.min||0),0)/60).toFixed(1)} uur les`,t9:`± ${E(bs.pm)} p/m netto`,t10:`${S.regions.length} regio's`,t11:`${S.trips.length} reizen`,t12:`${DOCSTEPS.filter(d=>S.docs[d[0]]).length} van ${DOCSTEPS.length} geregeld`,t13:'NL naast Spanje',t14:`${S.mood.length} foto's`,t15:SB.hid?'Ingelogd':'Account en updates'};
+  const prog={t3:allP(),t4:pct(tot,GOALT),t5:pct(filled,ALLC.length),t12:pct(DOCSTEPS.filter(d=>S.docs[d[0]]).length,DOCSTEPS.length)};
+  return `${updBar()}<header class="hero band"><div class="wrap"><div><div style="display:flex;align-items:center;gap:8px;font-weight:700;color:#ffd666"><span class="dot" id="sync"></span>Project Spanje 2031</div><h1 style="margin-top:8px">Nog <span class="big">${daysLeft().toLocaleString('nl-NL')}</span> dagen tot Spanje</h1><p>Vertrek ${fmtD(S.vertrek)}. Elke maand gaat er ${E((+S.inleg.ing||0)+(+S.inleg.degiro||0))} richting Spanje.</p></div><div class="pic hide-s">${HERO}</div></div></header>
+  <main class="band" style="padding-top:0"><div class="wrap">
+  <div class="kpis"><div class="kpi"><div class="lbl">Gespaard voor Spanje</div><div class="v">${E(tot)}</div>${bar(pct(tot,GOALT))}<div class="lbl">${pct(tot,GOALT)}% van ${E(GOALT)} · nog ${E(need)} p/m nodig${S.inclHouse?`<br>Met overwaarde huis: <b>${E(tot+overwaarde())}</b>`:''}</div></div>
+  <div class="kpi"><div class="lbl">Totale voortgang</div><div class="v">${allP()}%</div>${bar(allP(),'b')}<div class="lbl">${tasks().length-open.length} van ${tasks().length} taken${late.length?` · <span class="warn">${late.length} te laat</span>`:''}</div></div>
+  <div class="kpi"><div class="lbl">Dividend per maand</div><div class="v">${E(S.divi)}</div>${bar(pct(S.divi,500),'g')}<div class="lbl">Doel bij vertrek: € 400–500</div></div></div>
+  ${S.celebrate?`<div class="card celebrate"><b style="font:700 20px Fraunces,serif">${S.celebrate===GOALT?'Spaardoel gehaald!':E(S.celebrate)+' gespaard!'}</b><div>Weer een stap dichter bij de finca.</div><button class="btn sm ghost" style="margin-top:8px;border-color:#0004" data-act="clearcele">Mooi!</button></div>`:''}
+  <details class="card" id="qe" ${qOpen?'open':''}><summary style="cursor:pointer;font-weight:700">Bedragen aanpassen</summary>${moneyForm()}</details>
+  <div class="card word"><div class="sm" style="color:#6b5200">Spaans woord van de dag</div><div style="font:700 24px Fraunces,serif">${esc(w[0])}</div><div>${esc(w[1])}</div></div>
+  <div class="tiles">${TILES.map(([id,t])=>`<button class="tile" data-go="${id}"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[id]}</svg><b>${t}</b>${prog[id]!=null?bar(prog[id],id==='t4'?'':'b'):''}<small>${sum[id]}</small></button>`).join('')}</div>
+  <div class="card"><h3>Eerstvolgende taken</h3>${taskList(open.sort((a,b)=>((S.tmeta[a.id]||{}).due||'9')<((S.tmeta[b.id]||{}).due||'9')?-1:1).slice(0,6),true)}</div>
+  </div></main>`}
+function page(id){const name=TILES.find(t=>t[0]===id)[1];return `${updBar()}<div class="top"><button class="btn sm" data-go="">←</button><b>${name}</b><span class="dot" id="sync"></span></div><main class="band"><div class="wrap">${V[id]()}</div></main>`}
+function lineChart(){const pts=S.hist.slice().sort((a,b)=>a.d<b.d?-1:1);return `<div class="fig" id="chart" data-chart="1"></div><div class="sm">Geel = jullie stand · blauw gestippeld = planlijn naar ${E(GOALT)}</div>`}
+function drawChart(){const el=$('chart');if(!el)return;const W=el.clientWidth,H=el.clientHeight;const pts=S.hist.slice().sort((a,b)=>a.d<b.d?-1:1);if(!pts.length){el.innerHTML='';return}
+  const t0=new Date(pts[0].d).getTime(),t1=vertrek().getTime(),max=Math.max(GOALT,...pts.map(p=>p.t))*1.08;const pl=46,pb=22,pr=10,pt=10;
+  const x=t=>pl+(t-t0)/(t1-t0)*(W-pl-pr),y=v=>pt+(1-v/max)*(H-pt-pb);
+  let g='';for(let i=0;i<=4;i++){const v=max/4*i;g+=`<line x1="${pl}" x2="${W-pr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${pl-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)">${Math.round(v/1000)}k</text>`}
+  for(let yr=new Date(t0).getFullYear()+1;yr<=vertrek().getFullYear();yr++){const t=new Date(yr,0,1).getTime();if(t>t0&&t<t1)g+=`<text x="${x(t)}" y="${H-6}" text-anchor="middle" font-size="11" fill="var(--muted)">${W<420?"'"+String(yr).slice(2):yr}</text>`}
+  const line=pts.map((p,i)=>(i?'L':'M')+x(new Date(p.d).getTime()).toFixed(1)+' '+y(p.t).toFixed(1)).join(' ');
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}">${g}<path d="M${x(t0)} ${y(pts[0].t)} L${x(t1)} ${y(GOALT)}" stroke="var(--bl)" stroke-dasharray="5 5" fill="none" stroke-width="2"/><path d="${line}" stroke="#f5b400" stroke-width="3" fill="none"/>${pts.map(p=>`<circle cx="${x(new Date(p.d).getTime())}" cy="${y(p.t)}" r="4" fill="#f5b400"/>`).join('')}</svg>`}
+const V={
+t1:()=>`<h2>Inleiding</h2><div class="card"><p style="margin:0">Dit is onze leidraad voor project <i>Spanje 2031</i>: tijdlijnen, spaarplannen, ideeën en lopende ontwikkelingen. Het helpt ons zien waar we nu staan en wat er nog moet gebeuren om de verhuizing goed en gestructureerd voor te bereiden.</p></div>${note('intro','Eigen notities','Waarom willen we naar Spanje?')}`,
+t2:()=>`<h2>Doel en uitgangspunten</h2><div class="card"><p style="margin:0">Onze verhuizing naar Spanje in 2031 stap voor stap voorbereiden, met bewuste keuzes over wonen, financiën, taal en levensstijl.</p></div><div class="tiles">${['We nemen de tijd en spreiden de voorbereiding over meerdere jaren','We combineren plannen maken met Spanje echt ervaren','Financiële rust en zekerheid staan voorop','We blijven flexibel en sturen bij wanneer nodig'].map(u=>`<div class="tile" style="cursor:default;min-height:100px"><b>${u}</b></div>`).join('')}</div>${note('uitg','Financiële uitgangspunten','Bijv. minimaal 12 maanden buffer…')}${tileTasks('t2')}`,
+t3:()=>{const yrs={};tasks().forEach(t=>{const m=S.tmeta[t.id];const y=m&&m.due?+m.due.slice(0,4):FASE_YEAR[t.f-1];(yrs[y]=yrs[y]||[]).push(t)});
+  return `<h2>Planning en fases</h2><div class="card"><div class="row">${`<div class="f"><label>Vertrekdatum</label><input type="date" data-bind="vertrek" data-t="s" value="${S.vertrek}"></div>`}<div><div class="lbl">Nog</div><div class="res">${monthsLeft()} maanden</div></div></div></div>
+  <div class="card"><h3>Voortgang per fase</h3>${FASES.map((f,i)=>`<div style="display:grid;grid-template-columns:110px minmax(0,1fr) 44px;gap:10px;align-items:center"><span class="sm">${i+1}. ${f}</span>${bar(faseP(i+1),i?'b':'')}<span class="n">${faseP(i+1)}%</span></div>`).join('')}</div>
+  <div class="card"><h3>Tijdlijn per jaar</h3><p class="sm">Taken met een deadline staan in dat jaar, de rest in het jaar van hun fase. Tik op een taak voor deadline en wie het doet.</p><div class="tl">${Object.keys(yrs).sort().map(y=>`<div class="yr"><b style="font:600 20px Fraunces,serif">${y}</b>${taskList(yrs[y],true)}</div>`).join('')}</div></div>
+  ${FASES.map((f,i)=>`<div class="card"><h3>Fase ${i+1} · ${f} <span class="badge">${faseP(i+1)}%</span></h3>${note('f'+(i+1),'Opmerkingen','')}</div>`).join('')}${addForm('t3')}`},
+t4:()=>{const tot=total(),w=S.whatif,p=projection(w.extra),p0=projection(0),dl=S.divlog,yr=String(new Date().getFullYear()),months=MND.map((m,i)=>dl.filter(e=>e.d.startsWith(yr+'-'+String(i+1).padStart(2,'0'))).reduce((a,e)=>a+(+e.amt||0),0)),mx=Math.max(1,...months);
+  return `<h2>Financiën</h2><div class="grid2"><div class="card"><div class="lbl">Totaal gespaard</div><div class="res">${E(tot)}</div>${bar(pct(tot,GOALT))}<div class="lbl">Doel 2031: ${E(GOALT)}</div><label style="display:flex;gap:10px;align-items:center;margin-top:10px"><input type="checkbox" data-bind="inclHouse" data-t="b" ${S.inclHouse?'checked':''}> Overwaarde huis meetellen (${E(overwaarde())})</label>${S.inclHouse?`<div style="margin-top:6px">Totaal met overwaarde: <b>${E(tot+overwaarde())}</b></div>`:''}</div>
+  <div class="card"><div class="lbl">Prognose bij vertrek</div><div class="res">${E(p0.total)}</div><div class="lbl">Dividend dan ± ${E(p0.div)} p/m · ${p0.total>=GOALT?'<span class="ok">doel gehaald</span>':'<span class="warn">'+E(GOALT-p0.total)+' te kort</span>'}</div></div></div>
+  <div class="card"><h3>Bedragen aanpassen</h3>${moneyForm()}</div>
+  <div class="card"><h3>Spaarverloop</h3>${lineChart()}</div>
+  <div class="card"><h3>Wat als…</h3><p class="sm">Schatting: ING zonder rente, DeGiro met het rendement hieronder (dividend herbelegd).</p><div class="f"><label>Extra inleg DeGiro per maand: <b>${E(w.extra)}</b></label><input type="range" min="-400" max="600" step="25" data-bind="whatif.extra" value="${w.extra}"></div>
+  <div class="row" style="margin-top:8px">${num('whatif.rend','Rendement % per jaar',w.rend)}${num('whatif.yld','Dividendrendement %',w.yld)}</div><label style="display:flex;gap:10px;align-items:center;margin-top:8px"><input type="checkbox" data-bind="whatif.bonus" data-t="b" ${w.bonus?'checked':''}> Elk jaar € 2.000 extra in december</label>
+  <div class="grid2" style="margin-top:12px"><div><div class="lbl">Totaal bij vertrek</div><div class="res">${E(p.total)}</div><div class="sm">${w.extra?(w.extra>0?'+':'')+E(p.total-p0.total)+' t.o.v. nu':'huidige inleg'}</div></div><div><div class="lbl">Dividend per maand</div><div class="res">${E(p.div)}</div><div class="sm">DeGiro-portefeuille ${E(p.dg)}</div></div></div></div>
+  <div class="card"><h3>Dividendkalender ${yr}</h3><div class="mbars">${months.map(v=>`<div style="height:${Math.max(2,v/mx*100)}%" title="${E(v)}" class="${v?'':'off'}"></div>`).join('')}</div><div class="mlab">${MND.map(m=>`<span>${m}</span>`).join('')}</div>
+  <p class="lbl">Ontvangen in ${yr}: <b>${E(months.reduce((a,b)=>a+b,0))}</b> · gemiddeld ${E(months.reduce((a,b)=>a+b,0)/Math.max(1,new Date().getMonth()+1))} p/m</p>
+  <div class="row"><div class="f"><label>Datum</label><input type="date" id="dvD" value="${today()}"></div><div class="f"><label>Bedrag (€)</label><input type="number" step="any" inputmode="decimal" id="dvA"></div><div class="f"><label>Aandeel</label><input type="text" id="dvN" placeholder="Bijv. Unilever"></div><button class="btn" style="flex:0 0 auto" data-act="adddiv">Toevoegen</button></div>
+  ${dl.length?`<ul class="list">${dl.slice().sort((a,b)=>a.d<b.d?1:-1).slice(0,8).map(e=>`<li><span style="flex:1">${fmtD(e.d)} · ${esc(e.note||'Dividend')}</span><span class="n">${E(e.amt)}</span><button class="btn sm ghost" data-act="deldiv" data-id="${e.id}" aria-label="Verwijder">✕</button></li>`).join('')}</ul>`:''}</div>
+  <div class="card"><h3>Mijlpalen</h3>${MILESTONES.map(m=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span>${m===GOALT?'Spaardoel 2031':E(m)}</span><span class="${tot>=m?'ok':'sm'}">${tot>=m?'Gehaald':'nog '+E(m-tot)}</span></div>`).join('')}</div>
+  <div class="card"><h3>DeGiro dividendplan</h3><p class="sm">Nu ${E(S.inleg.degiro)} p/m (oorspronkelijk plan € 350) + € 2.000 per jaar, dividend herbeleggen.</p><table><thead><tr><th>Jaar</th><th class="n">Portefeuille</th><th class="n">Dividend p/m</th></tr></thead><tbody>${[['Start',24500,'€ 140–145'],['Eind 2026',31000,'€ 165–175'],['Eind 2027',38000,'€ 200–215'],['Eind 2028',47000,'€ 245–265'],['Eind 2029',60000,'€ 300–325'],['2031',75000,'€ 400–450']].map((r,i,a)=>`<tr class="${S.acc.degiro>=r[1]&&(!a[i+1]||S.acc.degiro<a[i+1][1])?'now':''}"><td>${r[0]}</td><td class="n">${E(r[1])}</td><td class="n">${r[2]}</td></tr>`).join('')}</tbody></table></div>
+  <div class="card"><h3>Huis en auto</h3><table><tbody><tr><td>Huis NL (WOZ)</td><td class="n">${E(HOUSE.woz)}</td></tr><tr><td>Hypotheek</td><td class="n">${E(HOUSE.hyp)}</td></tr><tr><td>Verwachte waarde 2031</td><td class="n">${E(HOUSE.v2031)}</td></tr><tr><td><b>Mogelijke overwaarde</b></td><td class="n"><b>${E(overwaarde())}</b></td></tr><tr><td>Auto nu → 2031</td><td class="n">${E(13350)} → ${E(2000)}</td></tr></tbody></table></div>
+  <div class="card"><h3>Geschiedenis</h3>${S.hist.slice().sort((a,b)=>a.d<b.d?1:-1).slice(0,10).map(h=>`<div style="display:grid;grid-template-columns:100px minmax(0,1fr) 90px;gap:8px;align-items:center"><span class="sm">${fmtD(h.d)}</span>${bar(pct(h.t,GOALT))}<span class="n">${E(h.t)}</span></div>`).join('')}</div>${tileTasks('t4')}`},
+t5:()=>{const ct=costTot();return `<h2>Benodigde middelen</h2><div class="grid2"><div class="card"><div class="lbl">Eenmalige kosten</div><div class="res">${E(ct.e)}</div></div><div class="card"><div class="lbl">Vaste lasten per maand</div><div class="res">${E(ct.m)}</div><div class="lbl">Noodbuffer 6–12 maanden: ${E(ct.m*6)} – ${E(ct.m*12)}</div></div></div><p class="sm">Jaarbedragen tellen voor 1/12 mee. Bedragen p.p. zijn al voor 2 personen ingevuld.</p>
+  ${COSTS.map(([g,items])=>`<div class="card"><h3>${g}</h3><table><tbody>${items.map(([id,p,f,h])=>`<tr><td>${p}<div class="sm">${FREQ[f]}${h?' · '+h:''}</div></td><td class="n" style="width:120px"><input type="number" inputmode="decimal" step="any" aria-label="${p}" data-bind="costs.${id}" value="${S.costs[id]??''}" placeholder="€" style="text-align:right"></td></tr>`).join('')}</tbody></table></div>`).join('')}${tileTasks('t5')}`},
+t6:()=>`<h2>Branding</h2><div class="grid2"><div class="card"><h3>Naam</h3>${note('naam','Ideeën voor de naam','Casa …, Finca …')}</div><div class="card"><h3>Logo</h3>${note('logo','Ideeën en wensen','Kleuren, stijl, ontwerper…')}</div></div><div class="card"><h3>Website</h3><p>Opties: <a href="https://wordpress.com/nl/">WordPress.com</a> voor de site en <a href="https://n8n.io/">n8n</a> voor automatisering (boekingen, mails).</p>${note('site','Notities website','')}</div>${tileTasks('t6')}`,
+t7:()=>{const f=S.finca,kost=f.prijs*(f.itp+f.bij)/100,need=+f.prijs+kost+(+f.verb||0),have=total()+(S.inclHouse?overwaarde():0);
+  return `<h2>Wonen en finca</h2><div class="card"><h3>Onze woonwens</h3><p style="margin:0">Een <b>finca</b> met genoeg ruimte voor extra huisjes, met een bestaand huisje voor onszelf.</p></div>
+  <div class="card"><h3>Finca-budget</h3><p class="sm">Schatting, pas de percentages aan zodra je ze weet.</p><div class="row">${num('finca.prijs','Aankoopprijs (€)',f.prijs)}${num('finca.verb','Verbouwing (€)',f.verb)}${num('finca.itp','Overdrachtsbelasting %',f.itp)}${num('finca.bij','Notaris, register, advocaat %',f.bij)}</div>
+  <table style="margin-top:10px"><tbody><tr><td>Aankoop</td><td class="n">${E(f.prijs)}</td></tr><tr><td>Bijkomende kosten (${f.itp+f.bij}%)</td><td class="n">${E(kost)}</td></tr><tr><td>Verbouwing</td><td class="n">${E(f.verb)}</td></tr><tr><td><b>Totaal nodig</b></td><td class="n"><b>${E(need)}</b></td></tr><tr><td>Beschikbaar nu${S.inclHouse?' (incl. overwaarde)':''}</td><td class="n">${E(have)}</td></tr></tbody></table>${bar(pct(have,need),'g')}<div class="lbl">${pct(have,need)}% gedekt${!S.inclHouse?' · tip: zet bij Financiën de overwaarde aan':''}</div></div>
+  <div class="card"><h3>Finca-favorieten</h3>${S.fincas.length?S.fincas.map(x=>`<div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer" data-act="editfinca" data-id="${x.id}">${x.foto?`<img data-img="${x.foto}" class="ph" style="width:76px;flex:none" alt="">`:`<div class="ph" style="width:76px;flex:none"></div>`}<div style="flex:1"><b>${esc(x.naam||'Finca')}</b><div class="sm">${esc(x.regio||'')}${x.grond?' · '+esc(x.grond)+' m² grond':''}</div><div>${E(x.prijs)} <span class="badge">${esc(x.status||'Interessant')}</span></div></div></div>`).join(''):'<p class="lbl">Nog geen finca\'s bewaard. Kom je er een tegen? Bewaar de link hier.</p>'}<button class="btn" style="margin-top:10px" data-act="editfinca">Finca toevoegen</button></div>
+  <div class="card"><h3>Plattegrond van de finca</h3><p class="sm">Sleep de blokken. Tik op een blok om het aan te passen. Terrein ${S.plan.w} × ${S.plan.h} m.</p>${planSvg()}<div class="chips">${Object.entries(PLANTYPES).map(([k,v])=>`<button class="chip" data-act="addplan" data-id="${k}">+ ${v[0]}</button>`).join('')}</div><div class="row" style="margin-top:10px">${num('plan.w','Breedte terrein (m)',S.plan.w)}${num('plan.h','Diepte terrein (m)',S.plan.h)}</div></div>
+  <div class="card"><h3>Hypotheek</h3>${note('hypo','Notities hypotheek','Eigen inbreng, Spaanse bank, overwaarde NL…')}</div>${tileTasks('t7')}`},
+t8:()=>{const w=WORD(),uren=S.lessen.reduce((a,l)=>a+(+l.min||0),0)/60,LV=['A0','A1','A2','B1','B2','C1'];return `<h2>Taal</h2><div class="card word"><div class="sm" style="color:#6b5200">Woord van de dag</div><div style="font:700 26px Fraunces,serif">${esc(w[0])}</div><div>${esc(w[1])}</div></div>
+  <div class="card"><h3>Niveau</h3><div class="chips">${LV.map(l=>`<button class="chip" data-act="niveau" data-id="${l}" style="${S.niveau===l?'background:var(--blue);color:#fff;border-color:var(--blue)':''}">${l}</button>`).join('')}</div>${bar(pct(LV.indexOf(S.niveau),3),'b')}<div class="lbl">Doel: B1 vóór vertrek (zelfstandig gesprekken voeren)</div></div>
+  <div class="card"><h3>Lesuren</h3><div class="res">${uren.toFixed(1)} uur</div><div class="row" style="margin-top:10px"><div class="f"><label>Datum</label><input type="date" id="lsD" value="${today()}"></div><div class="f"><label>Minuten</label><input type="number" id="lsM" value="60"></div><div class="f" style="flex:2 1 160px"><label>Wat geleerd</label><input type="text" id="lsN"></div><button class="btn" style="flex:0 0 auto" data-act="addles">Toevoegen</button></div>
+  ${S.lessen.length?`<ul class="list">${S.lessen.slice().sort((a,b)=>a.d<b.d?1:-1).slice(0,10).map(l=>`<li><span style="flex:1">${fmtD(l.d)} · ${esc(l.note||'Les')}</span><span class="n">${l.min} min</span><button class="btn sm ghost" data-act="delles" data-id="${l.id}" aria-label="Verwijder">✕</button></li>`).join('')}</ul>`:''}</div>
+  <div class="card"><p style="margin-top:0">Start rond <b>2027–2028</b>, liefst op locatie of thuis, niet online.</p><a href="https://www.super-prof.nl/s/spaans,Barneveld,52.14019010,5.58415090,1,1019317.html">Superprof: docenten in Barneveld</a><br><a href="https://preply.com/nl/online/spaans-docenten">Preply</a> <span class="sm">(vooral online)</span></div>${note('taal','Notities taal','')}${tileTasks('t8')}`},
+t9:()=>{const b=bnbSimple(),s=bnbSeason(),ct=costTot(),mx=Math.max(1,...s.m),inc=s.pm+(+S.divi||0),avg=S.comp.length?S.comp.reduce((a,c)=>a+(+c.prijs||0),0)/S.comp.length:0;
+  return `<h2>Inkomen B&amp;B</h2><div class="card"><h3>Basis</h3><p class="sm">Voorbeeldwaarden, pas ze aan.</p><div class="row">${num('bnb.kamers','Kamers / huisjes',S.bnb.kamers)}${num('bnb.kost','Kosten (% omzet)',S.bnb.kost)}</div></div>
+  <div class="card"><h3>Seizoensplanner</h3><div class="mbars">${s.m.map((v,i)=>`<div class="${S.season[i].open?'':'off'}" style="height:${Math.max(2,v/mx*100)}%" title="${E(v)}"></div>`).join('')}</div><div class="mlab">${MND.map(m=>`<span>${m}</span>`).join('')}</div>
+  <div class="scroll"><table style="margin-top:10px"><thead><tr><th>Maand</th><th>Open</th><th class="n">Prijs/nacht</th><th class="n">Bezetting %</th><th class="n">Omzet</th></tr></thead><tbody>${S.season.map((x,i)=>`<tr><td>${MND[i]}</td><td><input type="checkbox" data-bind="season.${i}.open" data-t="b" ${x.open?'checked':''}></td><td class="n"><input type="number" style="width:80px;text-align:right" data-bind="season.${i}.prijs" value="${x.prijs}"></td><td class="n"><input type="number" style="width:70px;text-align:right" data-bind="season.${i}.bez" value="${x.bez}"></td><td class="n">${E(s.m[i])}</td></tr>`).join('')}</tbody></table></div>
+  <div class="grid2" style="margin-top:12px"><div><div class="lbl">Omzet per jaar</div><div class="res">${E(s.omzet)}</div></div><div><div class="lbl">Netto p/m + dividend</div><div class="res">${E(inc)}</div><div class="sm">${E(s.pm)} B&B + ${E(S.divi)} dividend${ct.m?` · lasten ${E(ct.m)}: <span class="${inc>=ct.m?'ok':'warn'}">${inc>=ct.m?'gedekt':E(ct.m-inc)+' tekort'}</span>`:''}</div></div></div></div>
+  <div class="card"><h3>Concurrentie</h3>${S.comp.length?`<table><thead><tr><th>B&B</th><th class="n">Prijs</th><th class="n">Bezet.</th></tr></thead><tbody>${S.comp.map(c=>`<tr data-act="editcomp" data-id="${c.id}" style="cursor:pointer"><td><b>${esc(c.naam)}</b><div class="sm">${esc(c.regio||'')}</div></td><td class="n">${E(c.prijs)}</td><td class="n">${c.bez?c.bez+'%':'–'}</td></tr>`).join('')}</tbody></table><p class="lbl">Gemiddelde prijs: <b>${E(avg)}</b> per nacht</p>`:'<p class="lbl">Houd B&B\'s in jullie favoriete regio bij: prijs, bezetting en wat ze goed doen.</p>'}<button class="btn" data-act="editcomp">B&amp;B toevoegen</button></div>
+  ${note('bnb','Notities B&B','Extra inkomsten: ontbijt, excursies…')}${tileTasks('t9')}`},
+t10:()=>{const w=S.regw||{};const score=r=>REGCRIT.reduce((a,[k])=>a+(+r.s[k]||0)*(w[k]??1),0),maxs=REGCRIT.reduce((a,[k])=>a+5*(w[k]??1),0)||1;const list=S.regions.slice().sort((a,b)=>score(b)-score(a));
+  return `<h2>Regio's vergelijken</h2><p class="sm">Geef elke regio 1 tot 5 punten per onderwerp. Belangrijker onderwerp? Zet het gewicht hoger.</p>
+  ${list.map((r,i)=>`<div class="card"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><h3>${i===0&&list.length>1?'1. ':''}${esc(r.naam)}</h3><span class="res" style="font-size:24px">${pct(score(r),maxs)}</span></div>${bar(pct(score(r),maxs),'b')}
+  <div class="grid2" style="gap:6px 14px;margin-top:6px">${REGCRIT.map(([k,l])=>`<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span class="sm">${l}</span><select data-bind="regions.#${r.id}.s.${k}" style="width:76px;min-height:38px">${[0,1,2,3,4,5].map(n=>`<option value="${n}" ${(+r.s[k]||0)===n?'selected':''}>${n||'–'}</option>`).join('')}</select></div>`).join('')}</div>
+  <div class="f" style="margin-top:8px"><label>Notities</label><input type="text" data-bind="regions.#${r.id}.note" data-t="s" value="${esc(r.note||'')}"></div><button class="btn sm ghost" style="margin-top:8px" data-act="delreg" data-id="${r.id}">Verwijderen</button></div>`).join('')}
+  <div class="card"><h3>Regio toevoegen</h3><div class="row"><div class="f" style="flex:3 1 180px"><input type="text" id="rgN" placeholder="Naam regio"></div><button class="btn" style="flex:0 0 auto" data-act="addreg">Toevoegen</button></div><div class="chips">${['Andalusië','Costa Blanca','Valencia','Murcia','Costa Brava','Extremadura','Mallorca'].filter(n=>!S.regions.some(r=>r.naam===n)).map(n=>`<button class="chip" data-act="addreg" data-id="${n}">+ ${n}</button>`).join('')}</div></div>
+  <div class="card"><h3>Gewichten</h3><div class="grid2" style="gap:6px 14px">${REGCRIT.map(([k,l])=>`<div style="display:flex;justify-content:space-between;align-items:center"><span class="sm">${l}</span><select data-bind="regw.${k}" style="width:76px;min-height:38px">${[0,1,2,3].map(n=>`<option value="${n}" ${(w[k]??1)===n?'selected':''}>×${n}</option>`).join('')}</select></div>`).join('')}</div></div>${tileTasks('t10')}`},
+t11:()=>`<h2>Reislogboek</h2>${S.trips.slice().sort((a,b)=>(a.van||'')<(b.van||'')?1:-1).map(t=>`<div class="card" data-act="edittrip" data-id="${t.id}" style="cursor:pointer"><div style="display:flex;justify-content:space-between;gap:8px"><h3>${esc(t.regio||'Reis')}</h3>${t.cijfer?`<span class="res" style="font-size:24px">${t.cijfer}</span>`:''}</div><div class="sm">${fmtD(t.van)}${t.tot?' – '+fmtD(t.tot):''}</div>${t.note?`<p style="margin:6px 0 0">${esc(t.note)}</p>`:''}${(t.fotos||[]).length?`<div class="photos">${t.fotos.slice(0,6).map(f=>`<img data-img="${f}" alt="">`).join('')}</div>`:''}</div>`).join('')||'<p class="lbl">Nog geen reizen. Leg elke oriëntatiereis vast met foto\'s en een cijfer.</p>'}<button class="btn" style="margin-top:14px" data-act="edittrip">Reis toevoegen</button>${tileTasks('t11')}`,
+t12:()=>`<h2>Documenten Spanje</h2><p class="sm">Globale volgorde. Eisen en formulieren veranderen soms: check ze bij het Spaanse consulaat of de gemeente voordat je ze aanvraagt.</p>${bar(pct(DOCSTEPS.filter(d=>S.docs[d[0]]).length,DOCSTEPS.length),'g')}
+  ${DOCSTEPS.map(([id,t,w,need],i)=>`<div class="card" style="${S.docs[id]?'opacity:.7':''}"><label style="display:flex;gap:12px;align-items:flex-start;cursor:pointer"><input type="checkbox" data-bind="docs.${id}" data-t="b" ${S.docs[id]?'checked':''} style="margin-top:3px"><span><b>${i+1}. ${t}</b><div style="margin-top:4px">${w}</div><div class="sm" style="margin-top:4px"><b>Nodig:</b> ${need}</div></span></label></div>`).join('')}${tileTasks('t12')}`,
+t13:()=>{const c=S.col,tot=k=>COLROWS.reduce((a,[id])=>a+(+((c.v[id]||{})[k])||0),0);return `<h2>Levensonderhoud</h2><p class="sm">Vul per maand in wat jullie nu kwijt zijn en wat je in Spanje verwacht (bijv. na een reis of van andere emigranten).</p>
+  <div class="card"><div class="row">${txt('col.r1','Regio 1',c.r1)}${txt('col.r2','Regio 2',c.r2)}</div></div>
+  <div class="card scroll"><table><thead><tr><th>Per maand</th><th class="n">NL</th><th class="n">${esc(c.r1)}</th><th class="n">${esc(c.r2)}</th></tr></thead><tbody>${COLROWS.map(([id,l])=>`<tr><td>${l}</td>${['nl','r1','r2'].map(k=>`<td class="n"><input type="number" step="any" inputmode="decimal" style="width:84px;text-align:right" data-bind="col.v.${id}.${k}" value="${(c.v[id]||{})[k]??''}"></td>`).join('')}</tr>`).join('')}
+  <tr><td><b>Totaal</b></td><td class="n"><b>${E(tot('nl'))}</b></td><td class="n"><b>${E(tot('r1'))}</b></td><td class="n"><b>${E(tot('r2'))}</b></td></tr></tbody></table>
+  ${tot('nl')&&(tot('r1')||tot('r2'))?`<p class="lbl">Verschil per maand: ${esc(c.r1)} ${E(tot('r1')-tot('nl'))}, ${esc(c.r2)} ${E(tot('r2')-tot('nl'))}</p>`:''}</div>`},
+t14:()=>{const cats=['Inrichting','Logo','Sfeer','Tuin'];const f=S.moodF||'';const list=S.mood.filter(m=>!f||m.cat===f);return `<h2>Moodboard</h2><div class="chips"><button class="chip" data-act="moodf" data-id="" style="${!f?'background:var(--blue);color:#fff':''}">Alles</button>${cats.map(c=>`<button class="chip" data-act="moodf" data-id="${c}" style="${f===c?'background:var(--blue);color:#fff':''}">${c}</button>`).join('')}</div>
+  <div class="row" style="margin-top:12px"><div class="f"><label>Categorie</label><select id="mdC">${cats.map(c=>`<option ${f===c?'selected':''}>${c}</option>`).join('')}</select></div><button class="btn" style="flex:0 0 auto" data-act="addmood">Foto's toevoegen</button></div>
+  ${list.length?`<div class="mood">${list.map(m=>`<figure><img data-img="${m.img}" alt=""><figcaption><span>${esc(m.label||m.cat)}</span><button class="btn sm ghost" style="min-height:28px;padding:0 8px" data-act="delmood" data-id="${m.id}" aria-label="Verwijder">✕</button></figcaption></figure>`).join('')}</div>`:'<p class="lbl">Nog geen foto\'s. Voeg inspiratie toe voor de inrichting, het logo en de sfeer.</p>'}`},
+t15:()=>`<h2>Instellingen</h2><div class="card"><h3>Account</h3>${SB.hid?`<p>Ingelogd als <b>${esc(SB.email)}</b><br><span class="sm">Huishouden: ${SB.members.map(m=>esc(m.name||'Lid')).join(' · ')}${VAULT.on?' · versleuteld':''}</span></p><button class="btn ghost" data-act="sync">Nu synchroniseren</button> <button class="btn ghost" data-act="logout">Uitloggen</button>`:`<p class="lbl">Je gebruikt de app zonder account; gegevens staan alleen op dit apparaat.</p><button class="btn" data-act="toauth">Inloggen met Stuiver-account</button>`}</div>
+  <div class="card"><h3>App</h3><p>Versie ${APP_VN}${isApp()?'':' (webversie)'}</p>${isApp()?`<button class="btn ghost" data-act="checkupd">Zoeken naar updates</button> <button class="btn ghost" data-act="notif">Meldingen toestaan</button>`:'<p class="sm">De Android-app vind je op <a href="https://github.com/thijsgame18-ui/spanje2031/raw/main/Spanje2031.apk">github.com/thijsgame18-ui/spanje2031</a>.</p>'}</div>`};
+function planSvg(){const P=S.plan;return `<svg class="plan" id="plan" viewBox="0 0 ${P.w} ${P.h}" style="aspect-ratio:${P.w}/${P.h}">${Array.from({length:Math.floor(P.w/10)},(_,i)=>`<line x1="${(i+1)*10}" x2="${(i+1)*10}" y1="0" y2="${P.h}" stroke="#0001" stroke-width=".2"/>`).join('')}${P.items.map(it=>{const t=PLANTYPES[it.type]||PLANTYPES.huis;return `<g data-pi="${it.id}" style="cursor:grab"><rect x="${it.x}" y="${it.y}" width="${it.w}" height="${it.h}" rx=".8" fill="${t[1]}" stroke="#0006" stroke-width=".3"/><text x="${it.x+it.w/2}" y="${it.y+it.h/2+1}" text-anchor="middle" font-size="${Math.min(3,it.w/5)}" fill="#222" style="pointer-events:none">${esc(it.label||t[0])}</text></g>`}).join('')}</svg>`}
+
+/* ---------- sheets ---------- */
+function editTask(id){const t=tasks().find(x=>x.id===id);if(!t)return;const m=S.tmeta[id]||{};const who=['',...(SB.members.length>1?SB.members.map(x=>x.name):['Thijs','Amber']),'Samen'];
+  openSheet(`<h3>Taak</h3>${t.c?`<div class="f" style="margin-top:10px"><label>Omschrijving</label><input type="text" id="etT" value="${esc(t.t)}"></div>`:`<p>${esc(t.t)}</p>`}
+  <div class="row" style="margin-top:10px"><div class="f"><label>Deadline</label><input type="date" id="etD" value="${m.due||''}"></div><div class="f"><label>Wie</label><select id="etW">${who.map(w=>`<option value="${esc(w)}" ${m.who===w?'selected':''}>${w||'Nog niemand'}</option>`).join('')}</select></div></div>
+  ${t.c?`<div class="f" style="margin-top:10px"><label>Fase</label><select id="etF">${FASES.map((f,i)=>`<option value="${i+1}" ${t.f===i+1?'selected':''}>${i+1}. ${f}</option>`).join('')}</select></div>`:''}
+  <p class="sm">${isApp()?'Je krijgt de dag vóór de deadline een melding.':''}</p><div class="actions">${t.c?`<button class="btn red" data-act="deltask" data-id="${id}">Verwijderen</button>`:''}<button class="btn ghost" data-act="close">Annuleren</button><button class="btn" data-act="savetask" data-id="${id}">Opslaan</button></div>`)}
+let draft=null;
+function editTrip(id){const t=id?clone(S.trips.find(x=>x.id===id)):{id:'t'+uid(),regio:'',van:today(),tot:'',cijfer:'',note:'',fotos:[],nw:1};draft=t;tripSheet()}
+function tripSheet(){const t=draft;openSheet(`<h3>${t.nw?'Nieuwe reis':'Reis'}</h3><div class="f" style="margin-top:10px"><label>Regio / plaats</label><input type="text" id="trR" value="${esc(t.regio)}"></div>
+  <div class="row" style="margin-top:10px"><div class="f"><label>Van</label><input type="date" id="trV" value="${t.van||''}"></div><div class="f"><label>Tot</label><input type="date" id="trT" value="${t.tot||''}"></div><div class="f"><label>Cijfer (1–10)</label><input type="number" min="1" max="10" id="trC" value="${t.cijfer||''}"></div></div>
+  <div class="f" style="margin-top:10px"><label>Wat vonden we ervan?</label><textarea id="trN">${esc(t.note)}</textarea></div>
+  <div class="photos">${t.fotos.map(f=>`<div style="position:relative"><img data-img="${f}" alt=""><button class="btn sm red" style="position:absolute;top:4px;right:4px;min-height:26px;padding:0 7px" data-act="tripdelfoto" data-id="${f}" aria-label="Verwijder foto">✕</button></div>`).join('')}</div>
+  <button class="btn ghost" style="margin-top:10px" data-act="tripfoto">Foto's toevoegen</button>
+  <div class="actions">${!t.nw?`<button class="btn red" data-act="deltrip">Verwijderen</button>`:''}<button class="btn ghost" data-act="close">Annuleren</button><button class="btn" data-act="savetrip">Opslaan</button></div>`);loadImgs()}
+function readTrip(){const t=draft;t.regio=$('trR').value;t.van=$('trV').value;t.tot=$('trT').value;t.cijfer=$('trC').value;t.note=$('trN').value}
+function editFinca(id){const x=id?S.fincas.find(f=>f.id===id):{};draft={id:x.id||'f'+uid(),foto:x.foto||null,nw:!id};
+  openSheet(`<h3>${id?'Finca':'Finca toevoegen'}</h3>${['naam:Naam / omschrijving','regio:Regio of plaats','url:Link (Idealista, Kyero…)'].map(s=>{const[k,l]=s.split(':');return `<div class="f" style="margin-top:10px"><label>${l}</label><input type="text" id="fi_${k}" value="${esc(x[k]||'')}"></div>`}).join('')}
+  <div class="row" style="margin-top:10px"><div class="f"><label>Prijs (€)</label><input type="number" id="fi_prijs" value="${x.prijs||''}"></div><div class="f"><label>Grond (m²)</label><input type="number" id="fi_grond" value="${x.grond||''}"></div><div class="f"><label>Status</label><select id="fi_status">${['Interessant','Bezichtigd','Favoriet','Afgevallen'].map(s=>`<option ${x.status===s?'selected':''}>${s}</option>`).join('')}</select></div></div>
+  <div class="f" style="margin-top:10px"><label>Notities</label><textarea id="fi_note">${esc(x.note||'')}</textarea></div>${x.url?`<p><a href="${esc(x.url)}">Advertentie openen</a></p>`:''}
+  <div id="fiFoto">${x.foto?`<img data-img="${x.foto}" class="ph" style="width:120px" alt="">`:''}</div><button class="btn ghost" style="margin-top:8px" data-act="fincafoto">Foto kiezen</button>
+  <div class="actions">${id?`<button class="btn red" data-act="delfinca" data-id="${id}">Verwijderen</button>`:''}<button class="btn ghost" data-act="close">Annuleren</button><button class="btn" data-act="savefinca">Opslaan</button></div>`);loadImgs()}
+function editComp(id){const c=id?S.comp.find(x=>x.id===id):{};openSheet(`<h3>${id?'B&B':'B&B toevoegen'}</h3>${['naam:Naam','regio:Regio','url:Link'].map(s=>{const[k,l]=s.split(':');return `<div class="f" style="margin-top:10px"><label>${l}</label><input type="text" id="cp_${k}" value="${esc(c[k]||'')}"></div>`}).join('')}
+  <div class="row" style="margin-top:10px"><div class="f"><label>Prijs per nacht (€)</label><input type="number" id="cp_prijs" value="${c.prijs||''}"></div><div class="f"><label>Bezetting % (schatting)</label><input type="number" id="cp_bez" value="${c.bez||''}"></div></div>
+  <div class="f" style="margin-top:10px"><label>Wat doen ze goed?</label><textarea id="cp_note">${esc(c.note||'')}</textarea></div>${c.url?`<p><a href="${esc(c.url)}">Website openen</a></p>`:''}
+  <div class="actions">${id?`<button class="btn red" data-act="delcomp" data-id="${id}">Verwijderen</button>`:''}<button class="btn ghost" data-act="close">Annuleren</button><button class="btn" data-act="savecomp" data-id="${id||''}">Opslaan</button></div>`)}
+function editPlan(id){const it=S.plan.items.find(x=>x.id===id);if(!it)return;openSheet(`<h3>${esc(it.label||PLANTYPES[it.type][0])}</h3><div class="f" style="margin-top:10px"><label>Naam</label><input type="text" id="plL" value="${esc(it.label||'')}"></div><div class="row" style="margin-top:10px"><div class="f"><label>Breedte (m)</label><input type="number" id="plW" value="${it.w}"></div><div class="f"><label>Diepte (m)</label><input type="number" id="plH" value="${it.h}"></div></div>
+  <div class="actions"><button class="btn red" data-act="delplan" data-id="${id}">Verwijderen</button><button class="btn ghost" data-act="close">Annuleren</button><button class="btn" data-act="saveplan" data-id="${id}">Opslaan</button></div>`)}
+
+/* ---------- acties ---------- */
+const val=id=>($(id)||{}).value||'';
+const A={
+login:doLogin,localmode:()=>{try{localStorage.setItem('sp-local','1')}catch(e){}render()},vault:()=>doVault(false),vaultrc:()=>doVault(true),logout:doLogout,toauth:()=>{try{localStorage.removeItem('sp-local')}catch(e){}showAuth()},
+sync:()=>{dirty=true;flush();pull().then(()=>toast('Gesynchroniseerd')).catch(()=>toast('Niet gelukt, probeer later'))},
+update:()=>{if(!UPD)return;try{Android.installUpdate(UPD.apk);toast('Update wordt gedownload…')}catch(e){location.href=UPD.apk}},
+checkupd:()=>{checkUpdate().then(()=>{if(!UPD)toast('Je hebt de nieuwste versie')})},notif:()=>{try{Android.requestNotifPermission();toast('Meldingen gevraagd')}catch(e){}},
+close:closeSheet,clearcele:()=>{delete S.celebrate;save();render()},
+addtask:id=>{const t=val('nt-'+id).trim();if(!t)return;S.custom.push({id:'u'+uid(),t,f:+val('nf-'+id),tile:id});save();render();toast('Taak toegevoegd')},
+edittask:editTask,
+savetask:id=>{const m={due:val('etD'),who:val('etW')};if(m.due||m.who)S.tmeta[id]=m;else delete S.tmeta[id];const c=S.custom.find(x=>x.id===id);if(c){c.t=val('etT')||c.t;c.f=+val('etF')||c.f}closeSheet();save();render()},
+deltask:id=>{S.custom=S.custom.filter(x=>x.id!==id);S.done=S.done.filter(x=>x!==id);delete S.tmeta[id];closeSheet();save();render()},
+adddiv:()=>{const a=parseFloat(val('dvA'));if(!a)return toast('Vul een bedrag in');S.divlog.push({id:'d'+uid(),d:val('dvD')||today(),amt:a,note:val('dvN')});save();render()},
+deldiv:id=>{S.divlog=S.divlog.filter(x=>x.id!==id);save();render()},
+niveau:id=>{S.niveau=id;save();render()},
+addles:()=>{const m=+val('lsM');if(!m)return;S.lessen.push({id:'l'+uid(),d:val('lsD')||today(),min:m,note:val('lsN')});save();render()},
+delles:id=>{S.lessen=S.lessen.filter(x=>x.id!==id);save();render()},
+addreg:id=>{const n=(id||val('rgN')).trim();if(!n)return;S.regions.push({id:'r'+uid(),naam:n,s:{},note:''});save();render()},
+delreg:id=>{S.regions=S.regions.filter(x=>x.id!==id);save();render()},
+edittrip:editTrip,tripfoto:()=>{readTrip();pickPhotos(true,ids=>{draft.fotos.push(...ids);tripSheet()})},
+tripdelfoto:id=>{readTrip();draft.fotos=draft.fotos.filter(f=>f!==id);delImg(id);tripSheet()},
+savetrip:()=>{readTrip();const t=draft;delete t.nw;const i=S.trips.findIndex(x=>x.id===t.id);if(i>=0)S.trips[i]=t;else S.trips.push(t);closeSheet();save();render()},
+deltrip:()=>{(draft.fotos||[]).forEach(delImg);S.trips=S.trips.filter(x=>x.id!==draft.id);closeSheet();save();render()},
+editfinca:editFinca,fincafoto:()=>pickPhotos(false,ids=>{if(draft.foto)delImg(draft.foto);draft.foto=ids[0];$('fiFoto').innerHTML=`<img data-img="${ids[0]}" class="ph" style="width:120px" alt="">`;loadImgs()}),
+savefinca:()=>{const g=k=>val('fi_'+k);const x={id:draft.id,foto:draft.foto,naam:g('naam'),regio:g('regio'),url:g('url'),prijs:+g('prijs')||0,grond:g('grond'),status:g('status'),note:g('note')};const i=S.fincas.findIndex(f=>f.id===x.id);if(i>=0)S.fincas[i]=x;else S.fincas.push(x);closeSheet();save();render()},
+delfinca:id=>{const f=S.fincas.find(x=>x.id===id);if(f&&f.foto)delImg(f.foto);S.fincas=S.fincas.filter(x=>x.id!==id);closeSheet();save();render()},
+editcomp:editComp,savecomp:id=>{const g=k=>val('cp_'+k);const x={id:id||'c'+uid(),naam:g('naam')||'B&B',regio:g('regio'),url:g('url'),prijs:+g('prijs')||0,bez:+g('bez')||0,note:g('note')};const i=S.comp.findIndex(c=>c.id===x.id);if(i>=0)S.comp[i]=x;else S.comp.push(x);closeSheet();save();render()},
+delcomp:id=>{S.comp=S.comp.filter(x=>x.id!==id);closeSheet();save();render()},
+addplan:type=>{const t=PLANTYPES[type];S.plan.items.push({id:'p'+uid(),type,x:Math.max(0,S.plan.w/2-t[2]/2),y:Math.max(0,S.plan.h/2-t[3]/2),w:t[2],h:t[3],label:''});save();render()},
+saveplan:id=>{const it=S.plan.items.find(x=>x.id===id);it.label=val('plL');it.w=+val('plW')||it.w;it.h=+val('plH')||it.h;closeSheet();save();render()},
+delplan:id=>{S.plan.items=S.plan.items.filter(x=>x.id!==id);closeSheet();save();render()},
+moodf:id=>{S.moodF=id;saveLocal();render()},addmood:()=>{const cat=val('mdC');pickPhotos(true,ids=>{ids.forEach(img=>S.mood.push({id:'m'+uid(),img,cat,label:''}));save();render()})},
+delmood:id=>{const m=S.mood.find(x=>x.id===id);if(m)delImg(m.img);S.mood=S.mood.filter(x=>x.id!==id);save();render()}};
+
+/* ---------- render + events ---------- */
+const app=$('app');let lastView=null;
+function render(){if(!$('app'))return;if(SB.c&&!SB.uid&&!localStorage.getItem('sp-local')&&window.supabase){showAuth();return}
+  const id=location.hash.slice(1),y=id===lastView?window.scrollY:0;app.innerHTML=V[id]?page(id):home();lastView=id;window.scrollTo(0,y);setSync(SB.state);drawChart();loadImgs()}
+addEventListener('resize',()=>drawChart());
+app.addEventListener('toggle',e=>{if(e.target.id==='qe')qOpen=e.target.open},true);
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){location.hash=g.dataset.go;return}
+  const a=e.target.closest('[data-act]');if(a&&A[a.dataset.act]){e.preventDefault();A[a.dataset.act](a.dataset.id)}});
+function bindVal(t){const r=getRef(t.dataset.bind);if(!r)return false;let v;if(t.dataset.t==='b')v=t.checked;else if(t.dataset.t==='s')v=t.value;else v=t.value===''?null:+t.value;
+  if(v===null&&t.dataset.bind.startsWith('costs.'))delete r.o[r.k];else r.o[r.k]=v;return true}
+document.addEventListener('change',e=>{const t=e.target;
+  if(t.dataset.task){const id=t.dataset.task;S.done=t.checked?S.done.concat(id):S.done.filter(x=>x!==id);save();render();return}
+  if(t.dataset.bind){if(t.dataset.bind.startsWith('regw.')){S.regw=S.regw||{}}if(t.dataset.bind.startsWith('col.v.')){const k=t.dataset.bind.split('.')[2];S.col.v[k]=S.col.v[k]||{}}
+    if(bindVal(t)){save();if(!t.dataset.norr)render()}}});
+document.addEventListener('submit',e=>{const m=e.target.closest('[data-form="money"]');if(!m)return;e.preventDefault();const v=n=>{const x=parseFloat(String(m.elements[n].value).replace(',','.'));return isNaN(x)?0:x};
+  S.acc={ing:v('ing'),degiro:v('degiro'),pokemon:v('pokemon')};S.divi=v('divi');S.inleg={ing:v('iing'),degiro:v('ideg')};S.upd=today();
+  S.hist=S.hist.filter(h=>h.d!==S.upd).concat({id:S.upd,d:S.upd,t:total()});qOpen=false;save();render();toast('Bedragen opgeslagen')});
+/* plattegrond slepen */
+let drag=null;
+document.addEventListener('pointerdown',e=>{const g=e.target.closest('[data-pi]');if(!g)return;const svg=$('plan');const it=S.plan.items.find(x=>x.id===g.dataset.pi);const pt=svgPt(svg,e);drag={it,dx:pt.x-it.x,dy:pt.y-it.y,moved:false,g};g.setPointerCapture&&g.setPointerCapture(e.pointerId);e.preventDefault()});
+document.addEventListener('pointermove',e=>{if(!drag)return;const pt=svgPt($('plan'),e),it=drag.it;const nx=Math.max(0,Math.min(S.plan.w-it.w,pt.x-drag.dx)),ny=Math.max(0,Math.min(S.plan.h-it.h,pt.y-drag.dy));if(Math.abs(nx-it.x)+Math.abs(ny-it.y)>.3)drag.moved=true;it.x=Math.round(nx*2)/2;it.y=Math.round(ny*2)/2;
+  const r=drag.g.querySelector('rect'),tx=drag.g.querySelector('text');r.setAttribute('x',it.x);r.setAttribute('y',it.y);tx.setAttribute('x',it.x+it.w/2);tx.setAttribute('y',it.y+it.h/2+1)});
+document.addEventListener('pointerup',()=>{if(!drag)return;const d=drag;drag=null;if(d.moved)save();else editPlan(d.it.id)});
+function svgPt(svg,e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())}
+addEventListener('hashchange',render);
+render();initSB().catch(()=>render());setTimeout(checkUpdate,4000);scheduleDeadlines();
+if(isApp()&&!localStorage.getItem('sp-notifasked')){try{Android.requestNotifPermission();localStorage.setItem('sp-notifasked','1')}catch(e){}}
+</script>
+</body>
+</html>
