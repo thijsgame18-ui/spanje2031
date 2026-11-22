@@ -14,9 +14,15 @@ s = src.replace('__APP_VN__', vn)
 i = s.index('<script>\n/* ---------- helpers')
 s = s[:i] + '<script>' + lib + '</script>\n' + s[i:]
 csp = ('<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; script-src \'self\' \'unsafe-inline\'; '
-       'style-src \'unsafe-inline\' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; '
+       'style-src \'unsafe-inline\'; font-src data:; img-src data: blob:; '
        'connect-src https://wnircustmcvwjlkvtyur.supabase.co wss://wnircustmcvwjlkvtyur.supabase.co https://raw.githubusercontent.com; '
        'form-action \'none\'; base-uri \'none\'">')
+import base64, glob
+ff = ''
+for f in sorted(glob.glob(f'{R}/src/fonts/*.woff2')):
+    n = os.path.basename(f); fam = 'Fraunces' if n.startswith('fraunces') else 'Figtree'; wt = n.split('-')[2]
+    ff += "@font-face{font-family:%s;font-weight:%s;font-style:normal;font-display:swap;src:url(data:font/woff2;base64,%s) format('woff2')}" % (fam, wt, base64.b64encode(open(f,'rb').read()).decode())
+s = s.replace('<style>', '<style>' + ff, 1)
 s = s.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n' + csp, 1)
 os.makedirs(f'{R}/src/apk/assets', exist_ok=True)
 open(f'{R}/src/apk/assets/index.html', 'w').write(s)

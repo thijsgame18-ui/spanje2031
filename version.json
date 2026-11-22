@@ -1,8 +1,11 @@
 {
- "versionCode": 1,
- "versionName": "1.0",
+ "versionCode": 2,
+ "versionName": "1.1",
  "notes": [
-  "Eerste versie: alle 20 nieuwe onderdelen, inloggen met Stuiver-account en automatische updates"
+  "Haalbaarheidsmeter 2031",
+  "Vergrendeling met vingerafdruk of pincode",
+  "Hypotheek-, belasting- en terugverdienrekenhulp",
+  "Bezichtigingschecklist, beslissingen en back-up"
  ],
- "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=1"
+ "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=2"
 }
