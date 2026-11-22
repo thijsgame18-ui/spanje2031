@@ -8,7 +8,7 @@ vn = re.search(r"versionName: '([^']+)'", yml).group(1)
 lib_path = '/tmp/sbjs/package/dist/umd/supabase.js'
 if not os.path.exists(lib_path):
     os.makedirs('/tmp/sbjs', exist_ok=True)
-    subprocess.run('cd /tmp/sbjs && npm pack @supabase/supabase-js@2.45.4 --silent && tar xzf supabase-supabase-js-2.45.4.tgz', shell=True, check=True)
+    subprocess.run('cd /tmp/sbjs && npm pack @supabase/supabase-js@2.119.0 --silent && tar xzf supabase-supabase-js-2.119.0.tgz', shell=True, check=True)
 lib = open(lib_path).read().replace('</script', '<\\/script')
 s = src.replace('__APP_VN__', vn)
 i = s.index('<script>\n/* ---------- helpers')
