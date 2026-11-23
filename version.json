@@ -1,10 +1,8 @@
 {
- "versionCode": 11,
- "versionName": "2.0",
+ "versionCode": 12,
+ "versionName": "2.1",
  "notes": [
-  "Jullie cijfers: overwaarde € 200.000, eigen geld € 70.000, hypotheek max € 600 p/m",
-  "DeGiro apart voor dividend",
-  "Marktcijfers bezetting B&B regio Valencia"
+  "Schermafbeeldingen zijn weer toegestaan"
  ],
- "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=11"
+ "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=12"
 }
