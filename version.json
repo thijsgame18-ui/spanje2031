@@ -1,10 +1,9 @@
 {
- "versionCode": 7,
- "versionName": "1.6",
+ "versionCode": 8,
+ "versionName": "1.7",
  "notes": [
-  "Kasstroom 2031–2035 en drie scenario's",
-  "Maximale finca-prijs, spaartempo en afbouwplan",
-  "Wensen en grenzen, kwartaal-check-in, bedragen uit Stuiver"
+  "Marktprijs finca onder Valencia: streefprijs € 350.000",
+  "Prijsstijging bijgesteld naar 4% per jaar"
  ],
- "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=7"
+ "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=8"
 }
