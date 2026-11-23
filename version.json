@@ -1,8 +1,9 @@
 {
- "versionCode": 9,
- "versionName": "1.8",
+ "versionCode": 10,
+ "versionName": "1.9",
  "notes": [
-  "Extra gastenhuisjes op 0 gezet"
+  "Hypotheek op basis van maximale maandlast",
+  "Overwaarde huis zelf in te vullen"
  ],
- "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=9"
+ "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=10"
 }

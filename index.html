@@ -126,7 +126,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 <script>
 /* ---------- helpers ---------- */
 const $=id=>document.getElementById(id);
-const APP_VN='1.8';
+const APP_VN='1.9';
 const SB_URL='https://wnircustmcvwjlkvtyur.supabase.co',SB_KEY='sb_publishable_4sqsUxgtDeD6rHnDJH0tkg_uchFNIIS';
 const UPD_URL='https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/version.json';
 const eur=new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR',maximumFractionDigits:0});
@@ -177,7 +177,8 @@ function marktCard(){const M=MARKT,f=+S.finca.prijs||0;return `<div class="card"
   <p class="sm">Prijzen in de regio Valencia stegen het afgelopen jaar ±15%; voor 2026 wordt 4–7% verwacht. Vraagprijzen, er valt vaak nog iets af te onderhandelen.</p>
   <p class="sm">${M.bron.map(b=>`<a href="${b[1]}">${b[0]}</a>`).join('<br>')}</p>
   ${Math.round(f)!==M.streef?`<button class="btn" data-act="usemarkt">Gebruik ${E(M.streef)} als budget</button>`:'<span class="ok">Jullie budget staat op de streefprijs</span>'}</div>`}
-function migrate4(){if(S.mig4)return false;S.huisjes.aantal=0;S.mig4=1;return true}
+function migrate5(){if(S.mig5)return false;const h=S.hypo;if(+h.rente===3.5)h.rente=4;if(+h.jaren===20)h.jaren=25;if(h.maxPm==null)h.maxPm=550;S.mig5=1;return true}
+function migrate4(){const m5=migrate5();if(S.mig4)return m5||false;S.huisjes.aantal=0;S.mig4=1;return true}
 function migrate3(){const m4=migrate4();if(S.mig3)return m4;if(+S.finca.prijs===250000)S.finca.prijs=MARKT.streef;if(S.finca.infl==null||+S.finca.infl===2)S.finca.infl=4;S.mig3=1;return true}
 function migrate(){const m3=migrate3();if(S.mig2)return m3;Object.entries(DUE).forEach(([id,d])=>{const m=S.tmeta[id]||{};if(!m.due){m.due=d;S.tmeta[id]=m}});S.mig2=1;return true}
 const FASES=['Financiële basis','Oriëntatie','Verdieping','Voorbereiding','Uitvoering'];
@@ -215,7 +216,7 @@ hist:[{id:'2026-02-06',d:'2026-02-06',t:38356},{id:'2026-11-22',d:'2026-11-22',t
 bnb:{kamers:3,prijs:90,bez:50,mnd:8,kost:40},done:['a1','a2'],custom:[],tmeta:{},inclHouse:false,whatif:{extra:0,rend:6,yld:7,bonus:true},
 finca:{prijs:250000,verb:40000,itp:9,bij:2},fincas:[],trips:[],regions:[],col:{r1:'Regio 1',r2:'Regio 2',v:{}},lessen:[],niveau:'A0',
 season:MND.map((m,i)=>({open:i>=3&&i<=9,prijs:i>=5&&i<=8?110:85,bez:i>=5&&i<=8?75:45})),plan:{w:80,h:50,items:[]},comp:[],mood:[],docs:{},divlog:[],ms:[],scen:{cur:'normaal'},cf:{ramp:[30,60,90,100,100],extra:0,dgKeep:0},derisk:{on:false,start:2029,pct:25,rente:2},wishes:[],checkins:[],stuiver:{},
-house:{woz:399000,hyp:367500,v2031:500000},goal:{ing:40862,degiro:75000},auto:{nu:13350,later:2000},divtax:15,hypo:{use:false,ltv:60,rente:3.5,jaren:20},huisjes:{aantal:0,kosten:35000},bufferM:12,decisions:[],tax:{autonomo:300,personen:2}}}
+house:{woz:399000,hyp:367500,v2031:500000},goal:{ing:40862,degiro:75000},auto:{nu:13350,later:2000},divtax:15,hypo:{use:false,ltv:60,rente:4,jaren:25,maxPm:550},huisjes:{aantal:0,kosten:35000},bufferM:12,decisions:[],tax:{autonomo:300,personen:2}}}
 let S=defaults();
 try{const l=JSON.parse(localStorage.getItem('sp-state')||'null');if(l&&l.v)S=Object.assign(defaults(),l)}catch(e){}
 let BASE=(()=>{try{return JSON.parse(localStorage.getItem('sp-base2')||'null')}catch(e){return null}})();
@@ -243,7 +244,8 @@ const tasks=()=>TASKS.map(([id,t,f,tile])=>({id,t,f,tile})).concat(S.custom.map(
 const isDone=id=>LINK[id]?!!S.docs[LINK[id]]:S.done.includes(id);
 function setDone(id,on){if(LINK[id]){S.docs[LINK[id]]=on;return}S.done=on?[...new Set(S.done.concat(id))]:S.done.filter(x=>x!==id)}
 const total=()=>(+S.acc.ing||0)+(+S.acc.degiro||0);
-const overwaarde=()=>{const v=+S.house.v2031||0;return v-(+S.house.hyp||0)-v*(+(S.house.verkoop??1.5)||0)/100};
+const owCalc=()=>{const v=+S.house.v2031||0;return v-(+S.house.hyp||0)-v*(+(S.house.verkoop??1.5)||0)/100};
+const overwaarde=()=>S.house.owManual!=null&&S.house.owManual!==''?(+S.house.owManual||0):owCalc();;
 
 const vertrek=()=>new Date(S.vertrek+'T12:00:00');
 const daysLeft=()=>Math.max(0,Math.ceil((vertrek()-new Date())/864e5));
@@ -275,7 +277,9 @@ function projYears(){const w=S.whatif,dr=S.derisk||{};let dg=+S.acc.degiro||0,sa
   while(d<end){d.setMonth(d.getMonth()+1);safe*=1+rs;dg=dg*(1+r)+(+S.inleg.degiro||0);if(w.bonus&&d.getMonth()===11)dg+=2000;if(dr.on&&d.getMonth()===0&&d.getFullYear()>=(+dr.start||2029)){const mv=dg*(+dr.pct||0)/100;dg-=mv;safe+=mv}if(d.getMonth()===11&&d<end)rows.push(['Eind '+d.getFullYear(),dg,safe])}
   rows.push(['Bij vertrek',dg,safe]);return rows.map(([l,v,sf])=>[l,v,v*((+w.yld||0)/100)/12,sf])}
 function fincaCost(){const f=S.finca,F=1+sc().fin/100,k=(+f.prijs||0)*F;return{koop:k,itp:k*(+f.itp||0)/100,bij:k*(+f.bij||0)/100,verb:(+f.verb||0)*F,huisjes:(+S.huisjes.aantal||0)*(+S.huisjes.kosten||0)}}
-function lening(){const h=S.hypo;return sc().hypo?fincaCost().koop*(+h.ltv||0)/100:0}
+function loanFromPm(pm,rt,y){const r=(+rt||0)/100/12,n=Math.max(1,(+y||1)*12);return r?pm*(1-Math.pow(1+r,-n))/r:pm*n}
+function loanCap(){const h=S.hypo,ltv=fincaCost().koop*(+h.ltv||0)/100,pm=+h.maxPm>0?loanFromPm(+h.maxPm,h.rente,h.jaren):Infinity;return{ltv,pm,loan:Math.min(ltv,pm)}}
+function lening(){return sc().hypo?loanCap().loan:0}
 const housePlan=()=>S.house.plan||'verkopen';
 function huurNet(){const h=S.house;return (+(h.huur??1800)||0)*(1-(+(h.huurKost??25)||0)/100)-(+(h.hypoLast??1500)||0)}
 function haveCalc(){const p=projection(0),ow=S.inclHouse&&housePlan()==='verkopen'?overwaarde():0,l=lening(),keep=+((S.cf||{}).dgKeep)||0;
@@ -492,13 +496,15 @@ t4:()=>{const tot=total(),w=S.whatif,p=projection(w.extra),p0=projection(0),dl=S
 t5:()=>{const ct=costTot(),fc=fincaCost(),FV={koop:fc.koop,itp:fc.itp,nota:fc.bij,advo:null,verb:fc.verb};return `<h2>Benodigde middelen</h2><div class="grid2"><div class="card"><div class="lbl">Overige eenmalige kosten</div><div class="res">${E(ct.e)}</div><div class="sm">Woning en verbouwing komen uit het finca-budget</div></div><div class="card"><div class="lbl">Vaste lasten per maand</div><div class="res">${E(ct.m)}</div><div class="f" style="margin-top:8px"><label>Buffer bij vertrek (maanden vaste lasten)</label><input type="number" data-bind="bufferM" value="${S.bufferM}"></div><div class="sm">= ${E(ct.m*(+S.bufferM||0))}</div></div></div><p class="sm">Jaarbedragen tellen voor 1/12 mee. Bedragen p.p. zijn al voor 2 personen ingevuld.</p>
   ${COSTS.map(([g,items])=>`<div class="card"><h3>${g}</h3><table><tbody>${items.map(([id,p,f,h])=>`<tr><td>${p}<div class="sm">${FREQ[f]}${h?' · '+h:''}</div></td><td class="n" style="width:120px">${FIN_IDS[id]?(FV[id]==null?'<span class="sm">in notaris</span>':`<button class="btn sm ghost" data-go="t7" title="Aanpassen bij Wonen en finca">${E(FV[id])}</button>`):`<input type="number" inputmode="decimal" step="any" aria-label="${p}" data-bind="costs.${id}" value="${S.costs[id]??''}" placeholder="€" style="text-align:right">`}</td></tr>`).join('')}</tbody></table></div>`).join('')}${tileTasks('t5')}`},
 t6:()=>`<h2>Branding</h2><div class="grid2"><div class="card"><h3>Naam</h3>${note('naam','Ideeën voor de naam','Casa …, Finca …')}</div><div class="card"><h3>Logo</h3>${note('logo','Ideeën en wensen','Kleuren, stijl, ontwerper…')}</div></div><div class="card"><h3>Website</h3><p>Opties: <a href="https://wordpress.com/nl/">WordPress.com</a> voor de site en <a href="https://n8n.io/">n8n</a> voor automatisering (boekingen, mails).</p>${note('site','Notities website','')}</div>${tileTasks('t6')}`,
-t7:()=>{const f=S.finca,fc=fincaCost(),need=fc.koop+fc.itp+fc.bij+fc.verb,h=S.hypo,loan=(+f.prijs||0)*(+h.ltv||0)/100,nd=needCalc();
+t7:()=>{const f=S.finca,fc=fincaCost(),need=fc.koop+fc.itp+fc.bij+fc.verb,h=S.hypo,lc=loanCap(),loan=lc.loan,nd=needCalc();
   return `<h2>Wonen en finca</h2><div class="card"><h3>Onze woonwens</h3><p style="margin:0">Een <b>finca</b> met genoeg ruimte voor extra huisjes, met een bestaand huisje voor onszelf.</p></div>
   ${marktCard()}<div class="card"><h3>Finca-budget</h3><p class="sm">Schatting; deze bedragen tellen mee in de haalbaarheid en in Benodigde middelen.</p><div class="row">${num('finca.prijs','Aankoopprijs (€)',f.prijs)}${num('finca.verb','Verbouwing (€)',f.verb)}${num('finca.itp','Overdrachtsbelasting %',f.itp)}${num('finca.bij','Notaris, register, advocaat %',f.bij)}${num('finca.infl','Prijsstijging % per jaar',f.infl??2)}</div>
   <table style="margin-top:10px"><tbody><tr><td>Aankoop</td><td class="n">${E(fc.koop)}</td></tr><tr><td>Bijkomende kosten</td><td class="n">${E(fc.itp+fc.bij)}</td></tr><tr><td>Verbouwing</td><td class="n">${E(fc.verb)}</td></tr><tr><td><b>Finca totaal</b></td><td class="n"><b>${E(need)}</b></td></tr></tbody></table></div>
-  <div class="card"><h3>Spaanse hypotheek</h3><p class="sm">Niet-ingezetenen kunnen in Spanje meestal 60–70% van de waarde lenen, ingezetenen vaak meer. Rente en voorwaarden zijn een schatting: vraag een offerte aan.</p>
-  <div class="row">${num('hypo.ltv','Lenen (% van prijs)',h.ltv)}${num('hypo.rente','Rente %',h.rente)}${num('hypo.jaren','Looptijd (jaren)',h.jaren)}</div>
-  <div class="grid2" style="margin-top:10px"><div><div class="lbl">Maximaal lenen</div><div class="res">${E(loan)}</div><div class="sm">Maandlast ± ${E(annuity(loan,h.rente,h.jaren))}</div></div><div><div class="lbl">Eigen geld nodig</div><div class="res">${E(Math.max(0,nd.total-loan))}</div><div class="sm">Alles uit de haalbaarheid min de lening</div></div></div>
+  <div class="card"><h3>Spaanse hypotheek</h3><p class="sm">Wat is realistisch (november 2026)? Als niet-ingezetene leen je meestal 60–70% van de waarde, voor 20–25 jaar, tegen ±3–4% vaste rente. De lening moet afgelost zijn vóór je 70e–75e. De Euribor is dit jaar gestegen naar ±3,3%, dus reken liever met 4%.</p>
+  <div class="row">${num('hypo.maxPm','Maximale maandlast (€)',h.maxPm)}${num('hypo.rente','Rente %',h.rente)}${num('hypo.jaren','Looptijd (jaren)',h.jaren)}${num('hypo.ltv','Grens bank (% van prijs)',h.ltv)}</div>
+  <div class="grid2" style="margin-top:10px"><div><div class="lbl">Realistisch te lenen</div><div class="res">${E(loan)}</div><div class="sm">Maandlast ± ${E(annuity(loan,h.rente,h.jaren))} · ${lc.pm<lc.ltv?`jullie maandlast is de grens (bank zou ${E(lc.ltv)} geven)`:`de bank is de grens (${h.ltv}% van ${E(fc.koop)})`}</div></div><div><div class="lbl">Eigen geld nodig</div><div class="res">${E(Math.max(0,nd.total-loan))}</div><div class="sm">Alles uit de haalbaarheid min de lening</div></div></div>
+  <table style="margin-top:10px;font-size:14px"><thead><tr><th>Maandlast</th><th class="n">20 jaar</th><th class="n">25 jaar</th></tr></thead><tbody>${[500,550,600].map(pm=>`<tr><td>${E(pm)} bij ${h.rente}%</td><td class="n">${E(loanFromPm(pm,h.rente,20))}</td><td class="n">${E(loanFromPm(pm,h.rente,25))}</td></tr>`).join('')}</tbody></table>
+  <p class="sm">Tip: vraag de hypotheek aan terwijl jullie nog in Nederland werken. Spaanse banken kijken naar aantoonbaar inkomen (de maandlast mag meestal max ±35% daarvan zijn), en een B&B die nog niet draait telt bijna niet mee.</p>
   <label style="display:flex;gap:10px;align-items:center;margin-top:10px"><input type="checkbox" data-bind="hypo.use" data-t="b" ${h.use?'checked':''}> Hypotheek meetellen in de haalbaarheid</label></div>
   ${feasCard()}
   <div class="card"><h3>Finca-favorieten</h3>${S.fincas.length?S.fincas.map(x=>{const n=CHECKS.filter(c=>(x.check||{})[c[0]]).length;return `<div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer" data-act="editfinca" data-id="${x.id}">${x.foto?`<img data-img="${x.foto}" class="ph" style="width:76px;flex:none" alt="">`:`<div class="ph" style="width:76px;flex:none"></div>`}<div style="flex:1"><b>${esc(x.naam||'Finca')}</b><div class="sm">${esc(x.regio||'')}${x.grond?' · '+esc(x.grond)+' m² grond':''}</div><div>${E(x.prijs)} <span class="badge">${esc(x.status||'Interessant')}</span><span class="badge ${n===CHECKS.length?'':'soon'}">${n}/${CHECKS.length} gecheckt</span>${wishBadge(x)}</div></div></div>`}).join(''):'<p class="lbl">Nog geen finca\'s bewaard. Kom je er een tegen? Bewaar de link hier.</p>'}<button class="btn" style="margin-top:10px" data-act="editfinca">Finca toevoegen</button></div>
@@ -579,6 +585,7 @@ function deriskCard(){const d=Object.assign({on:false,start:2029,pct:25,rente:2}
   ${d.on?`<table style="margin-top:10px"><thead><tr><th>Moment</th><th class="n">Belegd</th><th class="n">Veilig gespaard</th></tr></thead><tbody>${yrs.filter(r=>r[0]==='Bij vertrek'||+r[0].slice(5)>=d.start-1).map(r=>`<tr><td>${r[0]}</td><td class="n">${E(r[1])}</td><td class="n">${E(r[3])}</td></tr>`).join('')}</tbody></table><p class="sm">${isApp()?'Je krijgt elk jaar op 2 januari een herinnering.':''}</p>`:''}</div>`}
 function houseCard(){const h=S.house,plan=housePlan(),hn=huurNet();return `<div class="card"><h3>Huis in Nederland: verkopen of verhuren?</h3><div class="chips">${[['verkopen','Verkopen'],['verhuren','Verhuren']].map(([k,l])=>`<button class="chip" data-act="houseplan" data-id="${k}" style="${plan===k?'background:var(--blue);color:#fff':''}">${l}</button>`).join('')}</div>
   <div class="row" style="margin-top:10px">${num('house.huur','Huur per maand',h.huur??1800)}${num('house.huurKost','Kosten verhuur % (beheer, onderhoud)',h.huurKost??25)}${num('house.hypoLast','Hypotheeklast per maand',h.hypoLast??1500)}</div>
+  <div class="row" style="margin-top:10px"><div class="f"><label>Overwaarde (eigen schatting)</label><input type="number" inputmode="decimal" step="any" data-bind="house.owManual" value="${h.owManual??''}" placeholder="${Math.round(owCalc())}"></div></div><p class="sm" style="margin-top:4px">Leeg laten = berekend uit verwachte waarde, hypotheek en verkoopkosten (${E(owCalc())}).</p>
   <div class="grid2" style="margin-top:10px"><div style="${plan==='verkopen'?'':'opacity:.6'}"><div class="lbl">Verkopen</div><div class="res">${E(overwaarde())}</div><div class="sm">eenmalig vrij bij vertrek</div></div><div style="${plan==='verhuren'?'':'opacity:.6'}"><div class="lbl">Verhuren</div><div class="res" style="color:${hn>=0?'var(--ok)':'var(--bad)'}">${E(hn)} p/m</div><div class="sm">netto, telt mee in de kasstroom; huis blijft van jullie</div></div></div>
   <p class="sm">Verhuren is veiliger als Spanje tegenvalt, maar dan heb je de overwaarde niet voor de finca. Voor verhuren heb je toestemming van je hypotheekbank nodig, en je betaalt belasting in Nederland én Spanje. Laat dit doorrekenen door een adviseur.</p></div>`}
 /* ---------- wensen ---------- */
