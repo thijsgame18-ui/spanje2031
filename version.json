@@ -1,9 +1,8 @@
 {
- "versionCode": 14,
- "versionName": "2.3",
+ "versionCode": 15,
+ "versionName": "2.4",
  "notes": [
-  "5 zones tussen Valencia en Alicante bij Regio's vergelijken",
-  "Geplande oriëntatiereis Marina Alta in het reislogboek"
+  "Webversie: nette kolom op de computer, kan op beginscherm"
  ],
- "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=14"
+ "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=15"
 }

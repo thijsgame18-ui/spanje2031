@@ -2,6 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8">
+<meta name="theme-color" content="#f3ede3"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Spanje 2031">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#1446a0">
 <title>Spanje 2031</title>
@@ -16,11 +17,11 @@
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Figtree,system-ui,sans-serif;overflow-x:clip;padding-bottom:calc(96px + env(safe-area-inset-bottom))}
 h1,h2,h3{font-family:var(--disp);font-weight:400;line-height:1.1;text-wrap:balance;margin:0}
 h1{font-size:clamp(30px,6vw,44px)}h2{font-size:clamp(28px,4.6vw,34px)}h3{font-size:21px}
-.band{padding:16px max(4vw,14px)}.wrap{max-width:1040px;margin:0 auto}
+.band{padding:16px max(4vw,14px)}.wrap{max-width:780px;margin:0 auto}
 a{color:var(--bl)}
 /* hero: landschapskaart met de finca */
 .hero{padding:calc(14px + env(safe-area-inset-top)) max(4vw,14px) 0}
-.scene{position:relative;border-radius:26px;overflow:hidden;min-height:250px;color:#fff;max-width:1040px;margin:0 auto}
+.scene{position:relative;border-radius:26px;overflow:hidden;min-height:250px;color:#fff;max-width:780px;margin:0 auto}
 .scene svg{position:absolute;inset:0;width:100%;height:100%}
 .scene .tx{position:absolute;left:20px;right:20px;bottom:18px}
 .scene .kick{display:flex;align-items:center;gap:8px;font-size:14px;opacity:.95;position:absolute;left:20px;top:16px}
@@ -33,6 +34,7 @@ a{color:var(--bl)}
 .dot{width:9px;height:9px;border-radius:50%;background:#ffffffaa;flex:none}.top .dot{background:var(--line)}.dot.ok{background:#8fd18b}.dot.err{background:#ff9c84}
 /* kerncijfers */
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:12px;margin-top:2px}
+.kpis{grid-template-columns:repeat(2,1fr)}
 .kpi{background:var(--card);border-radius:22px;padding:16px}
 button.kpi{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%;border:0}
 .kpi.main{grid-column:1/-1}
