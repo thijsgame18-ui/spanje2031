@@ -1,10 +1,10 @@
 {
- "versionCode": 6,
- "versionName": "1.5",
+ "versionCode": 7,
+ "versionName": "1.6",
  "notes": [
-  "Pokémon verwijderd",
-  "Haalbaarheid met verkoopkosten huis en prijsstijging",
-  "Taken filteren, foto's groot bekijken, synctijd zichtbaar"
+  "Kasstroom 2031–2035 en drie scenario's",
+  "Maximale finca-prijs, spaartempo en afbouwplan",
+  "Wensen en grenzen, kwartaal-check-in, bedragen uit Stuiver"
  ],
- "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=6"
+ "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=7"
 }
