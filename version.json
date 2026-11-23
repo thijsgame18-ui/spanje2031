@@ -1,11 +1,10 @@
 {
- "versionCode": 2,
- "versionName": "1.1",
+ "versionCode": 3,
+ "versionName": "1.2",
  "notes": [
-  "Haalbaarheidsmeter 2031",
-  "Vergrendeling met vingerafdruk of pincode",
-  "Hypotheek-, belasting- en terugverdienrekenhulp",
-  "Bezichtigingschecklist, beslissingen en back-up"
+  "Nieuw ontwerp met Spaans tegelwerk",
+  "Menubalk onderin voor snel wisselen",
+  "Tegelmeter voor de haalbaarheid"
  ],
- "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=2"
+ "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=3"
 }

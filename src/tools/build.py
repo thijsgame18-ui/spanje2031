@@ -20,7 +20,7 @@ csp = ('<meta http-equiv="Content-Security-Policy" content="default-src \'none\'
 import base64, glob
 ff = ''
 for f in sorted(glob.glob(f'{R}/src/fonts/*.woff2')):
-    n = os.path.basename(f); fam = 'Fraunces' if n.startswith('fraunces') else 'Figtree'; wt = n.split('-')[2]
+    n = os.path.basename(f); fam = "Gloock" if n.startswith("gloock") else "Figtree"; wt = n.split('-')[2]
     ff += "@font-face{font-family:%s;font-weight:%s;font-style:normal;font-display:swap;src:url(data:font/woff2;base64,%s) format('woff2')}" % (fam, wt, base64.b64encode(open(f,'rb').read()).decode())
 s = s.replace('<style>', '<style>' + ff, 1)
 s = s.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n' + csp, 1)

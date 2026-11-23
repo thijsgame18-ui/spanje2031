@@ -6,69 +6,115 @@
 <meta name="theme-color" content="#1446a0">
 <title>Spanje 2031</title>
 <style>
-:root{color-scheme:light dark;--bg:light-dark(#ffffff,#08193a);--ink:light-dark(#0f1f3d,#eef3fb);--muted:light-dark(#4a5a78,#a9b8d3);--card:light-dark(#f1f5fc,#10295a);--line:light-dark(#d5e0f1,#24477a);--blue:#1446a0;--bl:light-dark(#1446a0,#8fb3ff);--sun:#f5b400;--ok:light-dark(#1b7a45,#5fd08f);--bad:light-dark(#b42318,#ff8a80);--field:light-dark(#ffffff,#0b2149)}
+/* Spanje 2031 — "cal y azulejo": gekalkte witte muren, kobalt tegelwerk, saffraan als licht.
+   Eén opvallend element: de tegels (azulejo-rand, tegelknoppen, tegelmeter). De rest blijft rustig. */
+:root{color-scheme:light dark;
+--bg:light-dark(#f6f7f4,#0c1730);--card:light-dark(#ffffff,#132448);--ink:light-dark(#14213d,#edf1fa);--muted:light-dark(#56627a,#a3b1cc);
+--line:light-dark(#dde3ee,#253a66);--blue:#1f3f99;--bl:light-dark(#1f3f99,#9db8ff);--sun:#e8a317;--ok:light-dark(#4f7224,#9fcb6b);--bad:light-dark(#b3261e,#ff8a80);
+--field:light-dark(#ffffff,#0f1d3c);--disp:Gloock,Georgia,serif;--tilebg:light-dark(#ffffff,#132448);--tint:light-dark(#eef2fa,#18295a);
+--az:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%23f6f7f4'/%3E%3Cpath d='M24 5c6 7 6 12 0 19c-6-7-6-12 0-19zM24 43c6-7 6-12 0-19c-6 7-6 12 0 19zM5 24c7 6 12 6 19 0c-7-6-12-6-19 0zM43 24c-7 6-12 6-19 0c7-6 12-6 19 0z' fill='%231f3f99'/%3E%3Ccircle cx='24' cy='24' r='3.2' fill='%23e8a317'/%3E%3Cpath d='M0 0h9a9 9 0 0 1-9 9zM48 0v9a9 9 0 0 1-9-9zM0 48v-9a9 9 0 0 1 9 9zM48 48h-9a9 9 0 0 1 9-9z' fill='%231f3f99'/%3E%3C/svg%3E")}
 *{box-sizing:border-box;min-width:0;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Figtree,system-ui,sans-serif;overflow-x:clip;padding-bottom:env(safe-area-inset-bottom)}
-h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.1;text-wrap:balance;margin:0}
-h1{font-size:clamp(30px,6vw,48px)}h2{font-size:clamp(24px,3.4vw,30px)}h3{font-size:18px}
-.band{padding:20px max(4vw,14px)}.wrap{max-width:1100px;margin:0 auto}
-.hero{background:linear-gradient(160deg,#1a55bd,#0b2a66);color:#fff;padding-top:calc(20px + env(safe-area-inset-top))}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:center}
-.hero p{color:#d8e4fb;margin:.5em 0 0}.big{color:var(--sun);font-variant-numeric:tabular-nums}
-.pic svg{width:100%;height:auto;display:block;border-radius:16px}
-.top{position:sticky;top:0;z-index:5;background:var(--blue);color:#fff;display:flex;align-items:center;gap:10px;padding:8px max(4vw,14px);padding-top:calc(8px + env(safe-area-inset-top))}
-.top b{font:600 18px Fraunces,serif;flex:1}.top .btn{background:#ffffff22}
-.dot{width:10px;height:10px;border-radius:50%;background:#9fb2d6;flex:none}.dot.ok{background:#5fd08f}.dot.err{background:#ff8a80}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;margin-top:-30px;position:relative}
-.kpi,.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-.kpi{background:var(--bg);box-shadow:0 10px 30px #0b2a6622}.card{margin-top:14px}
-.v{font:700 clamp(28px,5vw,38px)/1.1 Fraunces,serif;font-variant-numeric:tabular-nums;white-space:nowrap}
-.res{font:700 clamp(26px,5vw,36px)/1.1 Fraunces,serif;color:var(--bl);white-space:nowrap;font-variant-numeric:tabular-nums}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Figtree,system-ui,sans-serif;overflow-x:clip;padding-bottom:calc(78px + env(safe-area-inset-bottom))}
+h1,h2,h3{font-family:var(--disp);font-weight:400;line-height:1.08;text-wrap:balance;margin:0;letter-spacing:-.005em}
+h1{font-size:clamp(26px,5vw,38px)}h2{font-size:clamp(28px,4.4vw,36px);margin-bottom:4px}h3{font-size:21px}
+.band{padding:18px max(4vw,16px)}.wrap{max-width:1040px;margin:0 auto}
+a{color:var(--bl)}
+/* hero: gekalkte gevel met tegelrand */
+.hero{position:relative;background:var(--bg);padding-top:calc(18px + env(safe-area-inset-top));padding-bottom:46px}
+.hero:after{content:"";position:absolute;left:0;right:0;bottom:0;height:26px;background:var(--az) 0 0/26px 26px repeat-x;border-top:2px solid var(--blue)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:20px;align-items:end}
+.hero .kick{display:flex;align-items:center;gap:8px;color:var(--muted);font-weight:500;font-size:15px}
+.count{font:400 clamp(76px,19vw,132px)/.9 var(--disp);color:var(--bl);font-variant-numeric:lining-nums tabular-nums;margin-top:10px;letter-spacing:-.02em}
+.hero h1{margin-top:4px}.hero p{color:var(--muted);margin:.6em 0 0;max-width:34em}
+.big{color:var(--bl)}
+.pic svg{width:100%;height:auto;display:block;border-radius:14px 14px 0 0;border:2px solid var(--blue);border-bottom:0}
+/* bovenbalk detailpagina */
+.top{position:sticky;top:0;z-index:5;background:var(--bg);color:var(--ink);display:flex;align-items:center;gap:12px;padding:10px max(4vw,16px) 16px;padding-top:calc(10px + env(safe-area-inset-top))}
+.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:12px;background:var(--az) 0 0/12px 12px repeat-x}
+.top+main .wrap>h2:first-child{display:none}.top b{font:400 22px var(--disp);flex:1}.top .btn{width:42px;height:42px;min-height:0;padding:0;border-radius:50%;background:var(--card);color:var(--ink);border:1px solid var(--line);font-size:18px}
+.dot{width:9px;height:9px;border-radius:50%;background:#9fb2d6;flex:none}.dot.ok{background:#6fbf73}.dot.err{background:#ff8a80}
+/* kerncijfers */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px;margin-top:6px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px}
+.kpi.main{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 18px;align-items:center;border:2px solid var(--blue)}
+.kpi.main .tmeter{grid-column:1/-1}
+.v{font:400 clamp(30px,6vw,40px)/1.05 var(--disp);font-variant-numeric:tabular-nums;white-space:nowrap}
+.res{font:400 clamp(28px,5.4vw,36px)/1.1 var(--disp);color:var(--bl);white-space:nowrap;font-variant-numeric:tabular-nums}
 .lbl{color:var(--muted);font-size:14px}.sm{font-size:13px;color:var(--muted)}
-.bar{height:11px;background:var(--line);border-radius:9px;overflow:hidden;margin:8px 0 5px}.bar i{display:block;height:100%;background:var(--sun);border-radius:9px}.bar.b i{background:var(--blue)}.bar.g i{background:var(--ok)}
-.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:12px;margin-top:16px}
-.tile{all:unset;box-sizing:border-box;cursor:pointer;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:5px;min-height:138px}
-.tile:active{transform:scale(.98)}.tile svg{width:28px;height:28px;stroke:var(--bl);fill:none;stroke-width:1.8}
-.tile b{font:600 16px/1.2 Fraunces,serif}.tile small{color:var(--muted);font-size:13px;margin-top:auto}
-.btn{font:inherit;font-weight:700;min-height:44px;padding:0 16px;border-radius:12px;border:0;background:var(--blue);color:#fff;cursor:pointer}
-.btn.ghost{background:transparent;color:inherit;border:1px solid var(--line)}.btn.sm{min-height:36px;padding:0 12px;font-size:14px}.btn.red{background:var(--bad)}
-.btn:disabled{opacity:.5}
+.bar{height:8px;background:var(--line);border-radius:2px;overflow:hidden;margin:9px 0 6px}.bar i{display:block;height:100%;background:var(--sun)}.bar.b i{background:var(--bl)}.bar.g i{background:var(--ok)}
+/* tegelmeter: 10 tegels = 100% */
+.tmeter{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px;margin:10px 0 6px}
+.tmeter i{aspect-ratio:1;border:1.5px solid var(--line);border-radius:3px;background:var(--card)}
+.tmeter i.on{border-color:var(--blue);background:var(--az) center/100% 100%}
+.tmeter i.half{border-color:var(--blue);background:linear-gradient(90deg,var(--tint) 50%,var(--card) 50%)}
+/* tegelknoppen */
+.grp{display:flex;align-items:baseline;gap:12px;margin-top:28px}.grp h3{font-size:24px}.grp span{flex:1;height:1px;background:var(--line)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,152px),1fr));gap:10px;margin-top:12px}
+.tile{all:unset;box-sizing:border-box;cursor:pointer;position:relative;padding:18px 16px 14px;display:flex;flex-direction:column;gap:4px;min-height:150px;border-radius:4px;
+ background:var(--tilebg);box-shadow:inset 0 0 0 1px var(--line),inset 0 0 0 7px var(--tilebg),inset 0 0 0 8px light-dark(#c7d1ea,#2d4680)}
+.tile:after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:4px;background:radial-gradient(circle at 0 0,var(--blue) 11px,transparent 12px),radial-gradient(circle at 100% 0,var(--blue) 11px,transparent 12px),radial-gradient(circle at 0 100%,var(--blue) 11px,transparent 12px),radial-gradient(circle at 100% 100%,var(--blue) 11px,transparent 12px)}
+.tile:active{transform:scale(.97)}
+.tile svg{width:30px;height:30px;stroke:var(--bl);fill:none;stroke-width:1.7;margin-bottom:4px}
+.tile b{font:400 19px/1.12 var(--disp);hyphens:auto;overflow-wrap:break-word}.tile small{color:var(--muted);font-size:13px;margin-top:auto;line-height:1.35}
+.tile .bar{height:5px;margin:6px 0 2px}
+/* kaarten en formulieren */
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:18px;margin-top:14px}
+.card>h3:first-child{margin-bottom:6px}
+.btn{font:inherit;font-weight:700;min-height:46px;padding:0 20px;border-radius:999px;border:0;background:var(--blue);color:#fff;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--bl);border:1.5px solid var(--line)}.btn.sm{min-height:36px;padding:0 14px;font-size:14px}.btn.red{background:var(--bad);color:#fff}
+.btn:disabled{opacity:.5}.btn:active{transform:translateY(1px)}
 :focus-visible{outline:3px solid var(--sun);outline-offset:2px}
-input,select,textarea{font:inherit;font-size:16px;color:inherit;background:var(--field);border:1px solid var(--line);border-radius:10px;padding:9px 11px;min-height:44px;width:100%}
-input[type=checkbox]{width:22px;height:22px;min-height:0;accent-color:var(--blue);flex:none}input[type=range]{padding:0;accent-color:var(--blue)}
+input,select,textarea{font:inherit;font-size:16px;color:inherit;background:var(--field);border:1.5px solid var(--line);border-radius:6px;padding:9px 12px;min-height:46px;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);outline:none}
+input[type=checkbox]{width:22px;height:22px;min-height:0;accent-color:var(--blue);flex:none}input[type=range]{padding:0;border:0;accent-color:var(--blue);background:none}
 textarea{min-height:84px;resize:vertical}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:end}.row>*{flex:1 1 130px}
 .f label{display:block;font-size:14px;color:var(--muted);margin-bottom:4px}
 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
-ul.list{list-style:none;padding:0;margin:6px 0 0}ul.list li{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}ul.list li:last-child{border:0}
+ul.list{list-style:none;padding:0;margin:6px 0 0}ul.list li{display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}ul.list li:last-child{border:0}
 li.done .tt{text-decoration:line-through;color:var(--muted)}.tt{flex:1;cursor:pointer}
-.badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;background:var(--line);color:var(--ink);white-space:nowrap;margin:2px 4px 0 0}.badge.late{background:var(--bad);color:#fff}.badge.soon{background:var(--sun);color:#000}
-table{width:100%;border-collapse:collapse;font-size:15px}td,th{padding:8px 5px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+.badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:3px;background:var(--tint);color:var(--bl);white-space:nowrap;margin:3px 4px 0 0;font-weight:500}.badge.late{background:var(--bad);color:#fff}.badge.soon{background:var(--sun);color:#2a1d00}
+table{width:100%;border-collapse:collapse;font-size:15px}td,th{padding:9px 5px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
 th{font-size:13px;color:var(--muted);font-weight:500}.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
-td input{min-height:38px;padding:6px 8px}.scroll{overflow-x:auto}
-tr.now td{background:light-dark(#fff4cc,#3a3108)}
-.ok{color:var(--ok);font-weight:700}.warn{color:light-dark(#a35a00,#ffc857);font-weight:700}
+tr:last-child td{border-bottom:0}td input{min-height:38px;padding:6px 8px}.scroll{overflow-x:auto}
+tr.now td{background:light-dark(#fff3d1,#3a3108)}
+.ok{color:var(--ok);font-weight:700}.warn{color:light-dark(#9a5b00,#ffc857);font-weight:700}
 .fig{position:relative;height:220px;margin-top:8px}.fig svg{position:absolute;inset:0;width:100%;height:100%}
 .mbars{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;align-items:end;height:130px;margin-top:10px}
-.mbars div{background:var(--blue);border-radius:5px 5px 0 0;min-height:2px;position:relative}.mbars div.off{background:var(--line)}
+.mbars div{background:var(--bl);border-radius:2px 2px 0 0;min-height:2px}.mbars div.off{background:var(--line)}
 .mlab{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;font-size:11px;color:var(--muted);text-align:center}
-.tl{border-left:3px solid var(--blue);margin-left:8px;padding-left:16px}.tl .yr{position:relative;margin-top:16px}.tl .yr:before{content:"";position:absolute;left:-25px;top:4px;width:15px;height:15px;border-radius:50%;background:var(--sun);border:3px solid var(--bg)}
-.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-top:8px}
-.photos img,.ph{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:var(--line);display:block}
-.mood{columns:2 160px;column-gap:10px;margin-top:10px}.mood figure{break-inside:avoid;margin:0 0 10px;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--line)}.mood img{width:100%;display:block;min-height:80px;background:var(--line)}.mood figcaption{padding:6px 10px;font-size:14px;display:flex;justify-content:space-between;gap:6px}
-.word{background:linear-gradient(135deg,#fff3c4,#ffe08a);color:#3b2a00;border:0}
-.plan{width:100%;height:auto;touch-action:none;background:light-dark(#e9f3dc,#1b3320);border-radius:12px;border:1px solid var(--line);display:block}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chip{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:99px;padding:6px 12px;font-size:14px}
-#sheetBg{position:fixed;inset:0;background:#0008;z-index:20;display:none;align-items:flex-end;justify-content:center}#sheetBg.open{display:flex}
-#sheet{background:var(--bg);width:100%;max-width:640px;max-height:90vh;overflow:auto;border-radius:20px 20px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom))}
-.actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
-#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#0f1f3d;color:#fff;padding:10px 16px;border-radius:12px;z-index:30;display:none;max-width:90vw}
-.upd{background:var(--sun);color:#000;padding:10px max(4vw,14px);display:flex;gap:10px;align-items:center}.upd span{flex:1}
-.auth{max-width:440px;margin:0 auto;padding:calc(40px + env(safe-area-inset-top)) 18px 40px}
+.tl{border-left:2px solid var(--blue);margin-left:9px;padding-left:18px}.tl .yr{position:relative;margin-top:18px}.tl .yr:before{content:"";position:absolute;left:-29px;top:3px;width:18px;height:18px;border-radius:2px;background:var(--az) center/100% 100%;border:1.5px solid var(--blue)}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-top:10px}
+.photos img,.ph{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;background:var(--tint);display:block}
+.mood{columns:2 160px;column-gap:10px;margin-top:12px}.mood figure{break-inside:avoid;margin:0 0 10px;background:var(--card);border-radius:4px;overflow:hidden;border:1px solid var(--line)}.mood img{width:100%;display:block;min-height:80px;background:var(--tint)}.mood figcaption{padding:6px 10px;font-size:14px;display:flex;justify-content:space-between;gap:6px;align-items:center}
+/* woord van de dag als beschilderde tegel */
+.word{position:relative;background:var(--card);border:2px solid var(--blue);border-radius:4px;padding:18px 18px 18px 86px;min-height:92px}
+.word:before{content:"";position:absolute;left:14px;top:50%;transform:translateY(-50%);width:56px;height:56px;background:var(--az) center/100% 100%;border-radius:2px;outline:1.5px solid var(--blue)}
+.word .sm{color:var(--muted)}
+.plan{width:100%;height:auto;touch-action:none;background:light-dark(#e8efd9,#1b3320);border-radius:4px;border:1.5px solid var(--line);display:block}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.chip{all:unset;cursor:pointer;border:1.5px solid var(--line);border-radius:999px;padding:7px 14px;font-size:14px;font-weight:500}
+#sheetBg{position:fixed;inset:0;background:#0a1430a6;z-index:20;display:none;align-items:flex-end;justify-content:center}#sheetBg.open{display:flex}
+#sheet{background:var(--bg);width:100%;max-width:640px;max-height:90vh;overflow:auto;border-radius:16px 16px 0 0;padding:26px 18px calc(20px + env(safe-area-inset-bottom));position:relative;border-top:3px solid var(--blue)}
+#sheet:before{content:"";position:absolute;top:9px;left:50%;width:40px;height:4px;border-radius:2px;background:var(--line);transform:translateX(-50%)}
+.actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}
+#toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:999px;z-index:30;display:none;max-width:90vw;font-weight:500}
+.upd{background:var(--sun);color:#2a1d00;padding:10px max(4vw,16px);padding-top:calc(10px + env(safe-area-inset-top));display:flex;gap:10px;align-items:center}.upd span{flex:1}.upd .btn{background:#2a1d00}
+.auth{max-width:440px;margin:0 auto;padding:calc(36px + env(safe-area-inset-top)) 18px 40px}
+.auth:before{content:"";display:block;height:30px;margin:0 -18px 26px;background:var(--az) 0 0/30px 30px repeat-x}
 .err{color:var(--bad);font-size:14px;margin-top:8px;min-height:1em}
-.celebrate{background:linear-gradient(135deg,#ffd666,#f5b400);color:#2b1d00;border:0}
-#lock{position:fixed;inset:0;z-index:50;background:linear-gradient(160deg,#1a55bd,#0b2a66);color:#fff;display:none;align-items:center;justify-content:center;padding:20px}#lock.on{display:flex}.lockbox{text-align:center;width:min(320px,90vw)}.pins{display:flex;gap:14px;justify-content:center;margin:18px 0}.pins i{width:14px;height:14px;border-radius:50%;border:2px solid #fff}.pins i.on{background:#fff}.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px}.pad button{all:unset;cursor:pointer;height:64px;border-radius:50%;background:#ffffff1f;font:600 24px Figtree,sans-serif;text-align:center;line-height:64px}
-@media(max-width:600px){.hero .wrap{grid-template-columns:1fr}.kpis{margin-top:14px}.hide-s{display:none}}
+.celebrate{background:var(--sun);color:#2a1d00;border:0}
+/* onderste navigatie */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:15;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom)}
+.nav button{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 2px 8px;font-size:12px;color:var(--muted);font-weight:500;position:relative}
+.nav svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8}
+.nav button.on{color:var(--bl)}.nav button.on:before{content:"";position:absolute;top:0;left:30%;right:30%;height:3px;background:var(--blue);border-radius:0 0 2px 2px}
+#lock{position:fixed;inset:0;z-index:50;background:#14213d var(--az) 0 0/56px 56px;color:#fff;display:none;align-items:center;justify-content:center;padding:20px}#lock.on{display:flex}
+.lockbox{text-align:center;width:min(330px,92vw);background:#14213df2;border-radius:10px;padding:26px 20px;border:2px solid var(--sun)}.lockbox h2{color:#fff}
+.pins{display:flex;gap:14px;justify-content:center;margin:18px 0}.pins i{width:14px;height:14px;border-radius:50%;border:2px solid #fff}.pins i.on{background:var(--sun);border-color:var(--sun)}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}.pad button{all:unset;cursor:pointer;height:62px;border-radius:50%;background:#ffffff18;font:600 24px Figtree,sans-serif;text-align:center;line-height:62px;color:#fff}
+button.kpi .kr{text-align:right}button.kpi{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%}
+@media(max-width:600px){.hero .wrap{grid-template-columns:1fr}.hide-s{display:none}.kpi.main{grid-template-columns:1fr}button.kpi .kr{text-align:left}}
+@media(prefers-reduced-motion:reduce){.tile:active,.btn:active{transform:none}}
 </style>
 </head>
 <body>
@@ -91,6 +137,7 @@ const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const clone=o=>JSON.parse(JSON.stringify(o));
 const fmtD=d=>d?new Date(d+'T12:00:00').toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'}):'';
 const MND=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+const tmeter=p=>`<div class="tmeter" role="img" aria-label="${p}%">${Array.from({length:10},(_,i)=>`<i class="${p>=(i+1)*10?'on':p>i*10?'half':''}"></i>`).join('')}</div>`;
 const bar=(p,c='')=>`<div class="bar ${c}"><i style="width:${p}%"></i></div>`;
 const isApp=()=>!!window.Android;
 function toast(t){const el=$('toast');el.textContent=t;el.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>el.style.display='none',2600)}
@@ -309,7 +356,7 @@ window.appResume=()=>{setTimeout(checkUpdate,1500);if(SB.ready)pull().catch(()=>
 /* ---------- views ---------- */
 const ICON={t1:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>',t2:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',t3:'<path d="M3 20h4v-5h4v-5h4V5h6"/>',t4:'<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>',t5:'<path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/>',t6:'<path d="M4 20l4-1L19 8l-3-3L5 16z"/><path d="M14 7l3 3"/>',t7:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',t8:'<path d="M4 5h16v10H9l-5 4z"/>',t9:'<path d="M3 18V8M3 14h18v4M21 14v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11" r="2"/>',t10:'<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',t11:'<path d="M2 16l20-8-6 12-3-5z"/><path d="M13 15l-2 5"/>',t12:'<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/>',t13:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',t14:'<rect x="3" y="3" width="8" height="10" rx="1"/><rect x="13" y="3" width="8" height="6" rx="1"/><rect x="13" y="11" width="8" height="10" rx="1"/><rect x="3" y="15" width="8" height="6" rx="1"/>',t16:'<path d="M4 4h16v16H4z"/><path d="M8 10l3 3 5-5M8 17h8"/>',t15:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>'};
 const TILES=[['t4','Financiën'],['t3','Planning en fases'],['t5','Benodigde middelen'],['t7','Wonen en finca'],['t10','Regio\'s vergelijken'],['t11','Reislogboek'],['t9','Inkomen B&B'],['t8','Taal'],['t12','Documenten Spanje'],['t13','Levensonderhoud'],['t6','Branding'],['t14','Moodboard'],['t2','Doel en uitgangspunten'],['t1','Inleiding'],['t15','Instellingen'],['t16','Beslissingen']];
-const HERO=`<svg viewBox="0 0 400 260" role="img" aria-label="Finca op een heuvel onder de zon"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b9be8"/><stop offset="1" stop-color="#ffd27a"/></linearGradient><linearGradient id="h1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c98a4b"/><stop offset="1" stop-color="#9c5f2e"/></linearGradient><linearGradient id="h2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2b26b"/><stop offset="1" stop-color="#c48a45"/></linearGradient><g id="olive"><rect x="-2" y="0" width="4" height="14" fill="#5a3b1e"/><ellipse cx="0" cy="-4" rx="13" ry="10" fill="#5f7f3a"/><ellipse cx="-3" cy="-7" rx="7" ry="5" fill="#7d9e4c"/></g></defs><rect width="400" height="260" fill="url(#sky)"/><circle cx="300" cy="78" r="44" fill="#f5b400"/><circle cx="300" cy="78" r="58" fill="#f5b400" opacity=".18"/><path d="M0 170 Q90 120 190 150 T400 140 V260 H0Z" fill="url(#h1)"/><path d="M0 205 Q120 165 230 190 T400 185 V260 H0Z" fill="url(#h2)"/><g transform="translate(150 118)"><rect x="0" y="22" width="92" height="44" fill="#fbf7ef"/><rect x="0" y="62" width="92" height="5" fill="#d8cdb8"/><path d="M-6 24 L46 0 L98 24Z" fill="#c4512a"/><path d="M-6 24 L46 0 L46 6 L2 26Z" fill="#e06a3c"/><rect x="38" y="40" width="16" height="26" rx="8" fill="#1446a0"/><rect x="12" y="34" width="14" height="12" fill="#1446a0"/><rect x="66" y="34" width="14" height="12" fill="#1446a0"/><rect x="100" y="38" width="40" height="28" fill="#f3ece0"/><path d="M96 40 L120 26 L144 40Z" fill="#c4512a"/></g><use href="#olive" x="70" y="196"/><use href="#olive" x="110" y="206"/><use href="#olive" x="320" y="188"/><use href="#olive" x="355" y="198"/><use href="#olive" x="40" y="222"/></svg>`;
+const HERO=`<svg viewBox="0 0 400 260" role="img" aria-label="Finca op een heuvel onder de zon"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b9be8"/><stop offset="1" stop-color="#ffd27a"/></linearGradient><linearGradient id="h1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c98a4b"/><stop offset="1" stop-color="#9c5f2e"/></linearGradient><linearGradient id="h2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2b26b"/><stop offset="1" stop-color="#c48a45"/></linearGradient><g id="olive"><rect x="-2" y="0" width="4" height="14" fill="#5a3b1e"/><ellipse cx="0" cy="-4" rx="13" ry="10" fill="#5f7f3a"/><ellipse cx="-3" cy="-7" rx="7" ry="5" fill="#7d9e4c"/></g></defs><rect width="400" height="260" fill="url(#sky)"/><circle cx="300" cy="78" r="44" fill="#e8a317"/><circle cx="300" cy="78" r="58" fill="#e8a317" opacity=".18"/><path d="M0 170 Q90 120 190 150 T400 140 V260 H0Z" fill="url(#h1)"/><path d="M0 205 Q120 165 230 190 T400 185 V260 H0Z" fill="url(#h2)"/><g transform="translate(150 118)"><rect x="0" y="22" width="92" height="44" fill="#fbf7ef"/><rect x="0" y="62" width="92" height="5" fill="#d8cdb8"/><path d="M-6 24 L46 0 L98 24Z" fill="#c4512a"/><path d="M-6 24 L46 0 L46 6 L2 26Z" fill="#e06a3c"/><rect x="38" y="40" width="16" height="26" rx="8" fill="#1446a0"/><rect x="12" y="34" width="14" height="12" fill="#1446a0"/><rect x="66" y="34" width="14" height="12" fill="#1446a0"/><rect x="100" y="38" width="40" height="28" fill="#f3ece0"/><path d="M96 40 L120 26 L144 40Z" fill="#c4512a"/></g><use href="#olive" x="70" y="196"/><use href="#olive" x="110" y="206"/><use href="#olive" x="320" y="188"/><use href="#olive" x="355" y="198"/><use href="#olive" x="40" y="222"/></svg>`;
 const num=(path,label,v,extra='')=>`<div class="f"><label>${label}</label><input type="number" inputmode="decimal" step="any" data-bind="${path}" value="${v??''}" ${extra}></div>`;
 const txt=(path,label,v,ph='')=>`<div class="f"><label>${label}</label><input type="text" data-bind="${path}" data-t="s" value="${esc(v)}" placeholder="${esc(ph)}"></div>`;
 function note(k,label,ph){return `<div class="f" style="margin-top:12px"><label>${label}</label><textarea data-bind="notes.${k}" data-t="s" data-norr="1" placeholder="${esc(ph||'')}">${esc(S.notes[k]||'')}</textarea></div>`}
@@ -327,18 +374,20 @@ function home(){const tot=total(),w=WORD(),open=tasks().filter(t=>!isDone(t.id))
   const sum={t1:'Waarom we dit doen',t2:'4 uitgangspunten',t3:act<0?'Alle fases afgerond':`Fase ${act+1}: ${FASES[act]}`,t4:`${E(tot)} gespaard`,t5:`${filled} van ${ALLC.length} ingevuld`,t6:'Naam, logo, website',t7:`${S.fincas.length} finca's bewaard`,t8:`Niveau ${S.niveau} · ${(S.lessen.reduce((a,l)=>a+(+l.min||0),0)/60).toFixed(1)} uur les`,t9:`± ${E(bs.pm)} p/m netto`,t10:`${S.regions.length} regio's`,t11:`${S.trips.length} reizen`,t12:`${DOCSTEPS.filter(d=>S.docs[d[0]]).length} van ${DOCSTEPS.length} geregeld`,t13:'NL naast Spanje',t14:`${S.mood.length} foto's`,t15:SB.hid?'Ingelogd':'Account en updates',t16:`${S.decisions.length} vastgelegd`};
   const prog={t3:allP(),t4:pct(tot,goalT()),t5:pct(filled,ALLC.length),t12:pct(DOCSTEPS.filter(d=>S.docs[d[0]]).length,DOCSTEPS.length)};
   const tile=id=>{const t=TILES.find(x=>x[0]===id);return `<button class="tile" data-go="${id}"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[id]}</svg><b>${t[1]}</b>${prog[id]!=null?bar(prog[id],id==='t4'?'':'b'):''}<small>${sum[id]}</small></button>`};
-  return `${updBar()}<header class="hero band"><div class="wrap"><div><div style="display:flex;align-items:center;gap:8px;font-weight:700;color:#ffd666"><span class="dot" id="sync"></span>Project Spanje 2031</div><h1 style="margin-top:8px">Nog <span class="big">${daysLeft().toLocaleString('nl-NL')}</span> dagen tot Spanje</h1><p>Vertrek ${fmtD(S.vertrek)}. Elke maand gaat er ${E((+S.inleg.ing||0)+(+S.inleg.degiro||0))} richting Spanje.</p></div><div class="pic hide-s">${HERO}</div></div></header>
+  return `${updBar()}<header class="hero band"><div class="wrap"><div><div class="kick"><span class="dot" id="sync"></span>Project Spanje 2031</div><div class="count">${daysLeft().toLocaleString('nl-NL')}</div><h1>dagen tot Spanje</h1><p>Vertrek ${fmtD(S.vertrek)}. Elke maand gaat er ${E((+S.inleg.ing||0)+(+S.inleg.degiro||0))} richting Spanje.</p></div><div class="pic hide-s">${HERO}</div></div></header>
   <main class="band" style="padding-top:0"><div class="wrap">
-  <div class="kpis"><button class="kpi" data-go="t4" style="all:unset;box-sizing:border-box;cursor:pointer;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 10px 30px #0b2a6622"><div class="lbl">Haalbaarheid 2031</div><div class="v" style="color:${fz>=100?'var(--ok)':fz>=70?'inherit':'var(--bad)'}">${fz}%</div>${bar(fz,fz>=100?'g':'')}<div class="lbl">${E(hv.total)} beschikbaar van ${E(nd.total)} nodig${fz<100?` · tekort ${E(nd.total-hv.total)}`:''}</div></button>
+  <div class="kpis"><button class="kpi main" data-go="t4"><div><div class="lbl">Haalbaarheid 2031</div><div class="v" style="color:${fz>=100?'var(--ok)':fz>=70?'var(--bl)':'var(--bad)'}">${fz}%</div></div><div class="lbl kr">${E(hv.total)} beschikbaar<br>van ${E(nd.total)} nodig${fz<100?`<br><b style="color:var(--ink)">Tekort ${E(nd.total-hv.total)}</b>`:''}</div>${tmeter(fz)}</button>
   <div class="kpi"><div class="lbl">Gespaard voor Spanje</div><div class="v">${E(tot)}</div>${bar(pct(tot,goalT()))}<div class="lbl">${pct(tot,goalT())}% van spaardoel ${E(goalT())} · prognose bij vertrek ${E(projection(0).total)}</div></div>
   <div class="kpi"><div class="lbl">Voortgang taken</div><div class="v">${allP()}%</div>${bar(allP(),'b')}<div class="lbl">${tasks().length-open.length} van ${tasks().length} taken${late.length?` · <span class="warn">${late.length} te laat</span>`:''} · dividend netto ${E(divNet())} p/m</div></div></div>
-  ${S.celebrate?`<div class="card celebrate"><b style="font:700 20px Fraunces,serif">${S.celebrate===goalT()?'Spaardoel gehaald!':E(S.celebrate)+' gespaard!'}</b><div>Weer een stap dichter bij de finca.</div><button class="btn sm ghost" style="margin-top:8px;border-color:#0004" data-act="clearcele">Mooi!</button></div>`:''}
+  ${S.celebrate?`<div class="card celebrate"><b style="font:400 20px var(--disp)">${S.celebrate===goalT()?'Spaardoel gehaald!':E(S.celebrate)+' gespaard!'}</b><div>Weer een stap dichter bij de finca.</div><button class="btn sm ghost" style="margin-top:8px;border-color:#2a1d0055;color:#2a1d00" data-act="clearcele">Mooi!</button></div>`:''}
   <details class="card" id="qe" ${qOpen?'open':''}><summary style="cursor:pointer;font-weight:700">Bedragen aanpassen</summary>${moneyForm()}</details>
-  <div class="card word"><div class="sm" style="color:#6b5200">Spaans woord van de dag</div><div style="font:700 24px Fraunces,serif">${esc(w[0])}</div><div>${esc(w[1])}</div></div>
-  ${GROUPS.map(([g,ids])=>`<h3 style="margin-top:22px">${g}</h3><div class="tiles" style="margin-top:8px">${ids.map(tile).join('')}</div>`).join('')}
+  <div class="card word"><div class="sm">Spaans woord van de dag</div><div style="font:400 24px var(--disp)">${esc(w[0])}</div><div>${esc(w[1])}</div></div>
+  ${GROUPS.map(([g,ids])=>`<div class="grp"><h3>${g}</h3><span></span></div><div class="tiles">${ids.map(tile).join('')}</div>`).join('')}
   <div class="card"><h3>Eerstvolgende taken</h3>${taskList(open.sort((a,b)=>((S.tmeta[a.id]||{}).due||'9')<((S.tmeta[b.id]||{}).due||'9')?-1:1).slice(0,6),true)}</div>
   </div></main>`}
-function page(id){const name=TILES.find(t=>t[0]===id)[1];return `${updBar()}<div class="top"><button class="btn sm" data-go="">←</button><b>${name}</b><span class="dot" id="sync"></span></div><main class="band"><div class="wrap">${V[id]()}</div></main>`}
+const NAV=[['','Overzicht','<rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/>'],['t4','Geld',null],['t3','Planning',null],['t7','Finca',null],['t9','B&B',null]];
+const nav=id=>`<nav class="nav">${NAV.map(([k,l,ic])=>`<button data-go="${k}" class="${id===k?'on':''}" aria-label="${l}"><svg viewBox="0 0 24 24" aria-hidden="true">${ic||ICON[k]}</svg>${l}</button>`).join('')}</nav>`;
+function page(id){const name=TILES.find(t=>t[0]===id)[1];return `${updBar()}<div class="top"><button class="btn" data-go="" aria-label="Terug">←</button><b>${name}</b><span class="dot" id="sync"></span></div><main class="band"><div class="wrap">${V[id]()}</div></main>`}
 function lineChart(){const pts=S.hist.slice().sort((a,b)=>a.d<b.d?-1:1);return `<div class="fig" id="chart" data-chart="1"></div><div class="sm">Geel = jullie stand · blauw gestippeld = planlijn naar ${E(goalT())}</div>`}
 function drawChart(){const el=$('chart');if(!el)return;const W=el.clientWidth,H=el.clientHeight;const pts=S.hist.slice().sort((a,b)=>a.d<b.d?-1:1);if(!pts.length){el.innerHTML='';return}
   const t0=new Date(pts[0].d).getTime(),t1=vertrek().getTime(),max=Math.max(goalT(),...pts.map(p=>p.t))*1.08;const pl=46,pb=22,pr=10,pt=10;
@@ -346,14 +395,14 @@ function drawChart(){const el=$('chart');if(!el)return;const W=el.clientWidth,H=
   let g='';for(let i=0;i<=4;i++){const v=max/4*i;g+=`<line x1="${pl}" x2="${W-pr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${pl-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)">${Math.round(v/1000)}k</text>`}
   for(let yr=new Date(t0).getFullYear()+1;yr<=vertrek().getFullYear();yr++){const t=new Date(yr,0,1).getTime();if(t>t0&&t<t1)g+=`<text x="${x(t)}" y="${H-6}" text-anchor="middle" font-size="11" fill="var(--muted)">${W<420?"'"+String(yr).slice(2):yr}</text>`}
   const line=pts.map((p,i)=>(i?'L':'M')+x(new Date(p.d).getTime()).toFixed(1)+' '+y(p.t).toFixed(1)).join(' ');
-  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}">${g}<path d="M${x(t0)} ${y(pts[0].t)} L${x(t1)} ${y(goalT())}" stroke="var(--bl)" stroke-dasharray="5 5" fill="none" stroke-width="2"/><path d="${line}" stroke="#f5b400" stroke-width="3" fill="none"/>${pts.map(p=>`<circle cx="${x(new Date(p.d).getTime())}" cy="${y(p.t)}" r="4" fill="#f5b400"/>`).join('')}</svg>`}
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}">${g}<path d="M${x(t0)} ${y(pts[0].t)} L${x(t1)} ${y(goalT())}" stroke="var(--bl)" stroke-dasharray="5 5" fill="none" stroke-width="2"/><path d="${line}" stroke="#e8a317" stroke-width="3" fill="none"/>${pts.map(p=>`<circle cx="${x(new Date(p.d).getTime())}" cy="${y(p.t)}" r="4" fill="#e8a317"/>`).join('')}</svg>`}
 const V={
 t1:()=>`<h2>Inleiding</h2><div class="card"><p style="margin:0">Dit is onze leidraad voor project <i>Spanje 2031</i>: tijdlijnen, spaarplannen, ideeën en lopende ontwikkelingen. Het helpt ons zien waar we nu staan en wat er nog moet gebeuren om de verhuizing goed en gestructureerd voor te bereiden.</p></div>${note('intro','Eigen notities','Waarom willen we naar Spanje?')}`,
 t2:()=>`<h2>Doel en uitgangspunten</h2><div class="card"><p style="margin:0">Onze verhuizing naar Spanje in 2031 stap voor stap voorbereiden, met bewuste keuzes over wonen, financiën, taal en levensstijl.</p></div><div class="tiles">${['We nemen de tijd en spreiden de voorbereiding over meerdere jaren','We combineren plannen maken met Spanje echt ervaren','Financiële rust en zekerheid staan voorop','We blijven flexibel en sturen bij wanneer nodig'].map(u=>`<div class="tile" style="cursor:default;min-height:100px"><b>${u}</b></div>`).join('')}</div>${note('uitg','Financiële uitgangspunten','Bijv. minimaal 12 maanden buffer…')}${tileTasks('t2')}`,
 t3:()=>{const yrs={};tasks().forEach(t=>{const m=S.tmeta[t.id];const y=m&&m.due?+m.due.slice(0,4):FASE_YEAR[t.f-1];(yrs[y]=yrs[y]||[]).push(t)});
   return `<h2>Planning en fases</h2><div class="card"><div class="row">${`<div class="f"><label>Vertrekdatum</label><input type="date" data-bind="vertrek" data-t="s" value="${S.vertrek}"></div>`}<div><div class="lbl">Nog</div><div class="res">${monthsLeft()} maanden</div></div></div></div>
   <div class="card"><h3>Voortgang per fase</h3>${FASES.map((f,i)=>`<div style="display:grid;grid-template-columns:110px minmax(0,1fr) 44px;gap:10px;align-items:center"><span class="sm">${i+1}. ${f}</span>${bar(faseP(i+1),i?'b':'')}<span class="n">${faseP(i+1)}%</span></div>`).join('')}</div>
-  <div class="card"><h3>Tijdlijn per jaar</h3><p class="sm">Taken met een deadline staan in dat jaar, de rest in het jaar van hun fase. Tik op een taak voor deadline en wie het doet.</p><div class="tl">${Object.keys(yrs).sort().map(y=>`<div class="yr"><b style="font:600 20px Fraunces,serif">${y}</b>${taskList(yrs[y],true)}</div>`).join('')}</div></div>
+  <div class="card"><h3>Tijdlijn per jaar</h3><p class="sm">Taken met een deadline staan in dat jaar, de rest in het jaar van hun fase. Tik op een taak voor deadline en wie het doet.</p><div class="tl">${Object.keys(yrs).sort().map(y=>`<div class="yr"><b style="font:400 20px var(--disp)">${y}</b>${taskList(yrs[y],true)}</div>`).join('')}</div></div>
   ${FASES.map((f,i)=>`<div class="card"><h3>Fase ${i+1} · ${f} <span class="badge">${faseP(i+1)}%</span></h3>${note('f'+(i+1),'Opmerkingen','')}</div>`).join('')}${addForm('t3')}`},
 t4:()=>{const tot=total(),w=S.whatif,p=projection(w.extra),p0=projection(0),dl=S.divlog,yr=String(new Date().getFullYear()),months=MND.map((m,i)=>dl.filter(e=>e.d.startsWith(yr+'-'+String(i+1).padStart(2,'0'))).reduce((a,e)=>a+(+e.amt||0),0)),mx=Math.max(1,...months);
   return `<h2>Financiën</h2>${feasCard()}
@@ -389,7 +438,7 @@ t7:()=>{const f=S.finca,fc=fincaCost(),need=fc.koop+fc.itp+fc.bij+fc.verb,h=S.hy
   <div class="card"><h3>Finca-favorieten</h3>${S.fincas.length?S.fincas.map(x=>{const n=CHECKS.filter(c=>(x.check||{})[c[0]]).length;return `<div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer" data-act="editfinca" data-id="${x.id}">${x.foto?`<img data-img="${x.foto}" class="ph" style="width:76px;flex:none" alt="">`:`<div class="ph" style="width:76px;flex:none"></div>`}<div style="flex:1"><b>${esc(x.naam||'Finca')}</b><div class="sm">${esc(x.regio||'')}${x.grond?' · '+esc(x.grond)+' m² grond':''}</div><div>${E(x.prijs)} <span class="badge">${esc(x.status||'Interessant')}</span><span class="badge ${n===CHECKS.length?'':'soon'}">${n}/${CHECKS.length} gecheckt</span></div></div></div>`}).join(''):'<p class="lbl">Nog geen finca\'s bewaard. Kom je er een tegen? Bewaar de link hier.</p>'}<button class="btn" style="margin-top:10px" data-act="editfinca">Finca toevoegen</button></div>
   <div class="card"><h3>Plattegrond van de finca</h3><p class="sm">Sleep de blokken. Tik op een blok om het aan te passen. Terrein ${S.plan.w} × ${S.plan.h} m.</p>${planSvg()}<div class="chips">${Object.entries(PLANTYPES).map(([k,v])=>`<button class="chip" data-act="addplan" data-id="${k}">+ ${v[0]}</button>`).join('')}</div><div class="row" style="margin-top:10px">${num('plan.w','Breedte terrein (m)',S.plan.w)}${num('plan.h','Diepte terrein (m)',S.plan.h)}</div></div>
   <div class="card"><h3>Hypotheek-notities</h3>${note('hypo','Notities','Eigen inbreng, Spaanse bank, overwaarde NL…')}</div>${tileTasks('t7')}`},
-t8:()=>{const w=WORD(),uren=S.lessen.reduce((a,l)=>a+(+l.min||0),0)/60,LV=['A0','A1','A2','B1','B2','C1'];return `<h2>Taal</h2><div class="card word"><div class="sm" style="color:#6b5200">Woord van de dag</div><div style="font:700 26px Fraunces,serif">${esc(w[0])}</div><div>${esc(w[1])}</div></div>
+t8:()=>{const w=WORD(),uren=S.lessen.reduce((a,l)=>a+(+l.min||0),0)/60,LV=['A0','A1','A2','B1','B2','C1'];return `<h2>Taal</h2><div class="card word"><div class="sm">Woord van de dag</div><div style="font:400 26px var(--disp)">${esc(w[0])}</div><div>${esc(w[1])}</div></div>
   <div class="card"><h3>Niveau</h3><div class="chips">${LV.map(l=>`<button class="chip" data-act="niveau" data-id="${l}" style="${S.niveau===l?'background:var(--blue);color:#fff;border-color:var(--blue)':''}">${l}</button>`).join('')}</div>${bar(pct(LV.indexOf(S.niveau),3),'b')}<div class="lbl">Doel: B1 vóór vertrek (zelfstandig gesprekken voeren)</div></div>
   <div class="card"><h3>Lesuren</h3><div class="res">${uren.toFixed(1)} uur</div><div class="row" style="margin-top:10px"><div class="f"><label>Datum</label><input type="date" id="lsD" value="${today()}"></div><div class="f"><label>Minuten</label><input type="number" id="lsM" value="60"></div><div class="f" style="flex:2 1 160px"><label>Wat geleerd</label><input type="text" id="lsN"></div><button class="btn" style="flex:0 0 auto" data-act="addles">Toevoegen</button></div>
   ${S.lessen.length?`<ul class="list">${S.lessen.slice().sort((a,b)=>a.d<b.d?1:-1).slice(0,10).map(l=>`<li><span style="flex:1">${fmtD(l.d)} · ${esc(l.note||'Les')}</span><span class="n">${l.min} min</span><button class="btn sm ghost" data-act="delles" data-id="${l.id}" aria-label="Verwijder">✕</button></li>`).join('')}</ul>`:''}</div>
@@ -431,8 +480,8 @@ t15:()=>{const ds=isApp()&&(()=>{try{return Android.deviceSecure()}catch(e){retu
   <div class="card"><h3>Back-up</h3><p class="sm">Een bestand met al je gegevens (zonder foto's). Handig om te bewaren of om terug te zetten.</p><button class="btn ghost" data-act="export">Back-up maken</button> <button class="btn ghost" data-act="import">Back-up terugzetten</button></div>
   <div class="card"><h3>App</h3><p>Versie ${APP_VN}${isApp()?'':' (webversie)'}</p>${isApp()?`<button class="btn ghost" data-act="checkupd">Zoeken naar updates</button>`:'<p class="sm">De Android-app vind je op <a href="https://github.com/thijsgame18-ui/spanje2031/raw/main/Spanje2031.apk">github.com/thijsgame18-ui/spanje2031</a>.</p>'}</div>`},
 t16:()=>`<h2>Beslissingen</h2><p class="sm">Wat hebben we besloten, en waarom? Handig om later op terug te kijken.</p><div class="card"><div class="f"><label>Beslissing</label><input type="text" id="dcW" placeholder="Bijv. We zoeken in het binnenland van Andalusië"></div><div class="f" style="margin-top:10px"><label>Waarom</label><textarea id="dcR"></textarea></div><div class="row" style="margin-top:10px"><div class="f"><label>Datum</label><input type="date" id="dcD" value="${today()}"></div><button class="btn" style="flex:0 0 auto" data-act="adddec">Vastleggen</button></div></div>
-  ${S.decisions.slice().sort((a,b)=>a.d<b.d?1:-1).map(d=>`<div class="card"><div class="sm">${fmtD(d.d)}${d.by?' · '+esc(d.by):''}</div><b style="font:600 18px Fraunces,serif">${esc(d.wat)}</b>${d.waarom?`<p style="margin:6px 0 0">${esc(d.waarom)}</p>`:''}<button class="btn sm ghost" style="margin-top:8px" data-act="deldec" data-id="${d.id}">Verwijderen</button></div>`).join('')||'<p class="lbl">Nog niets vastgelegd.</p>'}`};
-function feasCard(){const nd=needCalc(),hv=haveCalc(),fz=feas();return `<div class="card"><h3>Haalbaarheid 2031</h3><div style="display:flex;align-items:baseline;gap:10px"><div class="res" style="color:${fz>=100?'var(--ok)':fz>=70?'var(--bl)':'var(--bad)'}">${fz}%</div><span class="lbl">${fz>=100?'Haalbaar met deze aannames':'Tekort: '+E(nd.total-hv.total)}</span></div>${bar(fz,fz>=100?'g':'')}
+  ${S.decisions.slice().sort((a,b)=>a.d<b.d?1:-1).map(d=>`<div class="card"><div class="sm">${fmtD(d.d)}${d.by?' · '+esc(d.by):''}</div><b style="font:400 18px var(--disp)">${esc(d.wat)}</b>${d.waarom?`<p style="margin:6px 0 0">${esc(d.waarom)}</p>`:''}<button class="btn sm ghost" style="margin-top:8px" data-act="deldec" data-id="${d.id}">Verwijderen</button></div>`).join('')||'<p class="lbl">Nog niets vastgelegd.</p>'}`};
+function feasCard(){const nd=needCalc(),hv=haveCalc(),fz=feas();return `<div class="card"><h3>Haalbaarheid 2031</h3><div style="display:flex;align-items:baseline;gap:10px"><div class="res" style="color:${fz>=100?'var(--ok)':fz>=70?'var(--bl)':'var(--bad)'}">${fz}%</div><span class="lbl">${fz>=100?'Haalbaar met deze aannames':'Tekort: '+E(nd.total-hv.total)}</span></div>${tmeter(fz)}
   <div class="grid2" style="margin-top:8px"><div><div class="lbl">Nodig</div><table><tbody>${nd.rows.filter(r=>r[1]).map(r=>`<tr><td>${esc(r[0])}</td><td class="n">${E(r[1])}</td></tr>`).join('')}<tr><td><b>Totaal</b></td><td class="n"><b>${E(nd.total)}</b></td></tr></tbody></table></div>
   <div><div class="lbl">Beschikbaar bij vertrek</div><table><tbody>${hv.rows.map(r=>`<tr><td>${esc(r[0])}</td><td class="n">${r[1]?E(r[1]):'<span class="sm">uit</span>'}</td></tr>`).join('')}<tr><td><b>Totaal</b></td><td class="n"><b>${E(hv.total)}</b></td></tr></tbody></table></div></div>
   <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" data-bind="inclHouse" data-t="b" ${S.inclHouse?'checked':''}> Overwaarde huis NL meetellen (${E(overwaarde())})</label><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" data-bind="hypo.use" data-t="b" ${S.hypo.use?'checked':''}> Spaanse hypotheek meetellen (${S.hypo.ltv}% van de prijs)</label></div>
@@ -546,7 +595,7 @@ delmood:id=>{const m=S.mood.find(x=>x.id===id);if(m)delImg(m.img);S.mood=S.mood.
 /* ---------- render + events ---------- */
 const app=$('app');let lastView=null;
 function render(){if(!$('app'))return;if(SB.c&&!SB.uid&&!localStorage.getItem('sp-local')&&window.supabase){showAuth();return}
-  const id=location.hash.slice(1),y=id===lastView?window.scrollY:0;app.innerHTML=V[id]?page(id):home();lastView=id;window.scrollTo(0,y);setSync(SB.state);drawChart();loadImgs()}
+  const id=location.hash.slice(1),y=id===lastView?window.scrollY:0;app.innerHTML=(V[id]?page(id):home())+nav(V[id]?id:'');lastView=id;window.scrollTo(0,y);setSync(SB.state);drawChart();loadImgs()}
 addEventListener('resize',()=>drawChart());
 app.addEventListener('toggle',e=>{if(e.target.id==='qe')qOpen=e.target.open},true);
 document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){location.hash=g.dataset.go;return}
