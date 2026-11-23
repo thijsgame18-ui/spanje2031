@@ -176,7 +176,16 @@ function marktCard(){const M=MARKTS[mKey()],f=+S.finca.prijs||0,mx=maxFinca();re
   <p style="margin:8px 0">Jullie maximum nu (${SCN_L[scKey()]}): <b class="${mx>=M.streef?'ok':'warn'}">${mx>1000?E(mx):'past nog niet'}</b>${mx<M.streef&&mx>1000?` · ${E(M.streef-mx)} onder de streefprijs`:''}</p>
   <p class="sm">${M.bron.map(b=>`<a href="${b[1]}">${b[0]}</a>`).join('<br>')}</p>
   ${Math.round(f)!==M.streef?`<button class="btn" data-act="usemarkt">Gebruik ${E(M.streef)} als budget</button>`:'<span class="ok">Jullie budget staat op de streefprijs</span>'}</div>`}
-function migrate7(){if(S.mig7)return false;S.marktRegio='denia';if(+S.finca.prijs===350000)S.finca.prijs=450000;S.mig7=1;return true}
+const ZONES=[['Zone 1 · Kust Dénia–Jávea–Calp–Altea',{klimaat:5,prijs:1,toer:5,vlieg:4,voorz:5},'Duurst (gem. ± € 528.000 in Dénia), meeste toeristen, strengste vergunningen. Valt buiten budget, tenzij een kant-en-klare finca met vergunning.'],
+['Zone 2 · Binnenland Marina Alta (Orba, Jalón, Llíber, Benissa)',{klimaat:5,prijs:3,toer:4,vlieg:4,voorz:3},'20–30 min van de kust, fincas ± € 190.000–460.000. Beste mix van gasten en prijs; vergunning per gemeente checken.'],
+['Zone 3 · Achter Gandia (Planes, Beniarrés, Vall de Gallinera)',{klimaat:4,prijs:4,toer:3,vlieg:3,voorz:3},'Goedkoopste rond Gandia, echt Spaans, ± 30 min van het strand.'],
+['Zone 4 · Ontinyent, Xàtiva, Albaida',{klimaat:3,prijs:4,toer:2,vlieg:4,voorz:4},'Grote fincas, gem. ± € 350.000, dicht bij vliegveld Valencia; weinig toeristen.'],
+['Zone 5 · Alcoy en Cocentaina',{klimaat:3,prijs:3,toer:3,vlieg:3,voorz:4},'Bergen, wandelen en fietsen; actieve gasten.']];
+function migrate8(){if(S.mig8)return false;ZONES.forEach(([n,sc,note])=>{if(!S.regions.some(r=>r.naam===n))S.regions.push({id:'r'+uid(),naam:n,s:Object.assign({},sc),note,wish:{}})});
+ S.regw=Object.assign({},S.regw||{},{toer:2});
+ if(!S.trips.some(t=>t.plan))S.trips.push({id:'t'+uid(),plan:1,regio:'Oriëntatiereis Marina Alta (gepland)',van:'',tot:'',cijfer:'',fotos:[],note:'Dag 1: vliegen op Alicante, naar Altea en Calp: de kust zien zoals gasten hem zien. Dag 2: Jalón-vallei (Jalón, Alcalalí, Llíber), Orba en het binnenland van Benissa: fincas en makelaars. Dag 3: Dénia, Jávea en de Montgó; middag Pedreguer, Ondara en Gata. Dag 4: Vall de Pop, Vall de Laguar en Vall d\'Ebo, daarna Vall de Gallinera, Planes en Beniarrés ter vergelijking. Dag 5: Gandia, terugvliegen vanaf Valencia. Onderweg: bij elk ayuntamiento vragen naar het informe de compatibilidad voor toeristische verhuur, en met B&B-eigenaren praten. Kom ook een keer in de winter terug.'});
+ S.mig8=1;return true}
+function migrate7(){const m8=migrate8();if(S.mig7)return m8;S.marktRegio='denia';if(+S.finca.prijs===350000)S.finca.prijs=450000;S.mig7=1;return true}
 function migrate6(){const m7=migrate7();if(S.mig6)return m7;S.house.owManual=200000;S.inclHouse=true;S.hypo.use=true;S.hypo.maxPm=600;S.ownCash=70000;S.cf=Object.assign({ramp:[30,60,90,100,100],extra:0,dgKeep:0},S.cf||{});S.cf.dgAll=true;S.cf.dgKeep=0;S.mig6=1;return true}
 function migrate5(){const m6=migrate6();if(S.mig5)return m6;if(S.mig5)return false;const h=S.hypo;if(+h.rente===3.5)h.rente=4;if(+h.jaren===20)h.jaren=25;if(h.maxPm==null)h.maxPm=550;S.mig5=1;return true}
 function migrate4(){const m5=migrate5();if(S.mig4)return m5||false;S.huisjes.aantal=0;S.mig4=1;return true}
