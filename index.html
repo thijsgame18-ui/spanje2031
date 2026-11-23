@@ -126,7 +126,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 <script>
 /* ---------- helpers ---------- */
 const $=id=>document.getElementById(id);
-const APP_VN='1.7';
+const APP_VN='1.8';
 const SB_URL='https://wnircustmcvwjlkvtyur.supabase.co',SB_KEY='sb_publishable_4sqsUxgtDeD6rHnDJH0tkg_uchFNIIS';
 const UPD_URL='https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/version.json';
 const eur=new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR',maximumFractionDigits:0});
@@ -177,7 +177,8 @@ function marktCard(){const M=MARKT,f=+S.finca.prijs||0;return `<div class="card"
   <p class="sm">Prijzen in de regio Valencia stegen het afgelopen jaar ±15%; voor 2026 wordt 4–7% verwacht. Vraagprijzen, er valt vaak nog iets af te onderhandelen.</p>
   <p class="sm">${M.bron.map(b=>`<a href="${b[1]}">${b[0]}</a>`).join('<br>')}</p>
   ${Math.round(f)!==M.streef?`<button class="btn" data-act="usemarkt">Gebruik ${E(M.streef)} als budget</button>`:'<span class="ok">Jullie budget staat op de streefprijs</span>'}</div>`}
-function migrate3(){if(S.mig3)return false;if(+S.finca.prijs===250000)S.finca.prijs=MARKT.streef;if(S.finca.infl==null||+S.finca.infl===2)S.finca.infl=4;S.mig3=1;return true}
+function migrate4(){if(S.mig4)return false;S.huisjes.aantal=0;S.mig4=1;return true}
+function migrate3(){const m4=migrate4();if(S.mig3)return m4;if(+S.finca.prijs===250000)S.finca.prijs=MARKT.streef;if(S.finca.infl==null||+S.finca.infl===2)S.finca.infl=4;S.mig3=1;return true}
 function migrate(){const m3=migrate3();if(S.mig2)return m3;Object.entries(DUE).forEach(([id,d])=>{const m=S.tmeta[id]||{};if(!m.due){m.due=d;S.tmeta[id]=m}});S.mig2=1;return true}
 const FASES=['Financiële basis','Oriëntatie','Verdieping','Voorbereiding','Uitvoering'];
 const FASE_YEAR=[2026,2027,2028,2030,2031];
@@ -214,7 +215,7 @@ hist:[{id:'2026-02-06',d:'2026-02-06',t:38356},{id:'2026-11-22',d:'2026-11-22',t
 bnb:{kamers:3,prijs:90,bez:50,mnd:8,kost:40},done:['a1','a2'],custom:[],tmeta:{},inclHouse:false,whatif:{extra:0,rend:6,yld:7,bonus:true},
 finca:{prijs:250000,verb:40000,itp:9,bij:2},fincas:[],trips:[],regions:[],col:{r1:'Regio 1',r2:'Regio 2',v:{}},lessen:[],niveau:'A0',
 season:MND.map((m,i)=>({open:i>=3&&i<=9,prijs:i>=5&&i<=8?110:85,bez:i>=5&&i<=8?75:45})),plan:{w:80,h:50,items:[]},comp:[],mood:[],docs:{},divlog:[],ms:[],scen:{cur:'normaal'},cf:{ramp:[30,60,90,100,100],extra:0,dgKeep:0},derisk:{on:false,start:2029,pct:25,rente:2},wishes:[],checkins:[],stuiver:{},
-house:{woz:399000,hyp:367500,v2031:500000},goal:{ing:40862,degiro:75000},auto:{nu:13350,later:2000},divtax:15,hypo:{use:false,ltv:60,rente:3.5,jaren:20},huisjes:{aantal:2,kosten:35000},bufferM:12,decisions:[],tax:{autonomo:300,personen:2}}}
+house:{woz:399000,hyp:367500,v2031:500000},goal:{ing:40862,degiro:75000},auto:{nu:13350,later:2000},divtax:15,hypo:{use:false,ltv:60,rente:3.5,jaren:20},huisjes:{aantal:0,kosten:35000},bufferM:12,decisions:[],tax:{autonomo:300,personen:2}}}
 let S=defaults();
 try{const l=JSON.parse(localStorage.getItem('sp-state')||'null');if(l&&l.v)S=Object.assign(defaults(),l)}catch(e){}
 let BASE=(()=>{try{return JSON.parse(localStorage.getItem('sp-base2')||'null')}catch(e){return null}})();
