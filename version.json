@@ -1,8 +1,9 @@
 {
- "versionCode": 12,
- "versionName": "2.1",
+ "versionCode": 13,
+ "versionName": "2.2",
  "notes": [
-  "Schermafbeeldingen zijn weer toegestaan"
+  "Omgeving Dénia als eerste regio: streefprijs € 450.000",
+  "Wisselen tussen Dénia en onder Valencia"
  ],
- "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=12"
+ "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=13"
 }
