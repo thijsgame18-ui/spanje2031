@@ -1,10 +1,10 @@
 {
- "versionCode": 5,
- "versionName": "1.4",
+ "versionCode": 6,
+ "versionName": "1.5",
  "notes": [
-  "18 nieuwe taken en 3 beslismomenten, alles met een deadline",
-  "Startscherm laat zien wat nu aan de beurt is",
-  "Verwijderen kun je ongedaan maken"
+  "Pokémon verwijderd",
+  "Haalbaarheid met verkoopkosten huis en prijsstijging",
+  "Taken filteren, foto's groot bekijken, synctijd zichtbaar"
  ],
- "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=5"
+ "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=6"
 }
