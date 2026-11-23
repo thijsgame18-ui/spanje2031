@@ -105,6 +105,32 @@ tr.now td{background:var(--sand)}
 .pad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}.pad button{all:unset;cursor:pointer;height:62px;border-radius:50%;background:var(--tint);font:600 24px Figtree,sans-serif;text-align:center;line-height:62px;color:var(--ink)}
 #viewer{position:fixed;inset:0;z-index:40;background:#000e;display:none;align-items:center;justify-content:center}#viewer.on{display:flex}#viewer img{max-width:100%;max-height:100%;object-fit:contain}#viewer .vb{all:unset;position:absolute;cursor:pointer;color:#fff;background:#0007;border-radius:50%;width:46px;height:46px;display:grid;place-items:center;font-size:22px}#viewer .vc{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:#fff;font-size:14px}
 @media(min-width:700px){.scene{min-height:300px}}
+/* computer (webversie): zijbalk met alle onderdelen, brede inhoud, dialogen in het midden */
+.hcols{display:block}
+body.desk{padding-bottom:0}
+.dk{display:grid;grid-template-columns:276px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;overflow:auto;padding:26px 14px 22px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:2px;scrollbar-width:thin}
+.side .brand{font:400 28px/1 var(--disp);padding:0 12px}
+.side .cd{padding:6px 12px 0;color:var(--muted);font-size:14px}.side .cd b{color:var(--ink);font-weight:700}
+.side .st{display:flex;gap:8px;align-items:center;padding:4px 12px 14px;font-size:13px;color:var(--muted)}.side .st .dot{background:var(--line)}
+.side h4{margin:12px 12px 3px;font-size:13px;font-weight:500;color:var(--muted)}
+.sl{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:11px;padding:6px 12px;border-radius:12px;font-size:14.5px;font-weight:500}
+.sl svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;flex:none;opacity:.8}
+.sl i{width:9px;height:9px;border-radius:50%;flex:none;margin-left:auto}
+.sl:hover{background:var(--tint)}.sl.on{background:var(--sea);color:var(--ink)}.sl.on svg{opacity:1}
+.dmain{min-width:0}
+.desk .wrap,.desk .scene{max-width:1180px}
+.desk .band,.desk .hero,.desk .top{padding-left:40px;padding-right:40px}
+.desk .hero{padding-top:28px}.desk .scene{min-height:230px}
+.desk .top{padding-top:26px;padding-bottom:0;position:static}.desk .top b{font-size:40px}
+.desk .kpis{grid-template-columns:1.4fr 1fr 1fr}.desk .kpi.main{grid-column:auto}
+.desk .hcols{columns:2 420px;column-gap:16px;margin-top:2px}.desk .hcols{margin-top:14px}.desk .hcols>*{break-inside:avoid;display:block;margin:0 0 14px}
+.desk .tiles{grid-template-columns:repeat(4,1fr)}
+.desk .cols{columns:2 440px;column-gap:16px}.desk .cols>*{break-inside:avoid}.desk .cols>.card:first-child,.desk .cols>h2+.card{margin-top:0}
+.desk #sheetBg{align-items:center}.desk #sheet{border-radius:26px;max-width:620px;padding:26px 24px 22px}.desk #sheet:before{display:none}
+.desk #toast{bottom:28px;left:calc(50% + 138px)}
+.desk .tile{transition:filter .15s}.desk .tile:hover{filter:brightness(.96)}.desk .kpi:hover{filter:brightness(.985)}
+.desk .btn:hover{filter:brightness(1.07)}.desk .chip:hover{filter:brightness(.95)}
 @media(prefers-reduced-motion:reduce){.tile:active,.btn:active{transform:none}}
 </style>
 </head>
@@ -128,7 +154,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 <script>
 /* ---------- helpers ---------- */
 const $=id=>document.getElementById(id);
-const APP_VN='2.4';
+const APP_VN='2.5';
 const SB_URL='https://wnircustmcvwjlkvtyur.supabase.co',SB_KEY='sb_publishable_4sqsUxgtDeD6rHnDJH0tkg_uchFNIIS';
 const UPD_URL='https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/version.json';
 const eur=new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR',maximumFractionDigits:0});
@@ -474,15 +500,21 @@ function home(){const tot=total(),w=WORD(),open=tasks().filter(t=>!isDone(t.id))
   <div class="kpi"><div class="lbl">Gespaard voor Spanje</div><div class="v">${E(tot)}</div>${bar(pct(tot,goalT()))}<div class="lbl">${pct(tot,goalT())}% van spaardoel ${E(goalT())}<br>${(()=>{const pc=pace();return `<span style="color:${pc.diff>=0?'var(--ok)':'var(--bad)'}">${E(Math.abs(pc.diff))} ${pc.diff>=0?'voor':'achter'} op schema</span>${pc.goalExtra?` · spaar ${E(pc.goalExtra)} p/m extra`:''}`})()}</div></div>
   <div class="kpi"><div class="lbl">Voortgang taken</div><div class="v">${allP()}%</div>${bar(allP(),'b')}<div class="lbl">${tasks().length-open.length} van ${tasks().length} taken${late.length?` · <span class="warn">${late.length} te laat</span>`:''} · dividend netto ${E(divNet())} p/m</div></div></div>
   ${S.celebrate?`<div class="card celebrate"><b style="font:400 20px var(--disp)">${S.celebrate===goalT()?'Spaardoel gehaald!':E(S.celebrate)+' gespaard!'}</b><div>Weer een stap dichter bij de finca.</div><button class="btn sm ghost" style="margin-top:8px;border-color:#2a1d0055;color:#2a1d00" data-act="clearcele">Mooi!</button></div>`:''}
-  ${ckCard()}${nowCard(open)}
+  <div class="hcols">${ckCard()}${nowCard(open)}
   <details class="card" id="qe" ${qOpen?'open':''}><summary style="cursor:pointer;font-weight:700">Bedragen aanpassen</summary>${moneyForm()}</details>
-  <div class="card word"><div class="sm">Spaans woord van de dag</div><div style="font:400 24px var(--disp)">${esc(w[0])}</div><div>${esc(w[1])}</div></div>
+  <div class="card word"><div class="sm">Spaans woord van de dag</div><div style="font:400 24px var(--disp)">${esc(w[0])}</div><div>${esc(w[1])}</div></div></div>
   ${GROUPS.map(([g,ids])=>`<div class="grp"><h3>${g}</h3></div><div class="tiles">${ids.map(tile).join('')}</div>`).join('')}
   
   </div></main>`}
 const NAV=[['','Overzicht','<rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/>'],['t4','Geld',null],['t3','Planning',null],['t7','Finca',null],['t9','B&B',null]];
 const nav=id=>`<nav class="nav">${NAV.map(([k,l,ic])=>`<button data-go="${k}" class="${id===k?'on':''}" aria-label="${l}"><svg viewBox="0 0 24 24" aria-hidden="true">${ic||ICON[k]}</svg>${l}</button>`).join('')}</nav>`;
-function page(id){const name=TILES.find(t=>t[0]===id)[1];return `${updBar()}<div class="top"><button class="btn" data-go="" aria-label="Terug">←</button><b>${name}</b><span class="dot" id="sync"></span></div><main class="band"><div class="wrap">${V[id]()}</div></main>`}
+const COLV=['t3','t8','t15','t18','t2','t6'];
+function page(id){const name=TILES.find(t=>t[0]===id)[1],dk=isDesk();return `${updBar()}<div class="top">${dk?'':'<button class="btn" data-go="" aria-label="Terug">←</button>'}<b>${name}</b>${dk?'':'<span class="dot" id="sync"></span>'}</div><main class="band"><div class="wrap${dk&&COLV.includes(id)?' cols':''}">${V[id]()}</div></main>`}
+const isDesk=()=>!isApp()&&matchMedia('(min-width:1000px)').matches;
+function side(id){const tc={};try{tasks().forEach(t=>{if(!isDone(t.id)&&S.tmeta[t.id]&&S.tmeta[t.id].due&&S.tmeta[t.id].due<today())tc[t.tile]=1})}catch(e){}
+  const ln=(k,l,ic)=>`<button class="sl${id===k?' on':''}" data-go="${k}"><svg viewBox="0 0 24 24" aria-hidden="true">${ic}</svg>${esc(l)}${tc[k]?'<i style="background:var(--bad)" title="Taak te laat"></i>':''}</button>`;
+  return `<aside class="side"><div class="brand">Spanje 2031</div><div class="cd">Nog <b>${daysLeft().toLocaleString('nl-NL')} dagen</b> tot ${fmtD(S.vertrek)}</div>${SB.hid?`<div class="st"><span class="dot" id="sync"></span><span id="synct">${syncText()}</span></div>`:'<div class="st">Alleen op dit apparaat</div>'}
+  ${ln('','Overzicht',NAV[0][2])}${GROUPS.map(([g,ids])=>`<h4>${g}</h4>${ids.map(k=>ln(k,TILES.find(t=>t[0]===k)[1],ICON[k])).join('')}`).join('')}</aside>`}
 function lineChart(){const pts=S.hist.slice().sort((a,b)=>a.d<b.d?-1:1);return `<div class="fig" id="chart" data-chart="1"></div><div class="sm">Geel = jullie stand · blauw gestippeld = planlijn naar ${E(goalT())}</div>`}
 function drawChart(){const el=$('chart');if(!el)return;const W=el.clientWidth,H=el.clientHeight;const pts=S.hist.slice().sort((a,b)=>a.d<b.d?-1:1);if(!pts.length){el.innerHTML='';return}
   const t0=new Date(pts[0].d).getTime(),t1=vertrek().getTime(),max=Math.max(goalT(),...pts.map(p=>p.t))*1.08;const pl=46,pb=22,pr=10,pt=10;
@@ -779,8 +811,10 @@ const A=new Proxy(A0,{get(o,k){if(k==='undo')return()=>{if(!UNDO)return;S=UNDO;U
 /* ---------- render + events ---------- */
 const app=$('app');let lastView=null;
 function render(){if(!$('app'))return;if(SB.c&&!SB.uid&&!localStorage.getItem('sp-local')&&window.supabase){showAuth();return}
-  const id=location.hash.slice(1),y=id===lastView?window.scrollY:0;app.innerHTML=(V[id]?page(id):home())+nav(V[id]?id:'');lastView=id;window.scrollTo(0,y);setSync(SB.state);drawChart();loadImgs()}
-addEventListener('resize',()=>drawChart());
+  const id=location.hash.slice(1),y=id===lastView?window.scrollY:0;const dk=isDesk();document.body.classList.toggle('desk',dk);
+  if(dk){const c=(V[id]?page(id):home()).replace(/<span class="dot" id="sync"><\/span>/g,'').replace(/id="synct"/g,'');app.innerHTML=`<div class="dk">${side(id)}<div class="dmain">${c}</div></div>`}
+  else app.innerHTML=(V[id]?page(id):home())+nav(V[id]?id:'');lastView=id;window.scrollTo(0,y);setSync(SB.state);drawChart();loadImgs()}
+let wasDesk=null;addEventListener('resize',()=>{const d=isDesk();if(wasDesk!==null&&d!==wasDesk)render();wasDesk=d;drawChart()});
 app.addEventListener('toggle',e=>{if(e.target.id==='qe')qOpen=e.target.open},true);
 let VW={ids:[],i:0};
 function openViewer(im){const box=im.closest('.photos,.mood');VW.ids=[...box.querySelectorAll('img[data-img]')].map(x=>x.dataset.img);VW.i=Math.max(0,VW.ids.indexOf(im.dataset.img));$('viewer').classList.add('on');drawViewer()}

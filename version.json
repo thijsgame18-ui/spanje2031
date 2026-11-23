@@ -1,8 +1,8 @@
 {
- "versionCode": 15,
- "versionName": "2.4",
+ "versionCode": 16,
+ "versionName": "2.5",
  "notes": [
-  "Webversie: nette kolom op de computer, kan op beginscherm"
+  "Webversie op de computer: zijbalk met alle onderdelen en brede indeling"
  ],
- "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=15"
+ "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=16"
 }
