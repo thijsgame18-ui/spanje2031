@@ -104,6 +104,15 @@ tr.now td{background:var(--sand)}
 .pad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}.pad button{all:unset;cursor:pointer;height:62px;border-radius:50%;background:var(--tint);font:600 24px Figtree,sans-serif;text-align:center;line-height:62px;color:var(--ink)}
 #viewer{position:fixed;inset:0;z-index:40;background:#000e;display:none;align-items:center;justify-content:center}#viewer.on{display:flex}#viewer img{max-width:100%;max-height:100%;object-fit:contain}#viewer .vb{all:unset;position:absolute;cursor:pointer;color:#fff;background:#0007;border-radius:50%;width:46px;height:46px;display:grid;place-items:center;font-size:22px}#viewer .vc{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:#fff;font-size:14px}
 @media(min-width:700px){.scene{min-height:300px}}
+/* stappenplan */
+.step{background:var(--sea)}.stepno{font:400 44px/1 var(--disp);color:var(--bl);margin:6px 0 4px;font-variant-numeric:lining-nums}
+details.fase>summary{list-style:none;cursor:pointer;display:flex;gap:14px;align-items:center}details.fase>summary::-webkit-details-marker{display:none}
+.fn{width:38px;height:38px;border-radius:50%;background:var(--tint);display:grid;place-items:center;font:400 20px var(--disp);flex:none}
+details.fase[open] .fn{background:var(--blue);color:#fff}
+ol.steps{list-style:none;padding:0;margin:4px 0 0}ol.steps li{display:flex;gap:10px;align-items:flex-start;padding:10px 6px;border-bottom:1px solid var(--line);border-radius:12px}ol.steps li:last-child{border-bottom:0}
+ol.steps .no{font:400 17px/24px var(--disp);color:var(--muted);width:36px;flex:none;font-variant-numeric:lining-nums}ol.steps input{margin-top:1px}
+ol.steps li.now{background:var(--sea);border-bottom-color:transparent}ol.steps li.now .no{color:var(--bl)}
+ol.steps li.done .tt>span{text-decoration:line-through;color:var(--muted)}
 /* computer (webversie): zijbalk met alle onderdelen, brede inhoud, dialogen in het midden */
 .hcols{display:block}
 body.desk{padding-bottom:0}
@@ -172,18 +181,18 @@ const goalT=()=>(+S.goal.ing||0)+(+S.goal.degiro||0);
 const TASKS=[
 ['a1','Huidige financiële situatie in kaart brengen',1,'t4'],['a2','Spaardoelen per jaar richting 2031 vastleggen',1,'t4'],['a3','Gewenste financiële buffer bij vertrek bepalen',1,'t5'],['a4','Kosten emigratie en eerste periode inschatten',1,'t5'],['a5','Financiële uitgangspunten vastleggen (zekerheid, risico, flexibiliteit)',1,'t2'],['a6','Kostentabel invullen',1,'t5'],
 ['b1','Fase 2 t/m 5 verder uitwerken',2,'t3'],['b2','Mogelijke regio\'s verkennen',2,'t10'],['b3','Eerste oriëntatiereis naar Spanje',2,'t11'],['b4','Naam voor de B&B bedenken',2,'t6'],['b5','Realistisch B&B-inkomen doorrekenen',2,'t9'],
-['c1','Spaanse les starten (2027–2028), op locatie of thuis',3,'t8'],['c2','Regio\'s vergelijken en shortlist maken',3,'t10'],['c3','Langer verblijf in favoriete regio',3,'t11'],['c4','Logo laten ontwerpen',3,'t6'],['c5','Website opzetten (WordPress / n8n)',3,'t6'],['c6','Hypotheekmogelijkheden in Spanje uitzoeken',3,'t7'],
+['c1','Spaanse les starten (2027–2028), op locatie of thuis',3,'t8'],['c2','Regio\'s vergelijken en shortlist maken',3,'t10'],['c3','Langer verblijf in favoriete regio',3,'t11'],['c4','Logo laten ontwerpen',3,'t6'],['c5','Website opzetten (WordPress / n8n)',4,'t6'],['c6','Hypotheekmogelijkheden in Spanje uitzoeken',3,'t7'],
 ['d1','Finca kiezen: bestaand huisje + ruimte voor extra huisjes',4,'t7'],['d2','Hypotheek of financiering regelen',4,'t7'],['d3','Huis in Nederland verkopen',4,'t7'],['d4','NIE-nummers aanvragen',4,'t12'],['d5','Documenten laten vertalen',4,'t12'],['d6','Verhuisbedrijf regelen',4,'t5'],['d7','Spaanse zorgverzekering regelen',4,'t12'],
-['e2','Inschrijven bij de gemeente (padrón)',5,'t12'],['e3','Residencia aanvragen',5,'t12'],['e4','Spaanse bankrekening openen',5,'t12'],['e5','Verhuizen naar Spanje!',5,'t3'],
+['e2','Inschrijven bij de gemeente (padrón)',5,'t12'],['e3','Residencia aanvragen',5,'t12'],['e4','Spaanse bankrekening openen',4,'t12'],['e5','Verhuizen naar Spanje!',5,'t3'],
 ['n1','Documenten scannen en veilig bewaren (paspoorten, aktes, diploma\'s, rijbewijs)',1,'t12'],['n2','AOW-gat en pensioen laten doorrekenen (SVB en werkgever)',1,'t4'],
 ['n3','Facebookgroepen van Nederlanders in favoriete regio\'s volgen',2,'t10'],['n4','Plan B voor inkomen in de eerste jaren uitwerken (werk op afstand, verhuur)',2,'t9'],
 ['n5','Proefperiode in de winter: 1–3 maanden in het laagseizoen',3,'t11'],['n6','B&B-ervaring opdoen (meewerken via Workaway of cursus gastvrijheid)',3,'t9'],['n7','Per regio uitzoeken of je een toeristische vergunning kunt krijgen',3,'t10'],['n8','Gestor en advocaat kiezen via aanbevelingen',3,'t12'],
 ['k1','Beslismoment: regio kiezen',3,'t16'],['k2','Beslismoment: haalbaarheid minstens 80%? Anders vertrek opschuiven',3,'t16'],
 ['n9','Belastingadvies emigratie (183 dagen, Modelo 720, DeGiro)',4,'t4'],['n10','Laatste check AOW, pensioen en vergunningen bij een adviseur',4,'t12'],['k3','Beslismoment: finca kopen, ja of nee',4,'t16'],['n11','Kinderen: school kiezen en inschrijven (als dat speelt)',4,'t12'],
 ['n12','Uitschrijven bij de gemeente in Nederland',5,'t12'],['n13','Nederlandse zorgverzekering laten stoppen op de dag dat de Spaanse ingaat',5,'t12'],['n14','AOW vrijwillig bijverzekeren bij de SVB (binnen 1 jaar na vertrek)',5,'t4'],['n15','Spaanse belastingdienst informeren over fiscale woonplaats',5,'t12']];
-const DUE={a3:'2027-03-31',a4:'2027-03-31',a5:'2027-01-31',a6:'2027-06-30',n1:'2027-03-31',n2:'2027-06-30',b1:'2027-06-30',b2:'2027-09-30',b3:'2027-10-31',b4:'2028-06-30',b5:'2027-12-31',n3:'2027-06-30',n4:'2027-12-31',
-c1:'2028-01-31',c2:'2028-09-30',c3:'2029-03-31',c4:'2029-06-30',c5:'2030-06-30',c6:'2029-06-30',n5:'2029-02-28',n6:'2028-08-31',n7:'2028-09-30',n8:'2029-09-30',k1:'2028-12-31',k2:'2029-12-31',
-d1:'2030-06-30',d2:'2030-06-30',d3:'2030-12-31',d4:'2030-03-31',d5:'2030-09-30',d6:'2031-03-31',d7:'2031-05-31',n9:'2030-09-30',n10:'2030-07-31',k3:'2030-04-30',n11:'2031-03-31',
+const DUE={a1:'2026-12-31',a2:'2027-01-31',a3:'2027-03-31',a4:'2027-03-31',a5:'2027-01-31',a6:'2027-06-30',n1:'2027-03-31',n2:'2027-06-30',b1:'2027-06-30',b2:'2027-09-30',b3:'2027-10-31',b4:'2028-06-30',b5:'2027-12-31',n3:'2027-06-30',n4:'2027-12-31',
+c1:'2028-01-31',c2:'2028-09-30',c3:'2029-03-31',c4:'2029-06-30',c5:'2031-03-31',c6:'2029-06-30',n5:'2029-02-28',n6:'2028-08-31',n7:'2028-09-30',n8:'2029-09-30',k1:'2028-12-31',k2:'2029-12-31',
+d1:'2030-05-15',d2:'2030-06-30',d3:'2030-12-31',d4:'2030-03-31',d5:'2030-09-30',d6:'2031-03-31',d7:'2031-05-31',n9:'2030-09-30',n10:'2030-05-31',k3:'2030-06-15',n11:'2031-03-31',
 e1:'2031-03-31',e2:'2031-07-31',e3:'2031-09-30',e4:'2030-04-30',e5:'2031-07-01',n12:'2031-06-24',n13:'2031-06-30',n14:'2031-12-31',n15:'2031-12-31'};
 const MARKTS={denia:{naam:'Omgeving Dénia',streef:450000,min:250000,max:750000,datum:'november 2026',gebied:'Binnenland rond Dénia (Pedreguer, Orba, Llíber, Benissa, Jalón): finca met bewoonbaar huis en grond voor casitas.',
  vb:[['Orba','5 slpk, kleiner huis',199000],['Llíber','3 slpk',189000],['Dénia','224 m² huis, 2.309 m² grond, op te knappen',375000],['Pedreguer','410 m² huis, 4.703 m² grond, zwembad',740000]],
@@ -209,7 +218,8 @@ const ZONES=[['Zone 1 · Kust Dénia–Jávea–Calp–Altea',{klimaat:5,prijs:1
 ['Zone 3 · Achter Gandia (Planes, Beniarrés, Vall de Gallinera)',{klimaat:4,prijs:4,toer:3,vlieg:3,voorz:3},'Goedkoopste rond Gandia, echt Spaans, ± 30 min van het strand.'],
 ['Zone 4 · Ontinyent, Xàtiva, Albaida',{klimaat:3,prijs:4,toer:2,vlieg:4,voorz:4},'Grote fincas, gem. ± € 350.000, dicht bij vliegveld Valencia; weinig toeristen.'],
 ['Zone 5 · Alcoy en Cocentaina',{klimaat:3,prijs:3,toer:3,vlieg:3,voorz:4},'Bergen, wandelen en fietsen; actieve gasten.']];
-function migrate8(){if(S.mig8)return false;ZONES.forEach(([n,sc,note])=>{if(!S.regions.some(r=>r.naam===n))S.regions.push({id:'r'+uid(),naam:n,s:Object.assign({},sc),note,wish:{}})});
+function migrate9(){if(S.mig9)return false;const OLD={a1:null,a2:null,d1:'2030-06-30',n10:'2030-07-31',k3:'2030-04-30',c5:'2030-06-30'};Object.entries(OLD).forEach(([id,o])=>{const m=S.tmeta[id]||{};if(!m.due||m.due===o){m.due=DUE[id];S.tmeta[id]=m}});S.mig9=1;return true}
+function migrate8(){const m9=migrate9();if(S.mig8)return m9;ZONES.forEach(([n,sc,note])=>{if(!S.regions.some(r=>r.naam===n))S.regions.push({id:'r'+uid(),naam:n,s:Object.assign({},sc),note,wish:{}})});
  S.regw=Object.assign({},S.regw||{},{toer:2});
  if(!S.trips.some(t=>t.plan))S.trips.push({id:'t'+uid(),plan:1,regio:'Oriëntatiereis Marina Alta (gepland)',van:'',tot:'',cijfer:'',fotos:[],note:'Dag 1: vliegen op Alicante, naar Altea en Calp: de kust zien zoals gasten hem zien. Dag 2: Jalón-vallei (Jalón, Alcalalí, Llíber), Orba en het binnenland van Benissa: fincas en makelaars. Dag 3: Dénia, Jávea en de Montgó; middag Pedreguer, Ondara en Gata. Dag 4: Vall de Pop, Vall de Laguar en Vall d\'Ebo, daarna Vall de Gallinera, Planes en Beniarrés ter vergelijking. Dag 5: Gandia, terugvliegen vanaf Valencia. Onderweg: bij elk ayuntamiento vragen naar het informe de compatibilidad voor toeristische verhuur, en met B&B-eigenaren praten. Kom ook een keer in de winter terug.'});
  S.mig8=1;return true}
@@ -219,6 +229,65 @@ function migrate5(){const m6=migrate6();if(S.mig5)return m6;if(S.mig5)return fal
 function migrate4(){const m5=migrate5();if(S.mig4)return m5||false;S.huisjes.aantal=0;S.mig4=1;return true}
 function migrate3(){const m4=migrate4();if(S.mig3)return m4;if(+S.finca.prijs===250000)S.finca.prijs=MARKT.streef;if(S.finca.infl==null||+S.finca.infl===2)S.finca.infl=4;S.mig3=1;return true}
 function migrate(){const m3=migrate3();if(S.mig2)return m3;Object.entries(DUE).forEach(([id,d])=>{const m=S.tmeta[id]||{};if(!m.due){m.due=d;S.tmeta[id]=m}});S.mig2=1;return true}
+/* Stappenplan: alle basistaken per fase in logische volgorde, met uitleg wat je concreet doet */
+const STEPS=[['a1','a5','a2','n1','a4','a3','a6','n2'],['b1','n3','b2','b3','b5','n4','b4'],['c1','n6','n7','c2','k1','n5','c3','c6','c4','n8','k2'],['d4','e4','d1','n10','k3','d2','n9','d5','d3','d6','n11','c5','d7'],['n12','n13','e5','e2','e3','n14','n15']];
+const HOW={a1:'Zet bij Financiën wat er nu op de Spanje-rekening en bij DeGiro staat, of haal het uit Stuiver. Dan weet je waar je vandaan komt.',
+a5:'Spreek samen af hoeveel zekerheid je wilt en hoeveel risico je durft. Schrijf het op bij Doel en uitgangspunten.',
+a2:'Leg per jaar tot 2031 vast hoeveel je wilt sparen. Financiën rekent uit of je op schema ligt.',
+n1:'Scan paspoorten, geboorte- en huwelijksakte, diploma\'s en rijbewijs. Zet ze in een veilige map en bij Documenten Spanje.',
+a4:'Schat de eenmalige kosten van de verhuizing en de eerste maanden: verhuizer, reizen, papieren, inrichting.',
+a3:'Bepaal hoeveel maanden leven je als buffer wilt hebben als jullie allebei stoppen met werken. Advies: minstens 2 jaar.',
+a6:'Vul bij Benodigde middelen alle kostenposten in. Dan klopt de haalbaarheid.',
+n2:'Vraag bij de SVB en je pensioenfonds op hoeveel AOW en pensioen je mist door eerder te emigreren.',
+b1:'Loop dit stappenplan samen door. Pas deadlines aan en zet bij elke stap wie hem oppakt.',
+n3:'Word lid van Facebookgroepen van Nederlanders in de Marina Alta. Lees mee over vergunningen, kosten en het dagelijks leven.',
+b2:'Vul bij Regio\'s vergelijken per zone de scores in. Richt je op zone 1 en 2.',
+b3:'Maak de geplande oriëntatiereis uit het Reislogboek. Vraag bij elk gemeentehuis naar de toeristische vergunning.',
+b5:'Reken bij Inkomen B&B met een realistische bezetting (35–50% in het binnenland) en kijk wat er netto overblijft.',
+n4:'Bedenk waar het inkomen vandaan komt als de B&B de eerste jaren minder oplevert: dividend, verhuur, klussen op afstand.',
+b4:'Bedenk een naam en check of de domeinnaam en Instagram-naam nog vrij zijn.',
+c1:'Start met Spaanse les: online, bij een taalschool of via een app. Houd de uren bij onder Taal.',
+n6:'Werk een paar weken mee bij een B&B (bijvoorbeeld via Workaway) of volg een cursus gastvrijheid.',
+n7:'Vraag per gemeente op je shortlist of je een vergunning voor toeristische verhuur kunt krijgen. Zonder vergunning geen B&B.',
+c2:'Maak bij Regio\'s vergelijken een shortlist van 2 of 3 gemeentes, op basis van je reizen en de vergunningen.',
+k1:'Kies samen de regio. Leg de keuze en waarom vast bij Beslissingen.',
+n5:'Verblijf 1 tot 3 maanden in de winter in de gekozen regio. Zo zie je hoe stil het laagseizoen echt is.',
+c3:'Verblijf langer in de gekozen regio. Bekijk fincas, spreek makelaars en B&B-eigenaren.',
+c6:'Vraag bij 2 Spaanse banken of een hypotheekadviseur wat jullie kunnen lenen zonder vast inkomen. Houd de maandlast onder € 600.',
+c4:'Laat een logo maken dat past bij de naam en de sfeer van het moodboard.',
+n8:'Kies een gestor en een advocaat via aanbevelingen uit de Facebookgroepen. Zij begeleiden de aankoop en de papieren.',
+k2:'Kijk bij Financiën of de haalbaarheid minstens 80% is. Zo niet: vertrek opschuiven of een goedkopere finca zoeken.',
+d4:'Vraag de NIE-nummers aan bij het consulaat of in Spanje. Die heb je nodig voor de bank en de aankoop.',
+e4:'Open een Spaanse bankrekening met je NIE. Nodig voor de aankoop, de hypotheek en vaste lasten.',
+d1:'Kies de finca. Check eerst bij de gemeente of de toeristische vergunning er komt, en of de grond bebouwd mag worden.',
+n10:'Laat een adviseur nog één keer AOW, pensioen en de vergunning van de finca controleren, vóór je tekent.',
+k3:'Beslis samen of je de finca koopt. Leg het vast bij Beslissingen.',
+d2:'Regel de financiering: hypotheek, overwaarde en eigen geld. De advocaat checkt het koopcontract.',
+n9:'Laat een belastingadviseur uitleggen wat emigreren betekent: 183 dagen, Modelo 720 en je DeGiro-dividend.',
+d5:'Laat geboorte- en huwelijksakte en andere documenten beëdigd vertalen en waar nodig apostilleren.',
+d3:'Zet het huis in Nederland te koop. Stem de overdracht af op de aankoop in Spanje.',
+d6:'Vraag 3 offertes bij verhuisbedrijven en plan de verhuizing.',
+n11:'Speelt het: kies een school en schrijf de kinderen in.',
+c5:'Zet de website op met foto\'s van de finca en een boekingsmogelijkheid.',
+d7:'Regel een Spaanse zorgverzekering die ingaat op de dag van de verhuizing.',
+n12:'Schrijf jullie uit bij de gemeente in Nederland, uiterlijk 5 dagen voor vertrek.',
+n13:'Laat de Nederlandse zorgverzekering stoppen op de dag dat de Spaanse ingaat.',
+e5:'Verhuizen naar Spanje!',
+e2:'Schrijf jullie in bij het ayuntamiento (padrón). Neem paspoort, NIE en koopakte mee.',
+e3:'Vraag de residencia aan bij de politie (extranjería). Neem padrón, zorgverzekering en bewijs van inkomen mee.',
+n14:'Verzeker AOW vrijwillig bij bij de SVB. Dat moet binnen 1 jaar na vertrek.',
+n15:'Meld bij de Spaanse belastingdienst (Agencia Tributaria) dat jullie fiscaal in Spanje wonen.'};
+function phaseSteps(f){const T=tasks(),ids=STEPS[f-1],base=ids.map(id=>T.find(t=>t.id===id)).filter(Boolean),rest=T.filter(t=>t.f===f&&!ids.includes(t.id)).sort((a,b)=>((S.tmeta[a.id]||{}).due||'9')<((S.tmeta[b.id]||{}).due||'9')?-1:1);return base.concat(rest)}
+function stepNo(id){for(let f=1;f<=5;f++){const i=phaseSteps(f).findIndex(t=>t.id===id);if(i>=0)return f+'.'+(i+1)}return ''}
+function nextStep(){for(let f=1;f<=5;f++){const t=phaseSteps(f).find(x=>!isDone(x.id));if(t)return {t,f,no:stepNo(t.id)}}return null}
+const TILE_NAME=id=>(TILES.find(x=>x[0]===id)||[])[1];
+function stepCard(compact){const n=nextStep();if(!n)return `<div class="card celebrate"><h3>Alle stappen afgerond</h3><p>Welkom in Spanje!</p></div>`;const t=n.t,how=HOW[t.id]||t.note||'';
+  return `<div class="card step"><div class="sm">Volgende stap · fase ${n.f}, ${FASES[n.f-1].toLowerCase()}</div><div class="stepno">${n.no}</div><h3>${esc(t.t)}</h3>${how?`<p style="margin:6px 0 0">${esc(how)}</p>`:''}<div style="margin-top:4px">${badges(t)}</div>
+  <div class="actions" style="justify-content:flex-start">${LINK[t.id]?`<button class="btn" data-go="t12">Afvinken bij Documenten</button>`:`<button class="btn" data-act="stepdone" data-id="${t.id}">Klaar, volgende stap</button>`}${t.tile&&t.tile!=='t3'&&!LINK[t.id]?`<button class="btn ghost" data-go="${t.tile}">Naar ${esc(TILE_NAME(t.tile)||'')}</button>`:''}${compact?'<button class="btn ghost" data-go="t3">Hele stappenplan</button>':`<button class="btn ghost" data-act="edittask" data-id="${t.id}">Deadline of wie</button>`}</div></div>`}
+function stepPlan(){const n=nextStep(),cur=n?n.f:6;return FASES.map((fn,i)=>{const f=i+1,list=phaseSteps(f),dn=list.filter(t=>isDone(t.id)).length,p=pct(dn,list.length);
+  return `<details class="card fase" ${f===cur?'open':''}><summary><span class="fn">${f}</span><span style="flex:1"><b style="font:400 21px var(--disp)">${fn}</b><br><span class="sm">${dn===list.length?'Afgerond':`${dn} van ${list.length} stappen klaar`}${f>cur?' · komt hierna':''}</span></span><span class="n sm">${p}%</span></summary>${bar(p,'b')}
+  <ol class="steps">${list.map((t,j)=>{const d=isDone(t.id),now=n&&n.t.id===t.id;return `<li class="${d?'done':''}${now?' now':''}"><span class="no">${f}.${j+1}</span><input type="checkbox" data-task="${t.id}" ${d?'checked':''} aria-label="Stap ${f}.${j+1} afgevinkt"><div class="tt" data-act="edittask" data-id="${t.id}"><span>${esc(t.t)}</span>${now&&HOW[t.id]?`<div class="sm" style="margin-top:2px">${esc(HOW[t.id])}</div>`:''}<div>${badges(t)}</div></div></li>`}).join('')}</ol>
+  ${note('f'+f,'Opmerkingen bij deze fase','')}</details>`}).join('')}
 const FASES=['Financiële basis','Oriëntatie','Verdieping','Voorbereiding','Uitvoering'];
 const FASE_YEAR=[2026,2027,2028,2030,2031];
 const COSTS=[
@@ -461,7 +530,7 @@ const num=(path,label,v,extra='')=>`<div class="f"><label>${label}</label><input
 const txt=(path,label,v,ph='')=>`<div class="f"><label>${label}</label><input type="text" data-bind="${path}" data-t="s" value="${esc(v)}" placeholder="${esc(ph)}"></div>`;
 function note(k,label,ph){return `<div class="f" style="margin-top:12px"><label>${label}</label><textarea data-bind="notes.${k}" data-t="s" data-norr="1" placeholder="${esc(ph||'')}">${esc(S.notes[k]||'')}</textarea></div>`}
 function badges(t){const m=S.tmeta[t.id]||{};let h='';if(m.who)h+=`<span class="badge">${esc(m.who)}</span>`;if(m.due){const d=(new Date(m.due+'T12:00')-new Date())/864e5;h+=`<span class="badge ${!isDone(t.id)&&d<0?'late':!isDone(t.id)&&d<14?'soon':''}">${d<0&&!isDone(t.id)?'Te laat · ':''}${fmtD(m.due)}</span>`}return h}
-function taskList(list,showFase){if(!list.length)return '<p class="lbl">Nog geen taken.</p>';return '<ul class="list">'+list.map(t=>`<li class="${isDone(t.id)?'done':''}"><input type="checkbox" data-task="${t.id}" ${isDone(t.id)?'checked':''} aria-label="Afgevinkt"><div class="tt" data-act="edittask" data-id="${t.id}"><span>${esc(t.t)}</span><div>${showFase?`<span class="badge">Fase ${t.f}</span>`:''}${badges(t)}</div></div></li>`).join('')+'</ul>'}
+function taskList(list,showFase){if(!list.length)return '<p class="lbl">Nog geen taken.</p>';return '<ul class="list">'+list.map(t=>`<li class="${isDone(t.id)?'done':''}"><input type="checkbox" data-task="${t.id}" ${isDone(t.id)?'checked':''} aria-label="Afgevinkt"><div class="tt" data-act="edittask" data-id="${t.id}"><span>${esc(t.t)}</span><div>${showFase?`<span class="badge">Stap ${stepNo(t.id)}</span>`:''}${badges(t)}</div></div></li>`).join('')+'</ul>'}
 function addForm(tile){return `<div class="row" style="margin-top:12px"><div class="f" style="flex:3 1 200px"><label>Nieuwe taak</label><input type="text" id="nt-${tile}" placeholder="Bijv. makelaar bellen"></div><div class="f"><label>Fase</label><select id="nf-${tile}">${FASES.map((f,i)=>`<option value="${i+1}">${i+1}. ${f}</option>`).join('')}</select></div><button class="btn" style="flex:0 0 auto" data-act="addtask" data-id="${tile}">Toevoegen</button></div>`}
 function tileTasks(tile){return `<div class="card"><h3>Te regelen</h3>${taskList(tasks().filter(x=>x.tile===tile),true)}${addForm(tile)}</div>`}
 function moneyForm(){const f=(n,l,v)=>`<div class="f"><label>${l}</label><input type="number" inputmode="decimal" step="any" name="${n}" value="${v}"></div>`;
@@ -470,8 +539,8 @@ let qOpen=false;
 const TCOL={t17:'sea',t18:'peach',t4:'sage',t5:'sand',t13:'peach',t3:'sea',t12:'lav',t16:'stone',t7:'peach',t10:'sea',t11:'sage',t8:'lav',t9:'sand',t6:'peach',t14:'lav',t2:'sage',t1:'sea',t15:'stone'};
 const GROUPS=[['Geld',['t4','t17','t5','t13']],['Plannen',['t3','t18','t12','t16']],['Spanje ontdekken',['t7','t10','t11','t8']],['B&B',['t9','t6','t14']],['Overig',['t2','t1','t15']]];
 function nowCard(open){const dd=t=>(S.tmeta[t.id]||{}).due||'9',lim=new Date();lim.setDate(lim.getDate()+60);const L=lim.toISOString().slice(0,10);
-  const srt=open.slice().sort((a,b)=>dd(a)<dd(b)?-1:1),soon=srt.filter(t=>dd(t)<=L),list=soon.length?soon.slice(0,6):srt.slice(0,3);
-  return `<div class="card"><h3>${soon.length?'Nu aan de beurt':'Eerstvolgende taken'}</h3><p class="sm" style="margin:2px 0 0">${soon.length?`${soon.length} ${soon.length===1?'taak':'taken'} met een deadline in de komende 2 maanden`:'Niets met een deadline in de komende 2 maanden'}</p>${taskList(list,true)}<button class="btn ghost sm" style="margin-top:10px" data-go="t3">Alle taken per jaar</button></div>`}
+  const so=t=>{const x=stepNo(t.id).split('.');return x.length>1?+x[0]*100+ +x[1]:999},srt=open.slice().sort((a,b)=>dd(a)<dd(b)?-1:dd(a)>dd(b)?1:so(a)-so(b)),soon=srt.filter(t=>dd(t)<=L),list=soon.length?soon.slice(0,6):srt.slice(0,3);
+  return `<div class="card"><h3>${soon.length?'Nu aan de beurt':'Eerstvolgende taken'}</h3><p class="sm" style="margin:2px 0 0">${soon.length?`${soon.length} ${soon.length===1?'taak':'taken'} met een deadline in de komende 2 maanden`:'Niets met een deadline in de komende 2 maanden'}</p>${taskList(list,true)}<button class="btn ghost sm" style="margin-top:10px" data-go="t3">Hele stappenplan</button></div>`}
 let TF='';
 function tfOpts(){const names=SB.members.length>1?SB.members.map(m=>m.name).filter(Boolean):['Thijs','Amber'];return [['','Alles'],...names.map(n=>['w:'+n,n]),['w:Samen','Samen'],['late','Te laat'],['soon','Komende 3 maanden'],['none','Zonder deadline']]}
 function tfPass(t){if(!TF)return true;const m=S.tmeta[t.id]||{};if(TF.startsWith('w:'))return m.who===TF.slice(2);if(TF==='none')return !m.due;if(!m.due||isDone(t.id))return false;const L=new Date();L.setMonth(L.getMonth()+3);return TF==='late'?m.due<today():m.due>=today()&&m.due<=L.toISOString().slice(0,10)}
@@ -488,7 +557,7 @@ function home(){const tot=total(),w=WORD(),open=tasks().filter(t=>!isDone(t.id))
   <div class="kpi"><div class="lbl">Gespaard voor Spanje</div><div class="v">${E(tot)}</div>${bar(pct(tot,goalT()))}<div class="lbl">${pct(tot,goalT())}% van spaardoel ${E(goalT())}<br>${(()=>{const pc=pace();return `<span style="color:${pc.diff>=0?'var(--ok)':'var(--bad)'}">${E(Math.abs(pc.diff))} ${pc.diff>=0?'voor':'achter'} op schema</span>${pc.goalExtra?` · spaar ${E(pc.goalExtra)} p/m extra`:''}`})()}</div></div>
   <div class="kpi"><div class="lbl">Voortgang taken</div><div class="v">${allP()}%</div>${bar(allP(),'b')}<div class="lbl">${tasks().length-open.length} van ${tasks().length} taken${late.length?` · <span class="warn">${late.length} te laat</span>`:''} · dividend netto ${E(divNet())} p/m</div></div></div>
   ${S.celebrate?`<div class="card celebrate"><b style="font:400 20px var(--disp)">${S.celebrate===goalT()?'Spaardoel gehaald!':E(S.celebrate)+' gespaard!'}</b><div>Weer een stap dichter bij de finca.</div><button class="btn sm ghost" style="margin-top:8px;border-color:#2a1d0055;color:#2a1d00" data-act="clearcele">Mooi!</button></div>`:''}
-  <div class="hcols">${ckCard()}${nowCard(open)}
+  <div class="hcols">${stepCard(true)}${ckCard()}${nowCard(open)}
   <details class="card" id="qe" ${qOpen?'open':''}><summary style="cursor:pointer;font-weight:700">Bedragen aanpassen</summary>${moneyForm()}</details>
   <div class="card word"><div class="sm">Spaans woord van de dag</div><div style="font:400 24px var(--disp)">${esc(w[0])}</div><div>${esc(w[1])}</div></div></div>
   ${GROUPS.map(([g,ids])=>`<div class="grp"><h3>${g}</h3></div><div class="tiles">${ids.map(tile).join('')}</div>`).join('')}
@@ -496,7 +565,7 @@ function home(){const tot=total(),w=WORD(),open=tasks().filter(t=>!isDone(t.id))
   </div></main>`}
 const NAV=[['','Overzicht','<rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/>'],['t4','Geld',null],['t3','Planning',null],['t7','Finca',null],['t9','B&B',null]];
 const nav=id=>`<nav class="nav">${NAV.map(([k,l,ic])=>`<button data-go="${k}" class="${id===k?'on':''}" aria-label="${l}"><svg viewBox="0 0 24 24" aria-hidden="true">${ic||ICON[k]}</svg>${l}</button>`).join('')}</nav>`;
-const COLV=['t3','t8','t15','t18','t2','t6'];
+const COLV=['t8','t15','t18','t2','t6'];
 function page(id){const name=TILES.find(t=>t[0]===id)[1],dk=isDesk();return `${updBar()}<div class="top">${dk?'':'<button class="btn" data-go="" aria-label="Terug">←</button>'}<b>${name}</b>${dk?'':'<span class="dot" id="sync"></span>'}</div><main class="band"><div class="wrap${dk&&COLV.includes(id)?' cols':''}">${V[id]()}</div></main>`}
 const isDesk=()=>!isApp()&&matchMedia('(min-width:1000px)').matches;
 function side(id){const tc={};try{tasks().forEach(t=>{if(!isDone(t.id)&&S.tmeta[t.id]&&S.tmeta[t.id].due&&S.tmeta[t.id].due<today())tc[t.tile]=1})}catch(e){}
@@ -516,9 +585,11 @@ t1:()=>`<h2>Inleiding</h2><div class="card"><p style="margin:0">Dit is onze leid
 t2:()=>`<h2>Doel en uitgangspunten</h2><div class="card"><p style="margin:0">Onze verhuizing naar Spanje in 2031 stap voor stap voorbereiden, met bewuste keuzes over wonen, financiën, taal en levensstijl.</p></div><div class="tiles">${['We nemen de tijd en spreiden de voorbereiding over meerdere jaren','We combineren plannen maken met Spanje echt ervaren','Financiële rust en zekerheid staan voorop','We blijven flexibel en sturen bij wanneer nodig'].map(u=>`<div class="tile" style="cursor:default;min-height:100px"><b>${u}</b></div>`).join('')}</div>${note('uitg','Financiële uitgangspunten','Bijv. minimaal 12 maanden buffer…')}${tileTasks('t2')}`,
 t3:()=>{const yrs={};tasks().filter(tfPass).forEach(t=>{const m=S.tmeta[t.id];const y=m&&m.due?+m.due.slice(0,4):FASE_YEAR[t.f-1];(yrs[y]=yrs[y]||[]).push(t)});
   return `<h2>Planning en fases</h2><div class="card"><div class="row">${`<div class="f"><label>Vertrekdatum</label><input type="date" data-bind="vertrek" data-t="s" value="${S.vertrek}"></div>`}<div><div class="lbl">Nog</div><div class="res">${monthsLeft()} maanden</div></div></div></div>
-  <div class="card"><h3>Voortgang per fase</h3>${FASES.map((f,i)=>`<div style="display:grid;grid-template-columns:110px minmax(0,1fr) 44px;gap:10px;align-items:center"><span class="sm">${i+1}. ${f}</span>${bar(faseP(i+1),i?'b':'')}<span class="n">${faseP(i+1)}%</span></div>`).join('')}</div>
-  <div class="card"><h3>Tijdlijn per jaar</h3><p class="sm">Tik op een taak voor deadline en wie het doet.</p><div class="chips">${tfOpts().map(([k,l])=>`<button class="chip" data-act="tf" data-id="${esc(k)}" style="${TF===k?'background:var(--blue);color:#fff':''}">${esc(l)}</button>`).join('')}</div><div class="tl">${Object.keys(yrs).sort().map(y=>{const op=yrs[y].filter(t=>!isDone(t.id)),dn=yrs[y].length-op.length;return `<div class="yr"><b style="font:400 20px var(--disp)">${y}</b> <span class="sm">${op.length} open${dn?` · ${dn} afgerond`:''}</span>${op.length?taskList(op.sort((a,b)=>((S.tmeta[a.id]||{}).due||'9')<((S.tmeta[b.id]||{}).due||'9')?-1:1),true):'<p class="sm">Alles afgerond.</p>'}</div>`}).join('')}</div></div>
-  ${FASES.map((f,i)=>`<div class="card"><h3>Fase ${i+1} · ${f} <span class="badge">${faseP(i+1)}%</span></h3>${note('f'+(i+1),'Opmerkingen','')}</div>`).join('')}${addForm('t3')}`},
+  ${stepCard(false)}
+  <h3 style="margin-top:26px">Stappenplan</h3><p class="sm" style="margin:2px 0 0">Alles in volgorde. Vink een stap af en de volgende verschijnt vanzelf. Tik op een stap voor de deadline en wie hem doet.</p>
+  ${stepPlan()}
+  <details class="card" style="margin-top:22px"><summary style="cursor:pointer;font-weight:700">Alle taken per jaar</summary><div class="chips">${tfOpts().map(([k,l])=>`<button class="chip" data-act="tf" data-id="${esc(k)}" style="${TF===k?'background:var(--blue);color:#fff':''}">${esc(l)}</button>`).join('')}</div><div class="tl">${Object.keys(yrs).sort().map(y=>{const op=yrs[y].filter(t=>!isDone(t.id)),dn=yrs[y].length-op.length;return `<div class="yr"><b style="font:400 20px var(--disp)">${y}</b> <span class="sm">${op.length} open${dn?` · ${dn} afgerond`:''}</span>${op.length?taskList(op.sort((a,b)=>((S.tmeta[a.id]||{}).due||'9')<((S.tmeta[b.id]||{}).due||'9')?-1:1),true):'<p class="sm">Alles afgerond.</p>'}</div>`}).join('')}</div></details>
+  ${addForm('t3')}`},
 t4:()=>{const tot=total(),w=S.whatif,p=projection(w.extra),p0=projection(0),dl=S.divlog,yr=String(new Date().getFullYear()),months=MND.map((m,i)=>dl.filter(e=>e.d.startsWith(yr+'-'+String(i+1).padStart(2,'0'))).reduce((a,e)=>a+(+e.amt||0),0)),mx=Math.max(1,...months);
   return `<h2>Financiën</h2>${feasCard()}
   <div class="grid2"><div class="card"><div class="lbl">Totaal gespaard</div><div class="res">${E(tot)}</div>${bar(pct(tot,goalT()))}<div class="lbl">Spaardoel 2031: ${E(goalT())}</div></div>
@@ -753,7 +824,7 @@ update:()=>{if(!UPD)return;try{Android.installUpdate(UPD.apk);toast('Update word
 checkupd:()=>{checkUpdate().then(()=>{if(!UPD)toast('Je hebt de nieuwste versie')})},notif:()=>{try{Android.requestNotifPermission();toast('Meldingen gevraagd')}catch(e){}},
 close:closeSheet,clearcele:()=>{delete S.celebrate;save();render()},
 addtask:id=>{const t=val('nt-'+id).trim();if(!t)return;S.custom.push({id:'u'+uid(),t,f:+val('nf-'+id),tile:id});save();render();toast('Taak toegevoegd')},
-edittask:editTask,
+edittask:editTask,stepdone:id=>{const no=stepNo(id);setDone(id,true);save();render();const n=nextStep();toast(n?`Stap ${no} klaar. Nu stap ${n.no}`:'Alle stappen klaar!');if(location.hash.slice(1)==='t3'){const el=document.querySelector('.card.step');if(el)el.scrollIntoView({block:'start',behavior:'smooth'})}},
 savetask:id=>{const m={due:val('etD'),who:val('etW')};if(m.due||m.who)S.tmeta[id]=m;else delete S.tmeta[id];const c=S.custom.find(x=>x.id===id);if(c){c.t=val('etT')||c.t;c.f=+val('etF')||c.f}closeSheet();save();render()},
 deltask:id=>{S.custom=S.custom.filter(x=>x.id!==id);S.done=S.done.filter(x=>x!==id);delete S.tmeta[id];closeSheet();save();render()},
 adddiv:()=>{const a=parseFloat(val('dvA'));if(!a)return toast('Vul een bedrag in');S.divlog.push({id:'d'+uid(),d:val('dvD')||today(),amt:a,note:val('dvN')});save();render()},
