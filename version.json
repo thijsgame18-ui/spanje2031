@@ -1,8 +1,8 @@
 {
- "versionCode": 17,
- "versionName": "2.6",
+ "versionCode": 18,
+ "versionName": "2.7",
  "notes": [
-  "Stappenplan: alle taken per fase in logische volgorde (1.1, 1.2 …) met uitleg"
+  "Verhuur van losse vakantiehuisjes, kosten gezin van 4"
  ],
- "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=17"
+ "apk": "https://raw.githubusercontent.com/thijsgame18-ui/spanje2031/main/Spanje2031.apk?v=18"
 }
